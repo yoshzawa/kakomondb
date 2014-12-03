@@ -14,14 +14,13 @@ public class Genre {
 	@PrimaryKey
 	@Persistent
 	private String id;
-	
+
 	@Persistent
 	private String name;
 
 	@Persistent
 	private List<String> mondais;
 
-	
 	/**
 	 * @return the id
 	 */
@@ -30,7 +29,8 @@ public class Genre {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -44,13 +44,13 @@ public class Genre {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
 	/**
 	 * @return the mondais
 	 */
@@ -59,7 +59,8 @@ public class Genre {
 	}
 
 	/**
-	 * @param mondais the mondais to set
+	 * @param mondais
+	 *            the mondais to set
 	 */
 	public void setMondais(List<String> mondais) {
 		this.mondais = mondais;
@@ -71,20 +72,16 @@ public class Genre {
 		setMondais(list);
 	}
 
-	
-	public Genre( String id , String name ) {
+	public Genre(String id, String name) {
 		setId(id);
 		setName(name);
 		setMondais(new ArrayList<String>());
 	}
-	
-	public static void init(PersistenceManager pm){
-		pm.makePersistent(new Genre("1-01","基礎理論"));
-		pm.makePersistent(new Genre("1-02","アルゴリズムとプログラミング"));
-		pm.makePersistent(new Genre("2-03","コンピュータ構成要素"));
+
+	public static void init(PersistenceManager pm) {
+		pm.makePersistent(new Genre("1-01", "基礎理論"));
+		pm.makePersistent(new Genre("1-02", "アルゴリズムとプログラミング"));
+		pm.makePersistent(new Genre("2-03", "コンピュータ構成要素"));
 	}
-	
-	
-	
-	
+
 }
