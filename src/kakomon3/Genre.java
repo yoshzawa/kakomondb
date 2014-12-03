@@ -65,6 +65,13 @@ public class Genre {
 		this.mondais = mondais;
 	}
 
+	public void addMondais(String mondaiId) {
+		List<String> list = getMondais();
+		list.add(mondaiId);
+		setMondais(list);
+	}
+
+	
 	public Genre( String id , String name ) {
 		setId(id);
 		setName(name);

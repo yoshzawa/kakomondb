@@ -2,7 +2,9 @@ package kakomon3;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -22,19 +24,31 @@ public class Kakomon3Servlet extends HttpServlet {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
-		Mondai.init(pm);
 		Genre.init(pm);
+		Mondai.init(pm);
 		
 		Query query = pm.newQuery(Mondai.class);
 		@SuppressWarnings("unchecked")
 		List<Mondai> list = (List<Mondai>)query.execute();
+		
+		Query query2 = pm.newQuery(Genre.class);
+		@SuppressWarnings("unchecked")
+		List<Genre> list2 = (List<Genre>)query.execute();
+		
+		Map<String,String> mapGenre = new HashMap<String , String>();
+		
+		for(Genre g:list2){
+			mapGenre.put(g.getId(), g.getName());
+		}
+		
 		
 		for(Mondai m:list){
 			String s = "https://storage.googleapis.com/kakomondb/" + m.getURL();
 		
 			out.print("<hr>");
 			out.print("<h3>"+m.getComment()+"</h3>");
-			out.print("<img src='" + s + "' width=1000>");
+			out.print("genre:" + mapGenre.get(m.getGenre()));
+			out.println("<img src='" + s + "' width=1000>");
 		}
 		
 		pm.close();
