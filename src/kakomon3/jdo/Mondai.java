@@ -1,5 +1,8 @@
 package kakomon3.jdo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -17,6 +20,9 @@ public class Mondai {
 
 	@Persistent
 	private String genre;
+
+	@Persistent
+	private List<Long> tags;
 
 	public String getURL() {
 		return URL;
@@ -42,11 +48,27 @@ public class Mondai {
 		this.genre = genre;
 	}
 
+	
+	public List<Long> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Long> tags) {
+		this.tags = tags;
+	}
+	
+	public void addTags(Long id) {
+		List<Long> list = getTags();
+		list.add(id);
+		setTags(list);
+	}	
+
 	public Mondai(String URL, String comment, Genre genre) {
 		setURL(URL);
 		setComment(comment);
 		setGenre(genre.getId());
 		genre.addMondais(URL);
+		setTags(new ArrayList<Long>());
 	}
 
 	public static void init(PersistenceManager pm) {
@@ -85,5 +107,4 @@ public class Mondai {
 				g1_01));
 
 	}
-
 }
