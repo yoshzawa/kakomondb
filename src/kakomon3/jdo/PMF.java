@@ -1,4 +1,4 @@
-package kakomon3;
+package kakomon3.jdo;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;

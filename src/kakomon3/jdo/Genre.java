@@ -1,4 +1,4 @@
-package kakomon3;
+package kakomon3.jdo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,47 +21,26 @@ public class Genre {
 	@Persistent
 	private List<String> mondais;
 
-	/**
-	 * @return the id
-	 */
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the name
-	 */
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * @return the mondais
-	 */
 	public List<String> getMondais() {
 		return mondais;
 	}
 
-	/**
-	 * @param mondais
-	 *            the mondais to set
-	 */
 	public void setMondais(List<String> mondais) {
 		this.mondais = mondais;
 	}

@@ -1,4 +1,4 @@
-package kakomon3;
+package kakomon3.jdo;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.PersistenceCapable;
@@ -18,47 +18,26 @@ public class Mondai {
 	@Persistent
 	private String genre;
 
-	/**
-	 * @return the uRL
-	 */
 	public String getURL() {
 		return URL;
 	}
 
-	/**
-	 * @param uRL
-	 *            the uRL to set
-	 */
 	public void setURL(String uRL) {
 		URL = uRL;
 	}
 
-	/**
-	 * @return the comment
-	 */
 	public String getComment() {
 		return comment;
 	}
 
-	/**
-	 * @param comment
-	 *            the comment to set
-	 */
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
 
-	/**
-	 * @return the genre
-	 */
 	public String getGenre() {
 		return genre;
 	}
 
-	/**
-	 * @param genre
-	 *            the genre to set
-	 */
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}

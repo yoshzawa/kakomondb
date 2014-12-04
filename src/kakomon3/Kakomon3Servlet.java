@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kakomon3.jdo.Genre;
+import kakomon3.jdo.Mondai;
+import kakomon3.jdo.PMF;
+
 @SuppressWarnings("serial")
 public class Kakomon3Servlet extends HttpServlet {
 
@@ -24,12 +28,9 @@ public class Kakomon3Servlet extends HttpServlet {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
-		Genre.init(pm);
-		Mondai.init(pm);
-
-		Query query2 = pm.newQuery(Genre.class);
+		Query queryGenre = pm.newQuery(Genre.class);
 		@SuppressWarnings("unchecked")
-		List<Genre> list2 = (List<Genre>) query2.execute();
+		List<Genre> list2 = (List<Genre>) queryGenre.execute();
 
 		Map<String, String> mapGenre = new HashMap<String, String>();
 
@@ -37,9 +38,9 @@ public class Kakomon3Servlet extends HttpServlet {
 			mapGenre.put(g.getId(), g.getName());
 		}
 
-		Query query = pm.newQuery(Mondai.class);
+		Query queryMondai = pm.newQuery(Mondai.class);
 		@SuppressWarnings("unchecked")
-		List<Mondai> list = (List<Mondai>) query.execute();
+		List<Mondai> list = (List<Mondai>) queryMondai.execute();
 
 		for (Mondai m : list) {
 			String s = "https://storage.googleapis.com/kakomondb/" + m.getURL();
