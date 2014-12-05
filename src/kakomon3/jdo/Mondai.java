@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -106,5 +107,12 @@ public class Mondai {
 		pm.makePersistent(new Mondai("ap/APH250404.png", "‰—pî•ñ•½¬25”N“xt–â04",
 				g1_01));
 
+	}
+	
+	public static List<Mondai> findAll(PersistenceManager pm){
+		Query query = pm.newQuery(Mondai.class);
+		@SuppressWarnings("unchecked")
+		List<Mondai> list = (List<Mondai>) query.execute();
+		return list;
 	}
 }

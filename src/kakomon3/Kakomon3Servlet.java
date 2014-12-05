@@ -28,9 +28,8 @@ public class Kakomon3Servlet extends HttpServlet {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
-		Query queryGenre = pm.newQuery(Genre.class);
-		@SuppressWarnings("unchecked")
-		List<Genre> list2 = (List<Genre>) queryGenre.execute();
+		
+		List<Genre> list2 = Genre.findAll(pm);
 
 		Map<String, String> mapGenre = new HashMap<String, String>();
 
@@ -38,9 +37,7 @@ public class Kakomon3Servlet extends HttpServlet {
 			mapGenre.put(g.getId(), g.getName());
 		}
 
-		Query queryMondai = pm.newQuery(Mondai.class);
-		@SuppressWarnings("unchecked")
-		List<Mondai> list = (List<Mondai>) queryMondai.execute();
+		List<Mondai> list = Mondai.findAll(pm);
 
 		for (Mondai m : list) {
 			String s = "https://storage.googleapis.com/kakomondb/" + m.getURL();

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -58,9 +59,21 @@ public class Genre {
 	}
 
 	public static void init(PersistenceManager pm) {
-		pm.makePersistent(new Genre("1-01", "基礎理論"));
-		pm.makePersistent(new Genre("1-02", "アルゴリズムとプログラミング"));
-		pm.makePersistent(new Genre("2-03", "コンピュータ構成要素"));
-	}
+		List<String[]> list = new ArrayList<String[]>();
+		list.add(new String[]{"1-01", "基礎理論"});
+		list.add(new String[]{"1-02", "アルゴリズムとプログラミング"});
+		list.add(new String[]{"2-03", "コンピュータ構成要素"});
 
+		for(String[] s:list){
+			Genre g=new Genre(s[0], s[1]); 
+			pm.makePersistent(g);
+		}
+	}
+	
+	public static List<Genre> findAll(PersistenceManager pm){
+		Query query = pm.newQuery(Genre.class);
+		@SuppressWarnings("unchecked")
+		List<Genre> list = (List<Genre>) query.execute();
+		return list;
+	}
 }
