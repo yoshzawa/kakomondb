@@ -15,6 +15,11 @@ List<String[]> mondaiList = (List<String[]>)request.getAttribute("mondaiList");
 			out.print("<hr>");
 			out.print("<h3>" + m[1] + "</h3>");
 			out.print("genre:" + m[2]);
+			out.print("<br>tag:");
+			for(int i=3 ; i < m.length ; i++){
+				out.print("[" + m[i] + "]");
+			}
 			out.println("<br><img src='" + s + "' width=1000>");
+			
 		}
 %>
