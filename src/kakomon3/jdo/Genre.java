@@ -1,7 +1,9 @@
 package kakomon3.jdo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -57,6 +59,36 @@ public class Genre {
 		setName(name);
 		setMondais(new ArrayList<String>());
 	}
+	
+	/**
+	 * Genre全件をList<Genre>で取得する
+	 * @param pm PersistenceManagerのインスタンス
+	 * @return 全件分のList
+	 */
+	public static List<Genre> findAll(PersistenceManager pm){
+		Query query = pm.newQuery(Genre.class);
+		@SuppressWarnings("unchecked")
+		List<Genre> list = (List<Genre>) query.execute();
+		return list;
+	}
+
+	/**
+	 * Genre全件のidとnameのMap<String id,String name>を取得する
+	 * @param pm PersistenceManagerのインスタンス
+	 * @return Map
+	 */
+	public static Map<String,String> getMapAll(PersistenceManager pm){
+		List<Genre> list2 = Genre.findAll(pm);
+
+		Map<String, String> mapTag = new HashMap<String, String>();
+
+		for (Genre g : list2) {
+			mapTag.put(g.getId(), g.getName());
+		}
+		return mapTag;
+	}
+	
+	
 
 	public static void init(PersistenceManager pm) {
 		List<String[]> list = new ArrayList<String[]>();
@@ -68,12 +100,5 @@ public class Genre {
 			Genre g=new Genre(s[0], s[1]); 
 			pm.makePersistent(g);
 		}
-	}
-	
-	public static List<Genre> findAll(PersistenceManager pm){
-		Query query = pm.newQuery(Genre.class);
-		@SuppressWarnings("unchecked")
-		List<Genre> list = (List<Genre>) query.execute();
-		return list;
 	}
 }

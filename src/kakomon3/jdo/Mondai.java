@@ -1,7 +1,9 @@
 package kakomon3.jdo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -114,5 +116,16 @@ public class Mondai {
 		@SuppressWarnings("unchecked")
 		List<Mondai> list = (List<Mondai>) query.execute();
 		return list;
+	}
+	
+	public static Map<String, Mondai> getMapAll(PersistenceManager pm) {
+		List<Mondai> list = Mondai.findAll(pm);
+
+		Map<String, Mondai> map = new HashMap<String, Mondai>();
+
+		for (Mondai g : list) {
+			map.put(g.getURL(),g);
+		}
+		return map;
 	}
 }
