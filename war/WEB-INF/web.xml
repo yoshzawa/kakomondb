@@ -5,13 +5,23 @@ xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet>
-		<servlet-name>Kakomon3</servlet-name>
+		<servlet-name>mondai</servlet-name>
 		<servlet-class>kakomon3.Kakomon3Servlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Kakomon3</servlet-name>
-		<url-pattern>/kakomon3</url-pattern>
+		<servlet-name>mondai</servlet-name>
+		<url-pattern>/mondai</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>tag</servlet-name>
+		<servlet-class>kakomon3.Kakomon3TagServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>tag</servlet-name>
+		<url-pattern>/tag</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>Kakomon3Init</servlet-name>
 		<servlet-class>kakomon3.Kakomon3InitServlet</servlet-class>

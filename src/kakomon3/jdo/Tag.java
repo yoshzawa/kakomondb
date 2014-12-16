@@ -64,14 +64,14 @@ public class Tag {
 		setMondais(new ArrayList<String>());
 	}
 
-	public static List<Tag> findAll(PersistenceManager pm){
+	public static List<Tag> findAll(PersistenceManager pm) {
 		Query query = pm.newQuery(Tag.class);
 		@SuppressWarnings("unchecked")
 		List<Tag> list = (List<Tag>) query.execute();
 		return list;
 	}
-	
-	public static Map<Long,String> getMapAll(PersistenceManager pm){
+
+	public static Map<Long, String> getMapAll(PersistenceManager pm) {
 		List<Tag> list2 = Tag.findAll(pm);
 
 		Map<Long, String> map = new HashMap<Long, String>();
@@ -81,7 +81,7 @@ public class Tag {
 		}
 		return map;
 	}
-	
+
 	public static void init(PersistenceManager pm) {
 
 		Tag t = new Tag("ƒu[ƒ‹‰‰Z");
@@ -95,29 +95,27 @@ public class Tag {
 			t.addMondais(m);
 			pm.makePersistent(m);
 		}
-	
-	Tag t2 = new Tag("BNF");
-	pm.makePersistent(t2);
 
-	String[] mondais2 = { "ap/APH240403.png" };
-	for (String s : mondais2) {
-		Mondai m = pm.getObjectById(Mondai.class, s);
-		t2.addMondais(m);
-		pm.makePersistent(m);
+		Tag t2 = new Tag("BNF");
+		pm.makePersistent(t2);
+
+		String[] mondais2 = { "ap/APH240403.png" };
+		for (String s : mondais2) {
+			Mondai m = pm.getObjectById(Mondai.class, s);
+			t2.addMondais(m);
+			pm.makePersistent(m);
+		}
+
+		Tag t3 = new Tag("Œë‚è’ù³");
+		pm.makePersistent(t3);
+
+		String[] mondais3 = { "ap/APH240405.png", "ap/APH241003.png",
+				"ap/APH250404.png" };
+		for (String s : mondais3) {
+			Mondai m = pm.getObjectById(Mondai.class, s);
+			t3.addMondais(m);
+			pm.makePersistent(m);
+		}
 	}
-
-	Tag t3 = new Tag("Œë‚è’ù³");
-	pm.makePersistent(t3);
-
-	String[] mondais3 = { "ap/APH240405.png","ap/APH241003.png","ap/APH250404.png" };
-	for (String s : mondais3) {
-		Mondai m = pm.getObjectById(Mondai.class, s);
-		t3.addMondais(m);
-		pm.makePersistent(m);
-	}
-
-	
-	}
-	
 
 }
