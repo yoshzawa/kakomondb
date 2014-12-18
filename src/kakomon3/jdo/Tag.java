@@ -15,10 +15,6 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable
 public class Tag {
 
-//	@PrimaryKey
-//	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-//	private Long id;
-
 	@PrimaryKey
 	@Persistent
 	private String name;
@@ -26,13 +22,13 @@ public class Tag {
 	@Persistent
 	private List<String> mondais;
 
-//	public Long getId() {
-//		return id;
-//	}
+	// public Long getId() {
+	// return id;
+	// }
 
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
+	// public void setId(Long id) {
+	// this.id = id;
+	// }
 
 	public String getName() {
 		return name;
@@ -57,7 +53,7 @@ public class Tag {
 		list.add(mondaiURL);
 		setMondais(list);
 
-//		mondai.addTags(getId());
+		// mondai.addTags(getId());
 		mondai.addTags(getName());
 	}
 
@@ -73,13 +69,13 @@ public class Tag {
 		return list;
 	}
 
-	public static Map< String , Tag> getMapAll(PersistenceManager pm) {
+	public static Map<String, Tag> getMapAll(PersistenceManager pm) {
 		List<Tag> list2 = Tag.findAll(pm);
 
-		Map<String ,Tag> map = new HashMap<String,Tag>();
+		Map<String, Tag> map = new HashMap<String, Tag>();
 
 		for (Tag g : list2) {
-			map.put( g.getName(),g);
+			map.put(g.getName(), g);
 		}
 		return map;
 	}
