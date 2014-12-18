@@ -15,23 +15,24 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable
 public class Tag {
 
-	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Long id;
+//	@PrimaryKey
+//	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+//	private Long id;
 
+	@PrimaryKey
 	@Persistent
 	private String name;
 
 	@Persistent
 	private List<String> mondais;
 
-	public Long getId() {
-		return id;
-	}
+//	public Long getId() {
+//		return id;
+//	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
 
 	public String getName() {
 		return name;
@@ -56,7 +57,8 @@ public class Tag {
 		list.add(mondaiURL);
 		setMondais(list);
 
-		mondai.addTags(getId());
+//		mondai.addTags(getId());
+		mondai.addTags(getName());
 	}
 
 	public Tag(String name) {
@@ -71,49 +73,56 @@ public class Tag {
 		return list;
 	}
 
-	public static Map<Long, String> getMapAll(PersistenceManager pm) {
+	public static Map< String , Tag> getMapAll(PersistenceManager pm) {
 		List<Tag> list2 = Tag.findAll(pm);
 
-		Map<Long, String> map = new HashMap<Long, String>();
+		Map<String ,Tag> map = new HashMap<String,Tag>();
 
 		for (Tag g : list2) {
-			map.put(g.getId(), g.getName());
+			map.put( g.getName(),g);
 		}
 		return map;
 	}
 
 	public static void init(PersistenceManager pm) {
 
-		Tag t = new Tag("ブール演算");
-		pm.makePersistent(t);
-
-		String[] mondais = { "ap/APH240401.png", "ap/APH241001.png",
+		Tag t1 = new Tag("ブール演算");
+		String[] mondais1 = { "ap/APH240401.png", "ap/APH241001.png",
 				"ap/APH241003.png", "ap/APH250401.png", "ap/APH250402.png",
 				"ap/APH250404.png" };
+		init2(pm, t1, mondais1);
+
+		Tag t2 = new Tag("BNF");
+		String[] mondais2 = { "ap/APH240403.png" };
+		init2(pm, t2, mondais2);
+
+		Tag t3 = new Tag("誤り訂正");
+		String[] mondais3 = { "ap/APH240405.png", "ap/APH241003.png",
+				"ap/APH250404.png" };
+		init2(pm, t3, mondais3);
+
+		Tag t4 = new Tag("オートマトン");
+		String[] mondais4 = { "ap/APH250403.png" };
+		init2(pm, t4, mondais4);
+
+		Tag t5 = new Tag("配列");
+		String[] mondais5 = { "ap/APH241005.png" };
+		init2(pm, t5, mondais5);
+
+		String[] mondais6 = { "ap/APH241005.png" };
+		init2(pm, new Tag("スタック"), mondais6);
+
+		Tag t7 = new Tag("桁数");
+		String[] mondais7 = { "ap/APH250401.png" };
+		init2(pm, t7, mondais7);
+
+	}
+
+	private static void init2(PersistenceManager pm, Tag t, String[] mondais) {
+		pm.makePersistent(t);
 		for (String s : mondais) {
 			Mondai m = pm.getObjectById(Mondai.class, s);
 			t.addMondais(m);
-			pm.makePersistent(m);
-		}
-
-		Tag t2 = new Tag("BNF");
-		pm.makePersistent(t2);
-
-		String[] mondais2 = { "ap/APH240403.png" };
-		for (String s : mondais2) {
-			Mondai m = pm.getObjectById(Mondai.class, s);
-			t2.addMondais(m);
-			pm.makePersistent(m);
-		}
-
-		Tag t3 = new Tag("誤り訂正");
-		pm.makePersistent(t3);
-
-		String[] mondais3 = { "ap/APH240405.png", "ap/APH241003.png",
-				"ap/APH250404.png" };
-		for (String s : mondais3) {
-			Mondai m = pm.getObjectById(Mondai.class, s);
-			t3.addMondais(m);
 			pm.makePersistent(m);
 		}
 	}
