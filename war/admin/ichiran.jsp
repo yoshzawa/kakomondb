@@ -20,7 +20,16 @@
         <td colspan="2" style="font-weight:bold;">Available Servlets:</td>        
       </tr>
       <tr>
-        <td><a href="/admin/ichiran.jsp">開発済みページ一覧</a></td>
+        <td><a href="/admin/init">Initializer</a></td>
+      </tr>
+      <tr>
+        <td><a href="/admin/mondai">List of "Mondai"</a></td>
+      </tr>
+      <tr>
+        <td><a href="/admin/tag">List of "Tag"</a></td>
+      </tr>
+      <tr>
+        <td><a href="/logout">logout</a></td>
       </tr>
     </table>
   </body>

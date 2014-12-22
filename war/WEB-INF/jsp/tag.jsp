@@ -14,9 +14,9 @@ List<String[]> tagList = (List<String[]>)request.getAttribute("tagList");
 
 			out.print("<hr>");
 			out.print("<h2>" + m[0] + "</h2>");
-			out.print("genre:" + m[2]);
-			out.print("<br>comment:" + m[3]);
-			out.print("<br>tag:");
+			out.print("ジャンル:" + m[2]);
+			out.print("<br>コメント:" + m[3]);
+			out.print("<br>タグ:");
 			for(int i=4 ; i < m.length ; i++){
 				out.print("[" + m[i] + "]");
 			}

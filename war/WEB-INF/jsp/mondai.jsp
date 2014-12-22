@@ -14,13 +14,13 @@ List<String[]> mondaiList = (List<String[]>)request.getAttribute("mondaiList");
 
 			out.print("<hr>");
 			out.print("<h3>" + m[1] + "</h3>");
-			out.print("genre:" + m[2]);
-			out.print("<br>tag:");
+			out.print("ジャンル:" + m[2]);
+			out.print("<br>タグ:");
 			for(int i=4 ; i < m.length ; i++){
 				out.print("[" + m[i] + "]");
 			}
 			out.println("<br><img src='" + s + "' width=1000><br>");
-			out.print("kotae:" + m[3]);
+			out.print("答え:" + m[3]);
 			
 		}
 %>
