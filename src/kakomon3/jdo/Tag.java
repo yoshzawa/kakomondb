@@ -82,7 +82,7 @@ public class Tag {
 
 	public static void init(PersistenceManager pm) {
 
-		Tag t1 = new Tag("t1");
+		Tag t1 = new Tag("ブール演算");
 		String[] mondais1 = { "ap/APH240401.png", "ap/APH241001.png",
 				"ap/APH241003.png", "ap/APH250401.png", "ap/APH250402.png",
 				"ap/APH250404.png" };
@@ -92,23 +92,23 @@ public class Tag {
 		String[] mondais2 = { "ap/APH240403.png" };
 		init2(pm, t2, mondais2);
 
-		Tag t3 = new Tag("t3");
+		Tag t3 = new Tag("誤り訂正");
 		String[] mondais3 = { "ap/APH240405.png", "ap/APH241003.png",
 				"ap/APH250404.png" };
 		init2(pm, t3, mondais3);
 
-		Tag t4 = new Tag("t4");
+		Tag t4 = new Tag("オートマトン");
 		String[] mondais4 = { "ap/APH250403.png" };
 		init2(pm, t4, mondais4);
 
-		Tag t5 = new Tag("t5");
+		Tag t5 = new Tag("配列");
 		String[] mondais5 = { "ap/APH241005.png" };
 		init2(pm, t5, mondais5);
 
 		String[] mondais6 = { "ap/APH241005.png" };
-		init2(pm, new Tag("t6"), mondais6);
+		init2(pm, new Tag("スタック"), mondais6);
 
-		Tag t7 = new Tag("t7");
+		Tag t7 = new Tag("桁数");
 		String[] mondais7 = { "ap/APH250401.png" };
 		init2(pm, t7, mondais7);
 
