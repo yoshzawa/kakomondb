@@ -61,9 +61,9 @@ public class Genre {
 	}
 	
 	/**
-	 * Genre‘SŒ‚ğList<Genre>‚Åæ“¾‚·‚é
-	 * @param pm PersistenceManager‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
-	 * @return ‘SŒ•ª‚ÌList
+	 * Genreå…¨ä»¶ã‚’List<Genre>ã§å–å¾—ã™ã‚‹
+	 * @param pm PersistenceManagerã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
+	 * @return å…¨ä»¶åˆ†ã®List
 	 */
 	public static List<Genre> findAll(PersistenceManager pm){
 		Query query = pm.newQuery(Genre.class);
@@ -73,8 +73,8 @@ public class Genre {
 	}
 
 	/**
-	 * Genre‘SŒ‚Ìid‚Æname‚ÌMap<String id,String name>‚ğæ“¾‚·‚é
-	 * @param pm PersistenceManager‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+	 * Genreå…¨ä»¶ã®idã¨nameã®Map<String id,String name>ã‚’å–å¾—ã™ã‚‹
+	 * @param pm PersistenceManagerã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 	 * @return Map
 	 */
 	public static Map<String,String> getMapAll(PersistenceManager pm){
@@ -92,9 +92,9 @@ public class Genre {
 
 	public static void init(PersistenceManager pm) {
 		List<String[]> list = new ArrayList<String[]>();
-		list.add(new String[]{"1-01", "Šî‘b—˜_"});
-		list.add(new String[]{"1-02", "ƒAƒ‹ƒSƒŠƒYƒ€‚ÆƒvƒƒOƒ‰ƒ~ƒ“ƒO"});
-		list.add(new String[]{"2-03", "ƒRƒ“ƒsƒ…[ƒ^\¬—v‘f"});
+		list.add(new String[]{"1-01", "åŸºç¤ç†è«–"});
+		list.add(new String[]{"1-02", "ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã¨ãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°"});
+		list.add(new String[]{"2-03", "ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿æ§‹æˆè¦ç´ "});
 
 		for(String[] s:list){
 			Genre g=new Genre(s[0], s[1]); 

@@ -89,35 +89,35 @@ public class Mondai {
 
 		Genre g1_01 = pm.getObjectById(Genre.class, "1-01");
 
-		pm.makePersistent(new Mondai("ap/APH240401.png", "‰—pî•ñ•½¬24”N“xt–â01",
+		pm.makePersistent(new Mondai("ap/APH240401.png", "å¿œç”¨æƒ…å ±å¹³æˆ24æ˜¥å­£åˆå‰å•01",
 				g1_01, Kaitou.a));
-		pm.makePersistent(new Mondai("ap/APH240402.png", "‰—pî•ñ•½¬24”N“xt–â02",
+		pm.makePersistent(new Mondai("ap/APH240402.png", "å¿œç”¨æƒ…å ±å¹³æˆ24æ˜¥å­£åˆå‰å•02",
 				g1_01, Kaitou.e));
-		pm.makePersistent(new Mondai("ap/APH240403.png", "‰—pî•ñ•½¬24”N“xt–â03",
+		pm.makePersistent(new Mondai("ap/APH240403.png", "å¿œç”¨æƒ…å ±å¹³æˆ24æ˜¥å­£åˆå‰å•03",
 				g1_01, Kaitou.u));
-		pm.makePersistent(new Mondai("ap/APH240404.png", "‰—pî•ñ•½¬24”N“xt–â04",
+		pm.makePersistent(new Mondai("ap/APH240404.png", "å¿œç”¨æƒ…å ±å¹³æˆ24æ˜¥å­£åˆå‰å•04",
 				g1_01, Kaitou.a));
-		pm.makePersistent(new Mondai("ap/APH240405.png", "‰—pî•ñ•½¬24”N“xt–â05",
+		pm.makePersistent(new Mondai("ap/APH240405.png", "å¿œç”¨æƒ…å ±å¹³æˆ24ç§‹å­£åˆå‰å•05",
 				g1_01, Kaitou.a));
 
-		pm.makePersistent(new Mondai("ap/APH241001.png", "‰—pî•ñ•½¬24”N“xH–â01",
+		pm.makePersistent(new Mondai("ap/APH241001.png", "å¿œç”¨æƒ…å ±å¹³æˆ24ç§‹å­£åˆå‰å•01",
 				g1_01,Kaitou.a));
-		pm.makePersistent(new Mondai("ap/APH241002.png", "‰—pî•ñ•½¬24”N“xH–â02",
+		pm.makePersistent(new Mondai("ap/APH241002.png", "å¿œç”¨æƒ…å ±å¹³æˆ24ç§‹å­£åˆå‰å•02",
 				g1_01,Kaitou.i));
-		pm.makePersistent(new Mondai("ap/APH241003.png", "‰—pî•ñ•½¬24”N“xH–â03",
+		pm.makePersistent(new Mondai("ap/APH241003.png", "å¿œç”¨æƒ…å ±å¹³æˆ24ç§‹å­£åˆå‰å•03",
 				g1_01,Kaitou.e));
-		pm.makePersistent(new Mondai("ap/APH241004.png", "‰—pî•ñ•½¬24”N“xH–â04",
+		pm.makePersistent(new Mondai("ap/APH241004.png", "å¿œç”¨æƒ…å ±å¹³æˆ24ç§‹å­£åˆå‰å•04",
 				g1_01,Kaitou.i));
-		pm.makePersistent(new Mondai("ap/APH241005.png", "‰—pî•ñ•½¬24”N“xH–â05",
+		pm.makePersistent(new Mondai("ap/APH241005.png", "å¿œç”¨æƒ…å ±å¹³æˆ24ç§‹å­£åˆå‰å•05",
 				g1_01,Kaitou.a));
 
-		pm.makePersistent(new Mondai("ap/APH250401.png", "‰—pî•ñ•½¬25”N“xt–â01",
+		pm.makePersistent(new Mondai("ap/APH250401.png", "å¿œç”¨æƒ…å ±å¹³æˆ25ç§‹å­£åˆå‰å•01",
 				g1_01,Kaitou.i));
-		pm.makePersistent(new Mondai("ap/APH250402.png", "‰—pî•ñ•½¬25”N“xt–â02",
+		pm.makePersistent(new Mondai("ap/APH250402.png", "å¿œç”¨æƒ…å ±å¹³æˆ25ç§‹å­£åˆå‰å•02",
 				g1_01,Kaitou.a));
-		pm.makePersistent(new Mondai("ap/APH250403.png", "‰—pî•ñ•½¬25”N“xt–â03",
+		pm.makePersistent(new Mondai("ap/APH250403.png", "å¿œç”¨æƒ…å ±å¹³æˆ25ç§‹å­£åˆå‰å•03",
 				g1_01,Kaitou.u));
-		pm.makePersistent(new Mondai("ap/APH250404.png", "‰—pî•ñ•½¬25”N“xt–â04",
+		pm.makePersistent(new Mondai("ap/APH250404.png", "å¿œç”¨æƒ…å ±å¹³æˆ25ç§‹å­£åˆå‰å•04",
 				g1_01,Kaitou.a));
 
 	}

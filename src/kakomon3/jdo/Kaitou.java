@@ -2,10 +2,10 @@ package kakomon3.jdo;
 
 public enum Kaitou  {
 	
-	a("ア",1),
-	i("イ",2),
-	u("ウ",3),
-	e("エ",4);
+	a("繧｢",1),
+	i("繧､",2),
+	u("繧ｦ",3),
+	e("繧ｨ",4);
 
 	/**
 	 * @return the no
