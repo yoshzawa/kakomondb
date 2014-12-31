@@ -10,13 +10,14 @@ List<String[]> mondaiList = (List<String[]>)request.getAttribute("mondaiList");
 <%
 		 for ( String[] m : mondaiList) {
 		 
-			String s = "https://storage.googleapis.com/kakomondb/" + m[0];
+			String s = "https://storage.googleapis.com/kakomondb/" + m[1];
 
 			out.print("<hr>");
-			out.print("<h3>" + m[1] + "</h3>");
-			out.print("ジャンル:" + m[2]);
+			out.print("<h3>" + m[0] + "</h3>");
+			out.print("<h3>" + m[2] + "</h3>");
+			out.print("ジャンル:" + m[3]);
 			out.print("<br>タグ:");
-			for(int i=4 ; i < m.length ; i++){
+			for(int i=5 ; i < m.length ; i++){
 				out.print("[" + m[i] + "]");
 			}
 			out.println("<br><img src='" + s + "' width=1000><br>");

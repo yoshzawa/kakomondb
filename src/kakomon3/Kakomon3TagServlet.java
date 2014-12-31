@@ -39,7 +39,7 @@ public class Kakomon3TagServlet extends HttpServlet {
 				String[] s = new String[4 + tags.size()];
 				
 				s[0] = tagName;
-				s[1] = mondai.getURL();
+				s[1] = mondai.getId();
 				s[2] = mapGenre.get(mondai.getGenre());
 				s[3] = mondai.getComment();
 				s[4] = "";

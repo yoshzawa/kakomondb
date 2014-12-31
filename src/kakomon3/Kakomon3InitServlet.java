@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
+import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
 import kakomon3.jdo.Tag;
 
@@ -27,6 +28,7 @@ public class Kakomon3InitServlet extends HttpServlet {
 
 		Genre.init(pm);
 		Mondai.init(pm);
+		MondaiImage.init(pm);
 		Tag.init(pm);
 
 		out.println("<h2>Initialize Complete!</h2>");

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
+import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
 import kakomon3.jdo.Tag;
 
@@ -27,13 +28,11 @@ public class Kakomon3Servlet extends HttpServlet {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
-		// List<Genre> list2 = Genre.findAll(pm);
 		Map<String, String> mapGenre = Genre.getMapAll(pm);
-
-		Map<String,Tag> mapTag = Tag.getMapAll(pm);
 
 		List<Mondai> list = Mondai.findAll(pm);
 		
+		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMapAll(pm);
 
 
 		List<String[]> mondaiList = new ArrayList<String[]>();
@@ -41,13 +40,16 @@ public class Kakomon3Servlet extends HttpServlet {
 			List<String> tagList = m.getTags();
 			int tagLength = tagList.size();
 			
-			String[] s = new String[4+tagLength];
-			s[0] = m.getURL();
-			s[1] = m.getComment();
-			s[2] = mapGenre.get(m.getGenre());
-			s[3] = m.getKotae().toString();
+			String[] s = new String[5+tagLength];
+			s[0] = m.getId();
+			String id = m.getId();
+			System.out.println(id);
+			s[1] = mapMondaiImage.get(id).getURL();
+			s[2] = m.getComment();
+			s[3] = mapGenre.get(m.getGenre());
+			s[4] = m.getKotae().toString();
 			for(int i=0 ; i<tagLength ; i++){
-				s[4+i]=tagList.get(i);
+				s[5+i]=tagList.get(i);
 			}
 			mondaiList.add(s);
 		}
