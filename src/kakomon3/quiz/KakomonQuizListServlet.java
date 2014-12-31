@@ -1,9 +1,7 @@
 package kakomon3.quiz;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +16,6 @@ import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
-import kakomon3.jdo.Tag;
 
 @SuppressWarnings("serial")
 public class KakomonQuizListServlet extends HttpServlet {
@@ -33,7 +30,6 @@ public class KakomonQuizListServlet extends HttpServlet {
 		List<Mondai> list = Mondai.findAll(pm);
 		
 		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMapAll(pm);
-
 
 		List<String[]> mondaiList = new ArrayList<String[]>();
 		for (Mondai m : list) {
@@ -58,7 +54,7 @@ public class KakomonQuizListServlet extends HttpServlet {
 		pm.close();
 
 		RequestDispatcher rd = req
-				.getRequestDispatcher("/WEB-INF/jsp/mondai.jsp");
+				.getRequestDispatcher("/WEB-INF/jsp/quiz/list.jsp");
 		rd.forward(req, resp);
 	}
 }

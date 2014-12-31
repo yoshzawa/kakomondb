@@ -1,9 +1,7 @@
 package kakomon3;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +16,6 @@ import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
-import kakomon3.jdo.Tag;
 
 @SuppressWarnings("serial")
 public class Kakomon3Servlet extends HttpServlet {

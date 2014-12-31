@@ -31,6 +31,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/admin/init</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>QuizList</servlet-name>
+		<servlet-class>kakomon3.quiz.KakomonQuizListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QuizList</servlet-name>
+		<url-pattern>/quiz/list</url-pattern>
+	</servlet-mapping>
+
+
+
 	<filter>
 		<filter-name>admincheck</filter-name>
 		<filter-class>kakomon3.filter.AdminCheckFilter</filter-class>
@@ -41,6 +52,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/admin/*</url-pattern>
 	</filter-mapping>
 
+	<filter>
+		<filter-name>logincheck</filter-name>
+		<filter-class>kakomon3.filter.LoginCheckFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>logincheck</filter-name>
+		<url-pattern>/quiz/*</url-pattern>
+	</filter-mapping>
+
+
 	<servlet>
 		<servlet-name>logout</servlet-name>
 		<servlet-class>kakomon3.LogoutServlet</servlet-class>
@@ -49,8 +71,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>logout</servlet-name>
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
-
-
 
 
 	<welcome-file-list>
