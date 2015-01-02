@@ -1,49 +1,72 @@
 package kakomon3.jdo;
 
-public enum Kaitou  {
-	
-	a("ア",1),
-	i("イ",2),
-	u("ウ",3),
-	e("エ",4);
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
-	/**
-	 * @return the no
-	 */
-	public int getNo() {
-		return no;
-	}
-	/**
-	 * @param no the no to set
-	 */
-	public void setNo(int no) {
-		this.no = no;
-	}
-	private String name;
-	private int no;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.users.User;
+
+@PersistenceCapable
+public class Kaitou {
+
+	@PrimaryKey
+	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
+	private Key key;
+
+	@Persistent
+	private User user;
+
+	@Persistent
+	private String mondaiId;
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+	@Persistent
+	private Sentaku sentaku;
+	
+	
+
+	public Key getKey() {
+		return key;
 	}
 
-	private Kaitou(String name,int no) {
-		setName(name);
-		setNo(no);
+	public void setKey(Key key) {
+		this.key = key;
 	}
-	public String toString(){
-		return this.name;
+
+	public User getUser() {
+		return user;
 	}
-	public Kaitou get(int i){
-		Kaitou[] kaitoes = Kaitou.values();
-		
-		for(Kaitou k : kaitoes){
-			if(i == k.getNo())
-				return k;
-		}
-		return null;
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getMondaiId() {
+		return mondaiId;
+	}
+
+	public void setMondaiId(String mondaiId) {
+		this.mondaiId = mondaiId;
+	}
+
+	
+	public Sentaku getSentaku() {
+		return sentaku;
+	}
+
+	public void setSentaku(Sentaku sentaku) {
+		this.sentaku = sentaku;
+	}
+
+	public Kaitou(User user, String mondaiId) {
+		this(user, mondaiId, null);
+
+	}
+	public Kaitou(User user, String mondaiId , Sentaku sentaku) {
+		setUser(user);
+		setMondaiId(mondaiId);
+		setSentaku(sentaku);
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jdo.JDOFatalInternalException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.annotations.PersistenceCapable;
@@ -22,7 +23,7 @@ public class Mondai {
 	private String comment;
 
 	@Persistent
-	private Kaitou kotae;
+	private Sentaku kotae;
 
 	@Persistent
 	private String genre;
@@ -46,11 +47,11 @@ public class Mondai {
 		this.comment = comment;
 	}
 
-	public Kaitou getKotae() {
+	public Sentaku getKotae() {
 		return kotae;
 	}
 
-	public void setKotae(Kaitou kotae) {
+	public void setKotae(Sentaku kotae) {
 		this.kotae = kotae;
 	}
 
@@ -76,7 +77,7 @@ public class Mondai {
 		setTags(list);
 	}
 
-	public Mondai(String id, String comment, Genre genre, Kaitou kotae) {
+	public Mondai(String id, String comment, Genre genre, Sentaku kotae) {
 		setId(id);
 		setComment(comment);
 		setGenre(genre.getId());
@@ -90,35 +91,35 @@ public class Mondai {
 		Genre g1_01 = pm.getObjectById(Genre.class, "1-01");
 
 		pm.makePersistent(new Mondai("APH240401", "応用情報平成24春季午前問01",
-				g1_01, Kaitou.a));
+				g1_01, Sentaku.a));
 		pm.makePersistent(new Mondai("APH240402", "応用情報平成24春季午前問02",
-				g1_01, Kaitou.e));
+				g1_01, Sentaku.e));
 		pm.makePersistent(new Mondai("APH240403", "応用情報平成24春季午前問03",
-				g1_01, Kaitou.u));
+				g1_01, Sentaku.u));
 		pm.makePersistent(new Mondai("APH240404", "応用情報平成24春季午前問04",
-				g1_01, Kaitou.a));
+				g1_01, Sentaku.a));
 		pm.makePersistent(new Mondai("APH240405", "応用情報平成24秋季午前問05",
-				g1_01, Kaitou.a));
+				g1_01, Sentaku.a));
 
 		pm.makePersistent(new Mondai("APH241001", "応用情報平成24秋季午前問01",
-				g1_01,Kaitou.a));
+				g1_01,Sentaku.a));
 		pm.makePersistent(new Mondai("APH241002", "応用情報平成24秋季午前問02",
-				g1_01,Kaitou.i));
+				g1_01,Sentaku.i));
 		pm.makePersistent(new Mondai("APH241003", "応用情報平成24秋季午前問03",
-				g1_01,Kaitou.e));
+				g1_01,Sentaku.e));
 		pm.makePersistent(new Mondai("APH241004", "応用情報平成24秋季午前問04",
-				g1_01,Kaitou.i));
+				g1_01,Sentaku.i));
 		pm.makePersistent(new Mondai("APH241005", "応用情報平成24秋季午前問05",
-				g1_01,Kaitou.a));
+				g1_01,Sentaku.a));
 
 		pm.makePersistent(new Mondai("APH250401", "応用情報平成25秋季午前問01",
-				g1_01,Kaitou.i));
+				g1_01,Sentaku.i));
 		pm.makePersistent(new Mondai("APH250402", "応用情報平成25秋季午前問02",
-				g1_01,Kaitou.a));
+				g1_01,Sentaku.a));
 		pm.makePersistent(new Mondai("APH250403", "応用情報平成25秋季午前問03",
-				g1_01,Kaitou.u));
+				g1_01,Sentaku.u));
 		pm.makePersistent(new Mondai("APH250404", "応用情報平成25秋季午前問04",
-				g1_01,Kaitou.a));
+				g1_01,Sentaku.a));
 
 	}
 
@@ -138,5 +139,10 @@ public class Mondai {
 			map.put(g.getId(), g);
 		}
 		return map;
+	}
+
+	public static Mondai getById(PersistenceManager pm, String id) throws JDOFatalInternalException{
+		return pm.getObjectById(Mondai.class,id);
+		
 	}
 }

@@ -40,6 +40,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/quiz/list</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>Quiz</servlet-name>
+		<servlet-class>kakomon3.quiz.KakomonQuiz2Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Quiz</servlet-name>
+		<url-pattern>/quiz/toi</url-pattern>
+	</servlet-mapping>
+
 
 
 	<filter>

@@ -81,6 +81,10 @@ public class MondaiImage {
 		return map;
 	}
 
+	public static MondaiImage getById(PersistenceManager pm, String id) {
+		return pm.getObjectById(MondaiImage.class,id);
+	}
+
 	
 	
 }
