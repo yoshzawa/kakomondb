@@ -58,7 +58,7 @@ public class KakomonQuiz2Servlet extends HttpServlet {
 			pm.close();
 
 			RequestDispatcher rd = req
-					.getRequestDispatcher("/WEB-INF/jsp/quiz/toi.jsp");
+					.getRequestDispatcher("/WEB-INF/jsp/quiz/toi2.jsp");
 			rd.forward(req, resp);
 		} catch (JDOObjectNotFoundException e) {
 			resp.sendRedirect("/");

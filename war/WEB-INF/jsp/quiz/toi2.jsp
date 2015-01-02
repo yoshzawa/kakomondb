@@ -1,21 +1,52 @@
-<%@page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="java.util.List" %>
+<%@page contentType="text/html;charset=UTF-8" language="java"%>
+<%@page import="java.util.List"%>
 
 <%
-String[]m = (String[])request.getAttribute("mondaiList");
+	String[] m = (String[]) request.getAttribute("mondaiList");
 %>
 
-<h1>問題</H1>
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap 101 Template</title>
 
-<%
-		 
+<!-- Bootstrap -->
+<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+
+
+
+	<h1 class="h1">問題</H1>
+
+	<%
 			String s = "https://storage.googleapis.com/kakomondb/" + m[1];
 
-			out.print("<hr>");
-			out.print("<h3>" + m[0] + "</h3>");
-			out.print("<h3>" + m[2] + "</h3>");
-			out.println("<br><img src='" + s + "' width=1000><br>");
-			out.print("<p>" + m[3] + "</p>");
-			
+			out.println("<hr>");
+			out.print("<h2>" + m[0] + "");
+			out.println("<small>" + m[2] + "</small></h2>");
+			out.println("<br><img src='" + s + "' width=800 class='img-thumbnail'><br>");
+			out.println("<p>" + m[3] + "</p>");
+	%>
 
-%>
+
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="/bootstrap/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
