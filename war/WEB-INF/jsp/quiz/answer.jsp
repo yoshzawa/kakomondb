@@ -25,7 +25,7 @@
 <body>
 	<div class="container">
 
-		<h1 class="h1">問題</H1>
+		<h1 class="h1">答え合わせ</H1>
 
 		<%
 			String s = "https://storage.googleapis.com/kakomondb/" + m[1];
@@ -36,21 +36,8 @@
 			out.println("<br><img src='" + s
 					+ "' width=800 class='img-thumbnail'><br>");
 		%>
-<form mathod="get" action="/quiz/answer">
-		<div class="btn-group" data-toggle="buttons">
-			<label class="btn btn-primary active"> <input type="radio"
-				name="answer" value="1" autocomplete="off" checked>ア
-			</label> <label class="btn btn-primary"> <input type="radio"
-				name="answer" value="2" autocomplete="off">イ
-			</label> <label class="btn btn-primary"> <input type="radio"
-				name="answer" value="3" autocomplete="off">ウ
-			</label> <label class="btn btn-primary"> <input type="radio"
-				name="answer" value="4" autocomplete="off">エ
-			</label>
-		</div>
-			<input type="hidden" name="id" value="<%= m[3] %>">
-			<input class="btn btn-default" type="submit" value="Submit">
-</form>
+		解答：<%= m[3] %>　正解：<%= m[4] %><br>
+		<%= m[5] %>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script

@@ -1,5 +1,6 @@
 package kakomon3.jdo;
 
+import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -23,6 +24,9 @@ public class Kaitou {
 	
 	@Persistent
 	private Sentaku sentaku;
+
+	@Persistent
+	private boolean seikai;
 	
 	
 
@@ -58,15 +62,29 @@ public class Kaitou {
 	public void setSentaku(Sentaku sentaku) {
 		this.sentaku = sentaku;
 	}
+	
+
+	public boolean isSeikai() {
+		return seikai;
+	}
+
+	public void setSeikai(boolean seikai) {
+		this.seikai = seikai;
+	}
 
 	public Kaitou(User user, String mondaiId) {
-		this(user, mondaiId, null);
+		this(user, mondaiId, null,false);
 
 	}
-	public Kaitou(User user, String mondaiId , Sentaku sentaku) {
+	public Kaitou(User user, String mondaiId , Sentaku sentaku,boolean seikai) {
 		setUser(user);
 		setMondaiId(mondaiId);
 		setSentaku(sentaku);
+		setSeikai(seikai);
+	}
+	public static Kaitou getById(PersistenceManager pm , Key key){
+		return pm.getObjectById(Kaitou.class , key);
+		
 	}
 
 }

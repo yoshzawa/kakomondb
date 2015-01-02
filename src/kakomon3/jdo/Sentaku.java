@@ -36,7 +36,7 @@ public enum Sentaku  {
 	public String toString(){
 		return this.name;
 	}
-	public Sentaku get(int i){
+	public static Sentaku get(int i){
 		Sentaku[] kaitoes = Sentaku.values();
 		
 		for(Sentaku k : kaitoes){

@@ -49,6 +49,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/quiz/toi</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>QuizKotae</servlet-name>
+		<servlet-class>kakomon3.quiz.KakomonQuizKotaeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QuizKotae</servlet-name>
+		<url-pattern>/quiz/answer</url-pattern>
+	</servlet-mapping>
+
 
 
 	<filter>
