@@ -54,7 +54,8 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 			boolean b = ansSentaku.equals(seikaiSentaku);
 			kaitou.setSeikai(b);
 			
-			pm.makePersistent(kaitou);
+//			pm.makePersistent(kaitou);
+			kaitou.makePersistent(pm);
 			
 			String[] s = new String[7];
 			

@@ -38,15 +38,16 @@ public class KakomonQuiz2Servlet extends HttpServlet {
 			resp.sendRedirect("/");
 		}
 		try {
+
+			UserService service = UserServiceFactory.getUserService();
+
+			Kaitou k = Kaitou.getByUser(pm, service.getCurrentUser(), id);
+			
+			id = k.getMondaiId();
 			Mondai mondai = Mondai.getById(pm, id);
 			MondaiImage mondaiImage = MondaiImage.getById(pm, id);
 			
-	        UserService service = UserServiceFactory.getUserService();
-			Kaitou k = new Kaitou(service.getCurrentUser(), id);
-			pm.makePersistent(k);
-			
-			Key kk = k.getKey();
-			String kaitouId = KeyFactory.keyToString(kk);
+			String kaitouId = k.getKeyString();
 
 			String[] s = new String[4];
 			s[0] = mondai.getId();
@@ -62,7 +63,7 @@ public class KakomonQuiz2Servlet extends HttpServlet {
 			rd.forward(req, resp);
 		} catch (JDOObjectNotFoundException e) {
 			resp.sendRedirect("/");
-		} catch (JDOFatalInternalException e){
+		} catch (JDOFatalInternalException e) {
 			resp.sendRedirect("/");
 		}
 	}

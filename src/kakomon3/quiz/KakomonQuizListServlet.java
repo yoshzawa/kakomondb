@@ -25,7 +25,7 @@ public class KakomonQuizListServlet extends HttpServlet {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
-		Map<String, String> mapGenre = Genre.getMapAll(pm);
+		Map<String, String> mapGenre = Genre.getMap(pm);
 
 		List<Mondai> list = Mondai.findAll(pm);
 		

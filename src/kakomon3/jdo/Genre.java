@@ -11,6 +11,8 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 @PersistenceCapable
 public class Genre {
 
@@ -65,7 +67,7 @@ public class Genre {
 	 * @param pm PersistenceManagerのインスタンス
 	 * @return 全件分のList
 	 */
-	public static List<Genre> findAll(PersistenceManager pm){
+	public static List<Genre> getList(PersistenceManager pm){
 		Query query = pm.newQuery(Genre.class);
 		@SuppressWarnings("unchecked")
 		List<Genre> list = (List<Genre>) query.execute();
@@ -77,8 +79,8 @@ public class Genre {
 	 * @param pm PersistenceManagerのインスタンス
 	 * @return Map
 	 */
-	public static Map<String,String> getMapAll(PersistenceManager pm){
-		List<Genre> list2 = Genre.findAll(pm);
+	public static Map<String,String> getMap(PersistenceManager pm){
+		List<Genre> list2 = Genre.getList(pm);
 
 		Map<String, String> mapTag = new HashMap<String, String>();
 
@@ -88,7 +90,9 @@ public class Genre {
 		return mapTag;
 	}
 	
-	
+	public static Genre getById(PersistenceManager pm , Key key){
+		return pm.getObjectById(Genre.class , key);
+	}
 
 	public static void init(PersistenceManager pm) {
 		List<String[]> list = new ArrayList<String[]>();
