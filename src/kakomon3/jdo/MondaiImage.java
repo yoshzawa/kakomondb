@@ -35,10 +35,10 @@ public class MondaiImage {
 	public void setURL(String uRL) {
 		URL = uRL;
 	}
-	
-	 public MondaiImage( String id , String URL) {
-		 setId(id);
-		 setURL(URL);
+
+	public MondaiImage(String id, String URL) {
+		setId(id);
+		setURL(URL);
 	}
 
 	public static void init(PersistenceManager pm) {
@@ -61,17 +61,15 @@ public class MondaiImage {
 
 	}
 
-
-
-	public static List<MondaiImage> findAll(PersistenceManager pm) {
+	public static List<MondaiImage> getList(PersistenceManager pm) {
 		Query query = pm.newQuery(MondaiImage.class);
 		@SuppressWarnings("unchecked")
 		List<MondaiImage> list = (List<MondaiImage>) query.execute();
 		return list;
 	}
 
-	public static Map<String, MondaiImage> getMapAll(PersistenceManager pm) {
-		List<MondaiImage> list = MondaiImage.findAll(pm);
+	public static Map<String, MondaiImage> getMap(PersistenceManager pm) {
+		List<MondaiImage> list = MondaiImage.getList(pm);
 
 		Map<String, MondaiImage> map = new HashMap<String, MondaiImage>();
 
@@ -82,9 +80,7 @@ public class MondaiImage {
 	}
 
 	public static MondaiImage getById(PersistenceManager pm, String id) {
-		return pm.getObjectById(MondaiImage.class,id);
+		return pm.getObjectById(MondaiImage.class, id);
 	}
 
-	
-	
 }

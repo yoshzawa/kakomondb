@@ -61,13 +61,15 @@ public class Genre {
 		setName(name);
 		setMondais(new ArrayList<String>());
 	}
-	
+
 	/**
 	 * Genre全件をList<Genre>で取得する
-	 * @param pm PersistenceManagerのインスタンス
+	 * 
+	 * @param pm
+	 *            PersistenceManagerのインスタンス
 	 * @return 全件分のList
 	 */
-	public static List<Genre> getList(PersistenceManager pm){
+	public static List<Genre> getList(PersistenceManager pm) {
 		Query query = pm.newQuery(Genre.class);
 		@SuppressWarnings("unchecked")
 		List<Genre> list = (List<Genre>) query.execute();
@@ -76,10 +78,12 @@ public class Genre {
 
 	/**
 	 * Genre全件のidとnameのMap<String id,String name>を取得する
-	 * @param pm PersistenceManagerのインスタンス
+	 * 
+	 * @param pm
+	 *            PersistenceManagerのインスタンス
 	 * @return Map
 	 */
-	public static Map<String,String> getMap(PersistenceManager pm){
+	public static Map<String, String> getMap(PersistenceManager pm) {
 		List<Genre> list2 = Genre.getList(pm);
 
 		Map<String, String> mapTag = new HashMap<String, String>();
@@ -89,19 +93,19 @@ public class Genre {
 		}
 		return mapTag;
 	}
-	
-	public static Genre getById(PersistenceManager pm , Key key){
-		return pm.getObjectById(Genre.class , key);
+
+	public static Genre getById(PersistenceManager pm, Key key) {
+		return pm.getObjectById(Genre.class, key);
 	}
 
 	public static void init(PersistenceManager pm) {
 		List<String[]> list = new ArrayList<String[]>();
-		list.add(new String[]{"1-01", "基礎理論"});
-		list.add(new String[]{"1-02", "アルゴリズムとプログラミング"});
-		list.add(new String[]{"2-03", "コンピュータ構成要素"});
+		list.add(new String[] { "1-01", "基礎理論" });
+		list.add(new String[] { "1-02", "アルゴリズムとプログラミング" });
+		list.add(new String[] { "2-03", "コンピュータ構成要素" });
 
-		for(String[] s:list){
-			Genre g=new Genre(s[0], s[1]); 
+		for (String[] s : list) {
+			Genre g = new Genre(s[0], s[1]);
 			pm.makePersistent(g);
 		}
 	}

@@ -27,17 +27,16 @@ public class Kakomon3Servlet extends HttpServlet {
 
 		Map<String, String> mapGenre = Genre.getMap(pm);
 
-		List<Mondai> list = Mondai.findAll(pm);
-		
-		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMapAll(pm);
+		List<Mondai> list = Mondai.getList(pm);
 
+		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMap(pm);
 
 		List<String[]> mondaiList = new ArrayList<String[]>();
 		for (Mondai m : list) {
 			List<String> tagList = m.getTags();
 			int tagLength = tagList.size();
-			
-			String[] s = new String[5+tagLength];
+
+			String[] s = new String[5 + tagLength];
 			s[0] = m.getId();
 			String id = m.getId();
 			System.out.println(id);
@@ -45,8 +44,8 @@ public class Kakomon3Servlet extends HttpServlet {
 			s[2] = m.getComment();
 			s[3] = mapGenre.get(m.getGenre());
 			s[4] = m.getKotae().toString();
-			for(int i=0 ; i<tagLength ; i++){
-				s[5+i]=tagList.get(i);
+			for (int i = 0; i < tagLength; i++) {
+				s[5 + i] = tagList.get(i);
 			}
 			mondaiList.add(s);
 		}

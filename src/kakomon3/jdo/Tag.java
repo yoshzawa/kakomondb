@@ -53,15 +53,15 @@ public class Tag {
 		setMondais(new ArrayList<String>());
 	}
 
-	public static List<Tag> findAll(PersistenceManager pm) {
+	public static List<Tag> getList(PersistenceManager pm) {
 		Query query = pm.newQuery(Tag.class);
 		@SuppressWarnings("unchecked")
 		List<Tag> list = (List<Tag>) query.execute();
 		return list;
 	}
 
-	public static Map<String, Tag> getMapAll(PersistenceManager pm) {
-		List<Tag> list2 = Tag.findAll(pm);
+	public static Map<String, Tag> getMap(PersistenceManager pm) {
+		List<Tag> list2 = Tag.getList(pm);
 
 		Map<String, Tag> map = new HashMap<String, Tag>();
 

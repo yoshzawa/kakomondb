@@ -23,7 +23,6 @@ public class Kakomon3InitServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		out.println("<h1>kakomondb Initializer</h1>");
 
-
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
 		Genre.init(pm);

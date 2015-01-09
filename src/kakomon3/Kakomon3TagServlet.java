@@ -25,8 +25,8 @@ public class Kakomon3TagServlet extends HttpServlet {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Map<String, String> mapGenre = Genre.getMap(pm);
-		List<Tag> allTag = Tag.findAll(pm);
-		Map<String, Mondai> mapMondai = Mondai.getMapAll(pm);
+		List<Tag> allTag = Tag.getList(pm);
+		Map<String, Mondai> mapMondai = Mondai.getMap(pm);
 		List<String[]> tagList = new ArrayList<String[]>();
 
 		for (Tag t : allTag) {
@@ -37,20 +37,20 @@ public class Kakomon3TagServlet extends HttpServlet {
 				List<String> tags = mondai.getTags();
 
 				String[] s = new String[4 + tags.size()];
-				
+
 				s[0] = tagName;
 				s[1] = mondai.getId();
 				s[2] = mapGenre.get(mondai.getGenre());
 				s[3] = mondai.getComment();
 				s[4] = "";
-				
-//				List<String> tList = mondai.getTags();
-				for (int i=0 ; i<tags.size() ;i++) {
-					s[4+i] = tags.get(i);
+
+				// List<String> tList = mondai.getTags();
+				for (int i = 0; i < tags.size(); i++) {
+					s[4 + i] = tags.get(i);
 				}
 
 				tagList.add(s);
-				System.out.println(s[0]+";"+s[2]+";"+s[3]);
+				System.out.println(s[0] + ";" + s[2] + ";" + s[3]);
 			}
 		}
 

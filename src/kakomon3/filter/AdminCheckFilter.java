@@ -16,7 +16,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 /**
- *Å@Å@original: http://libro.tuyano.com/index3?id=141001&page=2
+ * original: http://libro.tuyano.com/index3?id=141001&page=2
  */
 public class AdminCheckFilter implements Filter {
 
@@ -27,19 +27,19 @@ public class AdminCheckFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp,
 			FilterChain chain) throws IOException, ServletException {
-        UserService service = UserServiceFactory.getUserService();
-        HttpServletRequest request = (HttpServletRequest)req;
-        HttpServletResponse response = (HttpServletResponse)resp;
-        HttpSession session = request.getSession();
-        if ((service.isUserLoggedIn()) && (service.isUserAdmin())){
-            session.setAttribute("admin", service.getCurrentUser());
-        } else {
-            session.removeAttribute("admin");
-            String url = request.getRequestURI();
-            String loginurl = service.createLoginURL(url);
-            response.sendRedirect(loginurl);
-        }
-        chain.doFilter(request, response);
+		UserService service = UserServiceFactory.getUserService();
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpServletResponse response = (HttpServletResponse) resp;
+		HttpSession session = request.getSession();
+		if ((service.isUserLoggedIn()) && (service.isUserAdmin())) {
+			session.setAttribute("admin", service.getCurrentUser());
+		} else {
+			session.removeAttribute("admin");
+			String url = request.getRequestURI();
+			String loginurl = service.createLoginURL(url);
+			response.sendRedirect(loginurl);
+		}
+		chain.doFilter(request, response);
 	}
 
 	@Override

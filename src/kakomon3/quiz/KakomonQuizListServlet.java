@@ -27,9 +27,9 @@ public class KakomonQuizListServlet extends HttpServlet {
 
 		Map<String, String> mapGenre = Genre.getMap(pm);
 
-		List<Mondai> list = Mondai.findAll(pm);
+		List<Mondai> list = Mondai.getList(pm);
 		
-		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMapAll(pm);
+		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMap(pm);
 
 		List<String[]> mondaiList = new ArrayList<String[]>();
 		for (Mondai m : list) {
