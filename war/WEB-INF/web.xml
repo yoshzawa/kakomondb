@@ -4,6 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
+	
 	<servlet>
 		<servlet-name>mondai</servlet-name>
 		<servlet-class>kakomon3.Kakomon3Servlet</servlet-class>
@@ -58,13 +59,20 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/quiz/answer</url-pattern>
 	</servlet-mapping>
 
-
+	<servlet>
+		<servlet-name>Bunseki</servlet-name>
+		<servlet-class>kakomon3.quiz.KakomonBunsekiServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Bunseki</servlet-name>
+		<url-pattern>/quiz/bunseki</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>admincheck</filter-name>
 		<filter-class>kakomon3.filter.AdminCheckFilter</filter-class>
 	</filter>
-	
+
 	<filter-mapping>
 		<filter-name>admincheck</filter-name>
 		<url-pattern>/admin/*</url-pattern>
@@ -74,7 +82,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<filter-name>logincheck</filter-name>
 		<filter-class>kakomon3.filter.LoginCheckFilter</filter-class>
 	</filter>
-	
+
 	<filter-mapping>
 		<filter-name>logincheck</filter-name>
 		<url-pattern>/quiz/*</url-pattern>
