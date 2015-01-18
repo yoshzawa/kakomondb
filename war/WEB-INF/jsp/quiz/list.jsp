@@ -7,8 +7,12 @@ List<String[]> mondaiList = (List<String[]>)request.getAttribute("mondaiList");
 
 <h1>問題一覧</H1>
 
+<a href="/quiz/list">問題順 </a>
+ジャンル指定
+タグ指定
+
 <table border=1>
-<tr><th>問題</th><td>ジャンル</td><td>タグ</td></tr>
+<tr><th>問題</th><th>ジャンル</th><th>タグ</th></tr>
 <%
 		 for ( String[] m : mondaiList) {
 %>
@@ -18,7 +22,7 @@ List<String[]> mondaiList = (List<String[]>)request.getAttribute("mondaiList");
 	<td>
 <% 		 
 			for(int i=5 ; i < m.length ; i++){
-				out.print("[" + m[i] + "]");
+				out.print("[" + m[i] + "] ");
 			}
 %>
 	</td></tr>

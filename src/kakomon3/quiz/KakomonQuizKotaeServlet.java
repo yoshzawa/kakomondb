@@ -1,9 +1,6 @@
 package kakomon3.quiz;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import javax.jdo.JDOFatalInternalException;
 import javax.jdo.JDOObjectNotFoundException;
@@ -14,10 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
-
-import kakomon3.jdo.Genre;
 import kakomon3.jdo.Kaitou;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.MondaiImage;
@@ -38,8 +31,7 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 			resp.sendRedirect("/");
 		}
 		try {
-			Key key = KeyFactory.stringToKey(id);
-			Kaitou kaitou = Kaitou.getById(pm,key);
+			Kaitou kaitou = Kaitou.getById(pm,id);
 			
 			String mondaiId = kaitou.getMondaiId();
 			
@@ -54,7 +46,6 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 			boolean b = ansSentaku.equals(seikaiSentaku);
 			kaitou.setSeikai(b);
 			
-//			pm.makePersistent(kaitou);
 			kaitou.makePersistent(pm);
 			
 			String[] s = new String[7];
