@@ -139,6 +139,7 @@ public class Kaitou {
 		query.setOrdering("key");
 		query.declareParameters("com.google.appengine.api.users.User newUser");
 		
+		@SuppressWarnings("unchecked")
 		List<Kaitou> result = (List<Kaitou>) query.execute(user);
 		return result;
 	}
