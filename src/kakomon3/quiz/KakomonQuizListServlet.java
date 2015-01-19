@@ -51,9 +51,12 @@ public class KakomonQuizListServlet extends HttpServlet {
 
 		req.setAttribute("mondaiList", mondaiList);
 		pm.close();
-
+	
+		req.setAttribute("jsp_url", "/WEB-INF/jsp/quiz/list.jsp");
+		
 		RequestDispatcher rd = req
-				.getRequestDispatcher("/WEB-INF/jsp/quiz/list.jsp");
+				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
+		
 		rd.forward(req, resp);
 	}
 }

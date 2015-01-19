@@ -10,7 +10,7 @@ List<String[]> mondaiList = (List<String[]>)request.getAttribute("mondaiList");
 <%
 		 for ( String[] m : mondaiList) {
 		 
-			String s = "https://storage.googleapis.com/kakomondb/" + m[1];
+			String s = "http://storage.googleapis.com/kakomondb/" + m[1];
 
 			out.print("<hr>");
 			out.print("<h3>" + m[0] + "</h3>");

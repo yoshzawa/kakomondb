@@ -54,8 +54,11 @@ public class KakomonBunsekiServlet extends HttpServlet {
 			req.setAttribute("result", s);
 			pm.close();
 
+			req.setAttribute("jsp_url", "/WEB-INF/jsp/quiz/bunseki.jsp");
+			
 			RequestDispatcher rd = req
-					.getRequestDispatcher("/WEB-INF/jsp/quiz/bunseki.jsp");
+					.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
+			
 			rd.forward(req, resp);
 		} catch(IOException e){
 			System.out.println(e.toString()); 
