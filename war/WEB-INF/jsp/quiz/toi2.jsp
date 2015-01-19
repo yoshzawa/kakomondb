@@ -28,7 +28,7 @@
 		<h1 class="h1">問題</H1>
 
 		<%
-			String s = "https://storage.googleapis.com/kakomondb/" + m[1];
+			String s = "http://storage.googleapis.com/kakomondb/" + m[1];
 
 			out.println("<hr>");
 			out.print("<h2>" + m[0] + "");

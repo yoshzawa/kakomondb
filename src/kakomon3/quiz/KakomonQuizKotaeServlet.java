@@ -31,48 +31,49 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 			resp.sendRedirect("/");
 		}
 		try {
-			Kaitou kaitou = Kaitou.getById(pm,id);
-			
+			Kaitou kaitou = Kaitou.getById(pm, id);
+
 			String mondaiId = kaitou.getMondaiId();
-			
+
 			Mondai mondai = Mondai.getById(pm, mondaiId);
 			MondaiImage mondaiImage = MondaiImage.getById(pm, mondaiId);
-			
+
 			int i = Integer.parseInt(answer);
 			Sentaku ansSentaku = Sentaku.get(i);
 			Sentaku seikaiSentaku = mondai.getKotae();
-			
+
 			kaitou.setSentaku(ansSentaku);
 			boolean b = ansSentaku.equals(seikaiSentaku);
 			kaitou.setSeikai(b);
-			
+
 			kaitou.makePersistent(pm);
-			
+
 			String[] s = new String[7];
-			
+
 			s[0] = mondai.getId();
 			s[1] = mondaiImage.getURL();
 			s[2] = mondai.getComment();
 			s[3] = mondai.getKotae().toString();
 			s[4] = kaitou.getSentaku().toString();
-			s[5] = kaitou.isSeikai()?"◯":"×";
+			s[5] = kaitou.isSeikai() ? "◯" : "×";
 			s[6] = id;
-			
 
 			req.setAttribute("mondaiList", s);
 			pm.close();
 
+			req.setAttribute("jsp_url", "/WEB-INF/jsp/quiz/answer.jsp");
+
 			RequestDispatcher rd = req
-					.getRequestDispatcher("/WEB-INF/jsp/quiz/answer.jsp");
+					.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
+
 			rd.forward(req, resp);
 		} catch (JDOObjectNotFoundException e) {
 			resp.sendRedirect("/");
-		} catch (JDOFatalInternalException e){
+		} catch (JDOFatalInternalException e) {
 			resp.sendRedirect("/");
-		} catch (IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			resp.sendRedirect("/");
 		}
 
-		}
 	}
-
+}

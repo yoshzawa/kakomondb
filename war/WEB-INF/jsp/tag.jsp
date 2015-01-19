@@ -10,7 +10,7 @@ List<String[]> tagList = (List<String[]>)request.getAttribute("tagList");
 <%
 		 for ( String[] m : tagList) {
 		 
-			String s = "https://storage.googleapis.com/kakomondb/" + m[1];
+			String s = "http://storage.googleapis.com/kakomondb/" + m[1];
 
 			out.print("<hr>");
 			out.print("<h2>" + m[0] + "</h2>");
