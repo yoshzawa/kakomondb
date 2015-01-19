@@ -23,38 +23,11 @@ public class Kakomon3Servlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-
-		Map<String, String> mapGenre = Genre.getMap(pm);
-
-		List<Mondai> list = Mondai.getList(pm);
-
-		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMap(pm);
-
-		List<String[]> mondaiList = new ArrayList<String[]>();
-		for (Mondai m : list) {
-			List<String> tagList = m.getTags();
-			int tagLength = tagList.size();
-
-			String[] s = new String[5 + tagLength];
-			s[0] = m.getId();
-			String id = m.getId();
-			System.out.println(id);
-			s[1] = mapMondaiImage.get(id).getURL();
-			s[2] = m.getComment();
-			s[3] = mapGenre.get(m.getGenre());
-			s[4] = m.getKotae().toString();
-			for (int i = 0; i < tagLength; i++) {
-				s[5 + i] = tagList.get(i);
-			}
-			mondaiList.add(s);
-		}
-
-		req.setAttribute("mondaiList", mondaiList);
-		pm.close();
+		req.setAttribute("jsp_url", "/WEB-INF/jsp/index.jsp");
 
 		RequestDispatcher rd = req
-				.getRequestDispatcher("/WEB-INF/jsp/mondai.jsp");
+				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
+
 		rd.forward(req, resp);
 	}
 }

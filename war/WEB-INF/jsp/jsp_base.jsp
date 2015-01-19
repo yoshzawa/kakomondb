@@ -26,9 +26,10 @@
 	<div class="container">
 
 <ul class="nav nav-pills">
+    <li><a href="/">TOP</a></li>
+    <li><a href="/quiz/list">問題一覧</a></li>
     <li><a href="/quiz/bunseki">結果分析</a></li>
     <li><a href="/admin/ichiran.jsp">管理者用</a></li>
-    <li><a href="/quiz/list">問題一覧</a></li>
 </ul>
 
 <jsp:include 	page= "<%= url %>" />

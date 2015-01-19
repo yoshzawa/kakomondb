@@ -7,7 +7,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	
 	<servlet>
 		<servlet-name>mondai</servlet-name>
-		<servlet-class>kakomon3.Kakomon3Servlet</servlet-class>
+		<servlet-class>kakomon3.admin.Kakomon3ListServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mondai</servlet-name>
@@ -16,7 +16,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	<servlet>
 		<servlet-name>tag</servlet-name>
-		<servlet-class>kakomon3.Kakomon3TagServlet</servlet-class>
+		<servlet-class>kakomon3.admin.Kakomon3TagServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tag</servlet-name>
@@ -25,7 +25,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	<servlet>
 		<servlet-name>Kakomon3Init</servlet-name>
-		<servlet-class>kakomon3.Kakomon3InitServlet</servlet-class>
+		<servlet-class>kakomon3.admin.Kakomon3InitServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Kakomon3Init</servlet-name>
@@ -98,6 +98,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>index</servlet-name>
+		<servlet-class>kakomon3.Kakomon3Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>index</servlet-name>
+		<url-pattern>/index.html</url-pattern>
+	</servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

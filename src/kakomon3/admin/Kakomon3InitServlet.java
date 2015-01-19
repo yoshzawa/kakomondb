@@ -1,4 +1,4 @@
-package kakomon3;
+package kakomon3.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
