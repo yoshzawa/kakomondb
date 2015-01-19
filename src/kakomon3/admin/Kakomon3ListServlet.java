@@ -54,7 +54,7 @@ public class Kakomon3ListServlet extends HttpServlet {
 		pm.close();
 
 		RequestDispatcher rd = req
-				.getRequestDispatcher("/WEB-INF/jsp/mondai.jsp");
+				.getRequestDispatcher("/WEB-INF/jsp/admin/mondai.jsp");
 		rd.forward(req, resp);
 	}
 }

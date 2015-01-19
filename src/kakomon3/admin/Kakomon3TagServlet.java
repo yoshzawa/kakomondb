@@ -57,7 +57,7 @@ public class Kakomon3TagServlet extends HttpServlet {
 		req.setAttribute("tagList", tagList);
 		pm.close();
 
-		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/tag.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/admin/tag.jsp");
 		rd.forward(req, resp);
 	}
 }

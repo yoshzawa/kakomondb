@@ -1,6 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/kakomon3/jdo/Sentaku.java=UTF-8
-encoding//war/WEB-INF/jsp/index2.jsp=UTF-8
-encoding//war/WEB-INF/jsp/mondai.jsp=UTF-8
-encoding//war/WEB-INF/jsp/tag.jsp=UTF-8
+encoding//war/WEB-INF/jsp/admin/mondai.jsp=UTF-8
+encoding//war/WEB-INF/jsp/admin/tag.jsp=UTF-8
 encoding/<project>=utf-8
