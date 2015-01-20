@@ -1,3 +1,4 @@
+<%@page import="kakomon3.PersonalData"%>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="java.util.List" %>
 
@@ -10,7 +11,7 @@ List<String[]> tagList = (List<String[]>)request.getAttribute("tagList");
 <%
 		 for ( String[] m : tagList) {
 		 
-			String s = "http://storage.googleapis.com/kakomondb/" + m[1];
+			String s = "http://storage.googleapis.com/"+PersonalData.googleStorageBucket+"/" + m[1];
 
 			out.print("<hr>");
 			out.print("<h2>" + m[0] + "</h2>");

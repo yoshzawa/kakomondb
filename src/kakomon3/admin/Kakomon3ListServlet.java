@@ -39,7 +39,7 @@ public class Kakomon3ListServlet extends HttpServlet {
 			String[] s = new String[5 + tagLength];
 			s[0] = m.getId();
 			String id = m.getId();
-			System.out.println(id);
+//			System.out.println(id);
 			s[1] = mapMondaiImage.get(id).getURL();
 			s[2] = m.getComment();
 			s[3] = mapGenre.get(m.getGenre());

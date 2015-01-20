@@ -1,27 +1,57 @@
-<%@page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="java.util.List" %>
+<%@page import="kakomon3.PersonalData"%>
+<%@page contentType="text/html;charset=UTF-8" language="java"%>
+<%@page import="java.util.List"%>
 
 <%
-List<String[]> mondaiList = (List<String[]>)request.getAttribute("mondaiList");
+	List<String[]> mondaiList = (List<String[]>) request
+			.getAttribute("mondaiList");
+	String message = (String) request.getAttribute("message");
+	if (message == null) {
+		message = "";
+	}
 %>
 
 <h1>問題一覧</H1>
 
-<%
-		 for ( String[] m : mondaiList) {
-		 
-			String s = "http://storage.googleapis.com/kakomondb/" + m[1];
 
-			out.print("<hr>");
-			out.print("<h3>" + m[0] + "</h3>");
-			out.print("<h3>" + m[2] + "</h3>");
-			out.print("ジャンル:" + m[3]);
-			out.print("<br>タグ:");
-			for(int i=5 ; i < m.length ; i++){
+<table border=1>
+	<tr>
+		<th>ID</th>
+		<th>Comment</th>
+		<th>Genre</th>
+		<th>Tag</th>
+		<th>StorageImage</th>
+		<th>Answer</th>
+	</tr>
+	<tr>
+	<form method='post' action="/admin/listAdd">
+		<td><input type='text' name='mondaiId'></td>
+		<td><input type='text' name='comment'></td>
+		<td><input type='text' name='genreId'></td>
+		<td>---</td>
+		<td><input type='text' name='mondaiImage'></td>
+		<td><input type='text' name='kotae'></td>
+	</form>
+	</tr>
+	
+	<%
+		for (String[] m : mondaiList) {
+
+			String s = "http://storage.googleapis.com/"
+					+ PersonalData.googleStorageBucket + "/" + m[1];
+
+			out.print("<tr>");
+			out.print("<th>" + m[0] + "</th>");
+			out.print("<td>" + m[2] + "</td>");
+			out.print("<td>" + m[3] + "</td>");
+			out.print("<td>");
+			for (int i = 5; i < m.length; i++) {
 				out.print("[" + m[i] + "]");
 			}
-			out.println("<br><img src='" + s + "' width=1000><br>");
-			out.print("答え:" + m[3]);
-			
+			out.println("</td><td><a href='" + s + "'>" + s + "</td>");
+			out.print("<td>" + m[4] + "</td>");
+
+			out.print("</tr>");
 		}
-%>
+	%>
+</table>

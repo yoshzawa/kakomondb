@@ -94,8 +94,8 @@ public class Genre {
 		return mapTag;
 	}
 
-	public static Genre getById(PersistenceManager pm, Key key) {
-		return pm.getObjectById(Genre.class, key);
+	public static Genre getById(PersistenceManager pm, String id) {
+		return pm.getObjectById(Genre.class, id);
 	}
 
 	public static void init(PersistenceManager pm) {
@@ -105,7 +105,7 @@ public class Genre {
 		list.add(new String[] { "2-03", "コンピュータ構成要素" });
 
 		for (String[] s : list) {
-			Genre g = new Genre(s[0], s[1]);
+			Genre g = new Genre(s[0], s[1]); 
 			pm.makePersistent(g);
 		}
 	}
