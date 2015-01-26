@@ -16,6 +16,7 @@ import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
+import kakomon3.jdo.Sentaku;
 
 @SuppressWarnings("serial")
 public class Kakomon3ListServlet extends HttpServlet {
@@ -30,6 +31,14 @@ public class Kakomon3ListServlet extends HttpServlet {
 		List<Mondai> list = Mondai.getList(pm);
 
 		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMap(pm);
+		
+		ArrayList<String[]> kotaeList = new ArrayList<String[]>();
+		for(Sentaku s:Sentaku.values()){
+			String[] data=new String[2];
+			data[0] = s.getNo()+"";
+			data[1] = s.toString();
+			kotaeList.add(data);
+		}
 
 		List<String[]> mondaiList = new ArrayList<String[]>();
 		for (Mondai m : list) {
@@ -51,6 +60,7 @@ public class Kakomon3ListServlet extends HttpServlet {
 		}
 
 		req.setAttribute("mondaiList", mondaiList);
+		req.setAttribute("kotaeList", kotaeList);
 		pm.close();
 
 		RequestDispatcher rd = req

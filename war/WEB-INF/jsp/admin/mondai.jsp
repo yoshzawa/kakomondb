@@ -5,10 +5,13 @@
 <%
 	List<String[]> mondaiList = (List<String[]>) request
 			.getAttribute("mondaiList");
+	List<String[]> kotaeList = (List<String[]>) request
+			.getAttribute("kotaeList");
 	String message = (String) request.getAttribute("message");
 	if (message == null) {
 		message = "";
 	}
+	
 %>
 
 <h1>問題一覧</H1>
@@ -30,7 +33,18 @@
 		<td><input type='text' name='genreId'></td>
 		<td>---</td>
 		<td><input type='text' name='mondaiImage'></td>
-		<td><input type='text' name='kotae'></td>
+		<td><select name='kotae'>
+<% 
+		for(String[] k:kotaeList){
+			out.print("<option value='");
+			out.print(k[0]);
+			out.print("' >");
+			out.print(k[1]);
+			out.print("</option>");
+		}
+%>
+
+		</select></td>
 	</form>
 	</tr>
 	
