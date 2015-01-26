@@ -3,7 +3,7 @@
 
 <%
 String[] result = (String[])request.getAttribute("result");
-List<String[]> genreResult = (List<String[]>)request.getAttribute("genreResult");
+List<String[]> mondaiResult = (List<String[]>)request.getAttribute("mondaiResult");
 
 %>
 
@@ -16,13 +16,18 @@ List<String[]> genreResult = (List<String[]>)request.getAttribute("genreResult")
 </table>
 
 <table border=1>
-<% for(String[] s : genreResult){
+<th>問題</th>
+<th>正解</th>
+<th>不正解</th>
+<th>合計</th>
+<% for(String[] s : mondaiResult){
 %>
 <tr>
-<th><%= s[0] %></th>
-<td><%= s[1] %></td>
-<td><%= s[2] %></td>
-<td><%= s[3] %></td>
+<th><a href="/quiz/toi?key=<%= s[0] %>">
+<%= s[1] %></a></td>
+<td align="right"><%= s[2] %></td>
+<td align="right"><%= s[3] %></td>
+<td align="right"><%= s[4] %></td>
 </tr>
 <% }
 %>
