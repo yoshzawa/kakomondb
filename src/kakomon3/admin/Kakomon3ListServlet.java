@@ -28,6 +28,8 @@ public class Kakomon3ListServlet extends HttpServlet {
 
 		Map<String, String> mapGenre = Genre.getMap(pm);
 
+//		List<Genre> listGenre = Genre.getList(pm);
+
 		List<Mondai> list = Mondai.getList(pm);
 
 		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMap(pm);
@@ -38,6 +40,14 @@ public class Kakomon3ListServlet extends HttpServlet {
 			data[0] = s.getNo()+"";
 			data[1] = s.toString();
 			kotaeList.add(data);
+		}
+		
+		ArrayList<String[]> genreList = new ArrayList<String[]>();
+		for(String s:mapGenre.keySet()){
+			String[] data=new String[2];
+			data[0] =s;
+			data[1] =mapGenre.get(s);
+			genreList.add(data);
 		}
 
 		List<String[]> mondaiList = new ArrayList<String[]>();
@@ -61,6 +71,7 @@ public class Kakomon3ListServlet extends HttpServlet {
 
 		req.setAttribute("mondaiList", mondaiList);
 		req.setAttribute("kotaeList", kotaeList);
+		req.setAttribute("genreList", genreList);
 		pm.close();
 
 		RequestDispatcher rd = req

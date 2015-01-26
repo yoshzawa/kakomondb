@@ -7,15 +7,14 @@
 			.getAttribute("mondaiList");
 	List<String[]> kotaeList = (List<String[]>) request
 			.getAttribute("kotaeList");
+	List<String[]> genreList = (List<String[]>) request
+			.getAttribute("genreList");
 	String message = (String) request.getAttribute("message");
-	if (message == null) {
-		message = "";
-	}
-	
+
 %>
 
-<h1>問題一覧</H1>
 
+<h1>問題一覧</H1>
 
 <table border=1>
 	<tr>
@@ -27,27 +26,38 @@
 		<th>Answer</th>
 	</tr>
 	<tr>
-	<form method='post' action="/admin/listAdd">
-		<td><input type='text' name='mondaiId'></td>
-		<td><input type='text' name='comment'></td>
-		<td><input type='text' name='genreId'></td>
-		<td>---</td>
-		<td><input type='text' name='mondaiImage'></td>
-		<td><select name='kotae'>
-<% 
-		for(String[] k:kotaeList){
-			out.print("<option value='");
-			out.print(k[0]);
-			out.print("' >");
-			out.print(k[1]);
-			out.print("</option>");
-		}
-%>
+		<form method='post' action="/admin/mondaiAdd">
+			<td><input type='text' name='mondaiId'></td>
+			<td><input type='text' name='comment'></td>
+			<td><select name='genreId'>
+					<%
+						for (String[] k : genreList) {
+							out.print("<option value='");
+							out.print(k[0]);
+							out.print("' >");
+							out.print(k[1]);
+							out.print("</option>");
+						}
+					%>
 
-		</select></td>
-	</form>
+			</select></td>
+			<td>---</td>
+			<td><input type='text' name='mondaiImage'></td>
+			<td><select name='kotae'>
+					<%
+						for (String[] k : kotaeList) {
+							out.print("<option value='");
+							out.print(k[0]);
+							out.print("' >");
+							out.print(k[1]);
+							out.print("</option>");
+						}
+					%>
+
+			</select> <input type="submit" value="追加"></td>
+		</form>
 	</tr>
-	
+
 	<%
 		for (String[] m : mondaiList) {
 
@@ -62,7 +72,7 @@
 			for (int i = 5; i < m.length; i++) {
 				out.print("[" + m[i] + "]");
 			}
-			out.println("</td><td><a href='" + s + "'>" + s + "</td>");
+			out.println("</td><td><a href='" + s + "'>" + m[1] + "</td>");
 			out.print("<td>" + m[4] + "</td>");
 
 			out.print("</tr>");

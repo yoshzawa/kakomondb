@@ -146,4 +146,13 @@ public class Mondai {
 		return pm.getObjectById(Mondai.class, id);
 
 	}
+	/**
+	 * インスタンスを永続化する
+	 * 
+	 * @param pm
+	 *            PersistenceManagerのインスタンス
+	 */
+	public void makePersistent(PersistenceManager pm) {
+		pm.makePersistent(this);
+	}
 }
