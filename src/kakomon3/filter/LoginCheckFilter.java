@@ -33,13 +33,13 @@ public class LoginCheckFilter implements Filter {
 		HttpSession session = request.getSession();
 		if (service.isUserLoggedIn()) {
 			session.setAttribute("user", service.getCurrentUser());
+			chain.doFilter(request, response);
 		} else {
 			session.removeAttribute("user");
 			String url = request.getRequestURI();
 			String loginurl = service.createLoginURL(url);
 			response.sendRedirect(loginurl);
 		}
-		chain.doFilter(request, response);
 	}
 
 	@Override
