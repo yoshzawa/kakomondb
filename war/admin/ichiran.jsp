@@ -29,6 +29,9 @@
         <td><a href="/admin/tag">List of "Tag"</a></td>
       </tr>
       <tr>
+        <td><a href="/admin/genre">List of "Genre"</a></td>
+      </tr>
+      <tr>
         <td><a href="/logout">logout</a></td>
       </tr>
     </table>
