@@ -15,7 +15,7 @@ List<String[]> genreResult = (List<String[]>)request.getAttribute("genreResult")
 <tr><th>不正解</th><td><%= result[2] %>問</td></tr>
 </table>
 
-<table border=1>
+      <table class="table table-striped table-bordered">
 <% for(String[] s : genreResult){
 %>
 <tr>

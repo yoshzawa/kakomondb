@@ -11,7 +11,7 @@ List<String[]> mondaiList = (List<String[]>)request.getAttribute("mondaiList");
 ジャンル指定
 タグ指定
 
-<table border=1>
+      <table class="table table-striped table-bordered">
 <tr><th>問題</th><th>ジャンル</th><th>タグ</th></tr>
 <%
 		 for ( String[] m : mondaiList) {

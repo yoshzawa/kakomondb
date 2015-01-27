@@ -15,7 +15,7 @@ List<String[]> mondaiResult = (List<String[]>)request.getAttribute("mondaiResult
 <tr><th>不正解</th><td><%= result[2] %>問</td></tr>
 </table>
 
-<table border=1>
+      <table class="table table-striped table-bordered">
 <th>問題</th>
 <th>正解</th>
 <th>不正解</th>
