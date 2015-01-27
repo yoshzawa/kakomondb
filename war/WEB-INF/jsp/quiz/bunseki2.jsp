@@ -24,8 +24,15 @@ List<String[]> mondaiResult = (List<String[]>)request.getAttribute("mondaiResult
 %>
 <tr>
 <th><a href="/quiz/toi?key=<%= s[0] %>">
-<%= s[1] %></a></td>
-<td align="right"><%= s[2] %></td>
+<%= s[1] %></a> 
+<% 
+for (int i=5;i<s.length;i++){
+	out.print(" #" + s[i]);
+}
+%>
+</td>
+<td align="right"><%= s[2] %>
+</td>
 <td align="right"><%= s[3] %></td>
 <td align="right"><%= s[4] %></td>
 </tr>

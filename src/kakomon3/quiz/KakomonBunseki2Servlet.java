@@ -74,7 +74,8 @@ public class KakomonBunseki2Servlet extends HttpServlet {
 			
 			for(Mondai m : mondaiList){
 				String mId = m.getId();
-				String ss[]=new String[5];
+				int tagSize = m.getTags().size();
+				String ss[]=new String[5 + tagSize];
 				ss[0] = m.getId();
 				ss[1] = m.getComment();
 				ss[2] = 
@@ -85,6 +86,9 @@ public class KakomonBunseki2Servlet extends HttpServlet {
 				ss[4] = (
 				genreAllCount.get(mId) + 
 				genreWinCount.get(mId) )+ "";
+				for(int i=0 ; i<tagSize ; i++){
+					ss[5+i]=m.getTags().get(i);
+				}
 				
 				mondaiResult.add(ss);
 			}

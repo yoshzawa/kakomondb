@@ -32,6 +32,7 @@ public class KakomonQuizListServlet extends HttpServlet {
 		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMap(pm);
 
 		List<String[]> mondaiList = new ArrayList<String[]>();
+		
 		for (Mondai m : list) {
 			List<String> tagList = m.getTags();
 			int tagLength = tagList.size();
