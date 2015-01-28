@@ -31,6 +31,7 @@ public class Kakomon3InitServlet extends HttpServlet {
 		Tag.init(pm);
 
 		out.println("<h2>Initialize Complete!</h2>");
+		out.println("<a href='/'>home</a>");
 
 		pm.close();
 	}

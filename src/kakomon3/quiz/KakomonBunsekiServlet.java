@@ -100,7 +100,6 @@ public class KakomonBunsekiServlet extends HttpServlet {
 
 			RequestDispatcher rd = req
 					.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
-
 			rd.forward(req, resp);
 		} catch (IOException e) {
 			System.out.println(e.toString());

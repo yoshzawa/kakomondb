@@ -16,6 +16,7 @@ import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
+import kakomon3.jdo.Sentaku;
 
 @SuppressWarnings("serial")
 public class Kakomon3ListServlet extends HttpServlet {
@@ -27,9 +28,27 @@ public class Kakomon3ListServlet extends HttpServlet {
 
 		Map<String, String> mapGenre = Genre.getMap(pm);
 
+//		List<Genre> listGenre = Genre.getList(pm);
+
 		List<Mondai> list = Mondai.getList(pm);
 
 		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMap(pm);
+		
+		ArrayList<String[]> kotaeList = new ArrayList<String[]>();
+		for(Sentaku s:Sentaku.values()){
+			String[] data=new String[2];
+			data[0] = s.getNo()+"";
+			data[1] = s.toString();
+			kotaeList.add(data);
+		}
+		
+		ArrayList<String[]> genreList = new ArrayList<String[]>();
+		for(String s:mapGenre.keySet()){
+			String[] data=new String[2];
+			data[0] =s;
+			data[1] =mapGenre.get(s);
+			genreList.add(data);
+		}
 
 		List<String[]> mondaiList = new ArrayList<String[]>();
 		for (Mondai m : list) {
@@ -39,7 +58,7 @@ public class Kakomon3ListServlet extends HttpServlet {
 			String[] s = new String[5 + tagLength];
 			s[0] = m.getId();
 			String id = m.getId();
-			System.out.println(id);
+//			System.out.println(id);
 			s[1] = mapMondaiImage.get(id).getURL();
 			s[2] = m.getComment();
 			s[3] = mapGenre.get(m.getGenre());
@@ -51,10 +70,14 @@ public class Kakomon3ListServlet extends HttpServlet {
 		}
 
 		req.setAttribute("mondaiList", mondaiList);
+		req.setAttribute("kotaeList", kotaeList);
+		req.setAttribute("genreList", genreList);
 		pm.close();
+		
+		req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/mondai.jsp");
 
 		RequestDispatcher rd = req
-				.getRequestDispatcher("/WEB-INF/jsp/admin/mondai.jsp");
+				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
 		rd.forward(req, resp);
 	}
 }

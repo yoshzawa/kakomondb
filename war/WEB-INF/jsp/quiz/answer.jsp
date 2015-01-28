@@ -1,3 +1,4 @@
+<%@page import="kakomon3.PersonalData"%>
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 <%@page import="java.util.List"%>
 
@@ -13,7 +14,7 @@
 		<h1 class="h1">答え合わせ</H1>
 
 		<%
-			String s = "http://storage.googleapis.com/kakomondb/" + m[1];
+			String s = "http://storage.googleapis.com/"+PersonalData.googleStorageBucket+"/" + m[1];
 
 			out.println("<hr>");
 			out.print("<h2>" + m[0] + "");

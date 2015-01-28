@@ -1,3 +1,4 @@
+<%@page import="kakomon3.PersonalData"%>
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 <%@page import="java.util.List"%>
 
@@ -28,13 +29,13 @@
 		<h1 class="h1">問題</H1>
 
 		<%
-			String s = "http://storage.googleapis.com/kakomondb/" + m[1];
+			String s = "http://storage.googleapis.com/"+PersonalData.googleStorageBucket+"/" + m[1];
 
 			out.println("<hr>");
 			out.print("<h2>" + m[0] + "");
 			out.println("<small>" + m[2] + "</small></h2>");
 			out.println("<br><img src='" + s
-					+ "' width=800 class='img-thumbnail'><br>");
+					+ "' width=700 class='img-thumbnail'><br>");
 		%>
 <form mathod="get" action="/quiz/answer">
 		<div class="btn-group" data-toggle="buttons">
