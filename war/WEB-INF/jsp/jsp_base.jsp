@@ -50,7 +50,6 @@
 				%>
 				<li><a href="/quiz/list">問題一覧</a></li>
 				<li><a href="/quiz/bunseki">結果分析</a></li>
-				<li><a href="/admin/mondai">管理者用</a></li>
 				<%
 					} else {
 				%>
