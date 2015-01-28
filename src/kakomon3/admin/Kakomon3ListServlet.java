@@ -73,9 +73,11 @@ public class Kakomon3ListServlet extends HttpServlet {
 		req.setAttribute("kotaeList", kotaeList);
 		req.setAttribute("genreList", genreList);
 		pm.close();
+		
+		req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/mondai.jsp");
 
 		RequestDispatcher rd = req
-				.getRequestDispatcher("/WEB-INF/jsp/admin/mondai.jsp");
+				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
 		rd.forward(req, resp);
 	}
 }

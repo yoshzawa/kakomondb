@@ -1,9 +1,6 @@
 package kakomon3.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
@@ -20,8 +17,9 @@ import kakomon3.jdo.Sentaku;
 
 @SuppressWarnings("serial")
 public class Kakomon3ListAddServlet extends HttpServlet {
-	private boolean checkParam(String s){
-		boolean b = ((s != null) && (s.length()>0));
+
+	private boolean checkParam(String s) {
+		boolean b = ((s != null) && (s.length() > 0));
 		return b;
 	}
 
@@ -39,7 +37,8 @@ public class Kakomon3ListAddServlet extends HttpServlet {
 		String mondaiImage = req.getParameter("mondaiImage");
 		int kotaeInt = 0;
 
-		if ((checkParam(mondaiId) == false) ||  (checkParam(comment) == false) || (checkParam(genreId) == false)
+		if ((checkParam(mondaiId) == false) || (checkParam(comment) == false)
+				|| (checkParam(genreId) == false)
 				|| (checkParam(kotaeStr) == false)) {
 			isOK = false;
 		} else {
@@ -52,7 +51,7 @@ public class Kakomon3ListAddServlet extends HttpServlet {
 			}
 		}
 
-		if(isOK == false){
+		if (isOK == false) {
 			req.setAttribute("message", "登録エラーが発生しました");
 			RequestDispatcher rd = req
 					.getRequestDispatcher("/WEB-INF/jsp/admin/mondaiAdd.jsp");
@@ -69,10 +68,13 @@ public class Kakomon3ListAddServlet extends HttpServlet {
 		req.setAttribute("message", "登録しました");
 		pm.close();
 
+		req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/mondaiAdd.jsp");
+
 		RequestDispatcher rd = req
-				.getRequestDispatcher("/WEB-INF/jsp/admin/mondaiAdd.jsp");
+				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
 		rd.forward(req, resp);
 	}
+
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		doGet(req, resp);

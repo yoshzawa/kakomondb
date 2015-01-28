@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
+import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
 import kakomon3.jdo.Tag;
 
@@ -28,6 +29,7 @@ public class Kakomon3TagServlet extends HttpServlet {
 		List<Tag> allTag = Tag.getList(pm);
 		Map<String, Mondai> mapMondai = Mondai.getMap(pm);
 		List<String[]> tagList = new ArrayList<String[]>();
+		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMap(pm);
 
 		for (Tag t : allTag) {
 			String tagName = t.getName();
@@ -39,7 +41,7 @@ public class Kakomon3TagServlet extends HttpServlet {
 				String[] s = new String[4 + tags.size()];
 
 				s[0] = tagName;
-				s[1] = mondai.getId();
+				s[1] = mapMondaiImage.get(mondai.getId()).getURL();
 				s[2] = mapGenre.get(mondai.getGenre());
 				s[3] = mondai.getComment();
 				s[4] = "";
@@ -57,7 +59,10 @@ public class Kakomon3TagServlet extends HttpServlet {
 		req.setAttribute("tagList", tagList);
 		pm.close();
 
-		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/admin/tag.jsp");
+		req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/tag.jsp");
+
+		RequestDispatcher rd = req
+				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
 		rd.forward(req, resp);
 	}
 }

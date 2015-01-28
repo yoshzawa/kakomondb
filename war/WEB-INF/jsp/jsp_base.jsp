@@ -1,9 +1,12 @@
+<%@page import="com.google.appengine.api.users.*"%>
 <%@page import="kakomon3.PersonalData"%>
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 <%@page import="java.util.List"%>
 
 <%
-	String url  = (String) request.getAttribute("jsp_url");
+	String url = (String) request.getAttribute("jsp_url");
+	//	HttpSession session = request.getSession();
+	UserService service = UserServiceFactory.getUserService();
 %>
 
 <!DOCTYPE html>
@@ -29,22 +32,78 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', '<%= PersonalData.googleAnalyticsId %>', 'auto');
-  ga('send', 'pageview');
-
+  ga('create', '<%=PersonalData.googleAnalyticsId%>
+	', 'auto');
+	ga('send', 'pageview');
 </script>
 </head>
 <body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand">過去問学習システム</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="/">TOP</a></li>
+				<%
+					if (service.isUserLoggedIn()) {
+				%>
+				<li><a href="/quiz/list">問題一覧</a></li>
+				<li><a href="/quiz/bunseki">結果分析</a></li>
+				<li><a href="/admin/mondai">管理者用</a></li>
+				<%
+					} else {
+				%>
+				<li><a>問題一覧</a></li>
+				<li><a>結果分析</a></li>
+				<%
+					}
+				%>
+			</ul>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<%
+					if (service.isUserLoggedIn()) {
+						String loginName = service.getCurrentUser().getNickname();
+						String isAdmin = service.isUserAdmin() ? "<B>admin</B>:" : "";
+				%>
+				<p class="navbar-text">
+					[<%=isAdmin + loginName%>]でログイン
+				</p>
+				<li><a href="/logout"> <span
+						class="glyphicon glyphicon glyphicon-log-in"></span> logout
+				</a></li>
+				<%
+					} else {
+						String loginurl = service.createLoginURL("/");
+				%>
+				<li><a href="<%=loginurl%>"> <span
+						class="glyphicon glyphicon glyphicon-log-out"></span> login
+				</a></li>
+				<%
+					}
+				%>
+			
+		</div>
+	</nav>
+	<% if ((service.isUserLoggedIn())&&(service.isUserAdmin())){ %>
+	<nav class="navbar navbar-inverse">
+	    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand">管理者ツール</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/admin/init">Initializer</a></li>
+            <li><a href="/admin/mondai">List of "Mondai"</a></li>
+            <li><a href="/admin/tag">List of "Tag"</a></li>
+            <li><a href="/admin/genre">List of "Genre"</a></li>
+        </ul>
+    </div>
+	</nav>
+	<% } %>
 	<div class="container">
 
-<ul class="nav nav-pills">
-    <li><a href="/">TOP</a></li>
-    <li><a href="/quiz/list">問題一覧</a></li>
-    <li><a href="/quiz/bunseki">結果分析</a></li>
-    <li><a href="/admin/ichiran.jsp">管理者用</a></li>
-</ul>
-
-<jsp:include 	page= "<%= url %>" />
+		<jsp:include page="<%=url%>" />
 
 	</div>
 

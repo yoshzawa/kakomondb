@@ -12,7 +12,6 @@ List<String[]> tagList = (List<String[]>)request.getAttribute("tagList");
 		 for ( String[] m : tagList) {
 		 
 			String s = "http://storage.googleapis.com/"+PersonalData.googleStorageBucket+"/" + m[1];
-
 			out.print("<hr>");
 			out.print("<h2>" + m[0] + "</h2>");
 			out.print("ジャンル:" + m[2]);
