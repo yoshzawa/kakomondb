@@ -59,12 +59,11 @@ public class Tag {
 		return list;
 	}
 
-	public static Map<String, Tag> getMap(PersistenceManager pm) {
-		List<Tag> list2 = Tag.getList(pm);
+	public static Map<String, Tag> getMap(PersistenceManager pm,List<Tag> tagList) {
 
 		Map<String, Tag> map = new HashMap<String, Tag>();
 
-		for (Tag g : list2) {
+		for (Tag g : tagList) {
 			map.put(g.getName(), g);
 		}
 		return map;
@@ -107,8 +106,12 @@ public class Tag {
 		for (String s : mondais) {
 			Mondai m = pm.getObjectById(Mondai.class, s);
 			t.addMondais(m);
-			pm.makePersistent(m);
+			m.makePersistent(pm);
 		}
+	}
+	
+	public void makePersistent(PersistenceManager pm){
+		Tag result = pm.makePersistent(this);
 	}
 
 }

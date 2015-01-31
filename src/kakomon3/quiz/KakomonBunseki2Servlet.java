@@ -38,8 +38,8 @@ public class KakomonBunseki2Servlet extends HttpServlet {
 
 			List<Kaitou> list = Kaitou.getListByUser(pm, user);
 
-			Map<String, Mondai> mondaiMap = Mondai.getMap(pm);
 			List<Mondai> mondaiList = Mondai.getList(pm);
+			Map<String, Mondai> mondaiMap = Mondai.getMap(pm,mondaiList);
 			List<Genre> genreList = Genre.getList(pm);
 			
 			

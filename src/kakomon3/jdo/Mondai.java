@@ -132,10 +132,13 @@ public class Mondai {
 
 	public static Map<String, Mondai> getMap(PersistenceManager pm) {
 		List<Mondai> list = Mondai.getList(pm);
+		return getMap(pm,list);
+	}
+	public static Map<String, Mondai> getMap(PersistenceManager pm,List<Mondai> mondaiListist) {
 
 		Map<String, Mondai> map = new HashMap<String, Mondai>();
 
-		for (Mondai g : list) {
+		for (Mondai g : mondaiListist) {
 			map.put(g.getId(), g);
 		}
 		return map;

@@ -83,17 +83,25 @@ public class Genre {
 	 */
 	public static Map<String, String> getMap(PersistenceManager pm) {
 		List<Genre> list2 = Genre.getList(pm);
+		return getMap(pm,list2);
+	}
+	public static Map<String, String> getMap(PersistenceManager pm,List<Genre> genreList) {
 
 		Map<String, String> mapTag = new HashMap<String, String>();
 
-		for (Genre g : list2) {
+		for (Genre g : genreList) {
 			mapTag.put(g.getId(), g.getName());
 		}
 		return mapTag;
 	}
+	
 
 	public static Genre getById(PersistenceManager pm, String id) {
 		return pm.getObjectById(Genre.class, id);
+	}
+	
+	public void makePersistent(PersistenceManager pm){
+		Genre result = pm.makePersistent(this);
 	}
 
 	public static void init(PersistenceManager pm) {
@@ -104,7 +112,7 @@ public class Genre {
 
 		for (String[] s : list) {
 			Genre g = new Genre(s[0], s[1]); 
-			pm.makePersistent(g);
+			g.makePersistent(pm);
 		}
 	}
 }
