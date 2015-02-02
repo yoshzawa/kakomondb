@@ -1,4 +1,3 @@
-<%@page import="kakomon3.PersonalData"%>
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 <%@page import="java.util.List"%>
 
