@@ -4,14 +4,23 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>genre</servlet-name>
 		<servlet-class>kakomon3.admin.KakomonGenreServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>genre</servlet-name>
 		<url-pattern>/admin/genre</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>genreAdd</servlet-name>
+		<servlet-class>kakomon3.admin.KakomonGenreAddServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>genreAdd</servlet-name>
+		<url-pattern>/admin/genreAdd</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
