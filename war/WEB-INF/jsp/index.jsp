@@ -1,3 +1,4 @@
+<%@page import="kakomon3.PersonalData"%>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="java.util.List" %>
 
@@ -9,6 +10,8 @@
   <p>  頑張って作ってるよ！</p>
 <p> googleアカウントが必要。
 保存されるデータは問題ごとの正解・不正解のみ。</p>
+
+<p>version:<%= PersonalData.appVersion %></p>
 	
 </body>
 </html>
