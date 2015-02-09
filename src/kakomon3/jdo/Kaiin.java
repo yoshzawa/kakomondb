@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -91,10 +92,7 @@ public class Kaiin {
 	}
 
 	public int[] addWinMondaiIdMap(String genreId, String mondaiId) {
-		int i[]=new int[3];
-		i[0]=0;
-		i[1]=0;
-		i[2]=0;
+		int i[] = new int[3];
 		{
 			Map<String, List<String>> winMondaiMap = getWinMondaiIdMap();
 			List<String> mondaiList = winMondaiMap.get(genreId);
@@ -103,9 +101,7 @@ public class Kaiin {
 				winMondaiMap.put(genreId, mondaiList);
 				setWinMondaiIdMap(winMondaiMap);
 			}
-			for(List<String> m : winMondaiMap.values()){
-				i[0]+=m.size();
-			}
+			i[0] = countMap(winMondaiMap);
 		}
 		{
 			Map<String, List<String>> loseMondaiMap = getLoseMondaiIdMap();
@@ -115,9 +111,7 @@ public class Kaiin {
 				loseMondaiMap.put(genreId, mondaiList);
 				setLoseMondaiIdMap(loseMondaiMap);
 			}
-			for(List<String> m : loseMondaiMap.values()){
-				i[1]+=m.size();
-			}
+			i[1] = countMap(loseMondaiMap);
 
 		}
 		{
@@ -128,23 +122,19 @@ public class Kaiin {
 				pendingMondaiMap.put(genreId, mondaiList);
 				setPendingMondaiIdMap(pendingMondaiMap);
 			}
-			for(List<String> m : pendingMondaiMap.values()){
-				i[2]+=m.size();
-			}
+			i[2] = countMap(pendingMondaiMap);
 		}
 		return i;
 	}
 
 	public int[] addLoseMondaiIdMap(String genreId, String mondaiId) {
-		int i[]=new int[3];
-		i[0]=0;
-		i[1]=0;
-		i[2]=0;
+		int i[] = new int[3];
+		i[0] = 0;
+		i[1] = 0;
+		i[2] = 0;
 		{
 			Map<String, List<String>> winMondaiMap = getWinMondaiIdMap();
-			for(List<String> m : winMondaiMap.values()){
-				i[0]+=m.size();
-			}
+			i[0] = countMap(winMondaiMap);
 		}
 		{
 			Map<String, List<String>> loseMondaiMap = getLoseMondaiIdMap();
@@ -154,37 +144,24 @@ public class Kaiin {
 				loseMondaiMap.put(genreId, mondaiList);
 				setLoseMondaiIdMap(loseMondaiMap);
 			}
-			for(List<String> m : loseMondaiMap.values()){
-				i[1]+=m.size();
-			}
-
+			i[1] = countMap(loseMondaiMap);
 		}
 		{
 			Map<String, List<String>> pendingMondaiMap = getPendingMondaiIdMap();
-			for(List<String> m : pendingMondaiMap.values()){
-				i[2]+=m.size();
-			}
+			i[2] = countMap(pendingMondaiMap);
 		}
 		return i;
 	}
 
 	public int[] addPendingMondaiIdMap(String genreId, String mondaiId) {
-		int i[]=new int[3];
-		i[0]=0;
-		i[1]=0;
-		i[2]=0;
+		int i[] = new int[3];
 		{
 			Map<String, List<String>> winMondaiMap = getWinMondaiIdMap();
-			for(List<String> m : winMondaiMap.values()){
-				i[0]+=m.size();
-			}
+			i[0] = countMap(winMondaiMap);
 		}
 		{
 			Map<String, List<String>> loseMondaiMap = getLoseMondaiIdMap();
-			for(List<String> m : loseMondaiMap.values()){
-				i[1]+=m.size();
-			}
-
+			i[1] = countMap(loseMondaiMap);
 		}
 		{
 			Map<String, List<String>> pendingMondaiMap = getPendingMondaiIdMap();
@@ -194,18 +171,33 @@ public class Kaiin {
 				pendingMondaiMap.put(genreId, mondaiList);
 				setPendingMondaiIdMap(pendingMondaiMap);
 			}
-			i[2]=countMap(pendingMondaiMap);
-/*			for(List<String> m : pendingMondaiMap.values()){
-				i[2]+=m.size();
-			}
-*/		}
-		return i;
-	}
-	private int countMap(Map<String,List<String>> map){
-		int i=0;
-		for(List<String> m : map.values()){
-			i+=m.size();
+			i[2] = countMap(pendingMondaiMap);
 		}
 		return i;
+	}
+
+	private int countMap(Map<String, List<String>> map) {
+		int i = 0;
+		for (List<String> m : map.values()) {
+			i += m.size();
+		}
+		return i;
+	}
+	public void makeMap(PersistenceManager pm){
+		List<Kaitou> list = Kaitou.getListByUser(pm, getUser());
+		Map<String, Mondai> mondaiMap = Mondai.getMap(pm);
+		for(Kaitou kaitou : list){
+			String mondaiId = kaitou.getMondaiId();
+			Mondai mondai = mondaiMap.get(mondaiId);
+			String genreId = mondai.getGenre();
+			if(kaitou.isSeikai() == true){
+				addWinMondaiIdMap(genreId, mondaiId);
+			}else{
+				addLoseMondaiIdMap(genreId, mondaiId);
+			}
+		}
+	}
+	public Kaitou getObjectById(PersistenceManager pm,User user){
+		return (Kaitou) pm.getObjectById(user);
 	}
 }
