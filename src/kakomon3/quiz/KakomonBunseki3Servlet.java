@@ -23,8 +23,9 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 @SuppressWarnings("serial")
-public class KakomonBunsekiServlet extends HttpServlet {
+public class KakomonBunseki3Servlet extends HttpServlet {
 
+	@SuppressWarnings("unused")
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 
@@ -34,20 +35,23 @@ public class KakomonBunsekiServlet extends HttpServlet {
 
 			UserService service = UserServiceFactory.getUserService();
 			User user = service.getCurrentUser();
+
 			List<Kaitou> list = Kaitou.getListByUser(pm, user);
 
-			Map<String, Mondai> mondaiMap = Mondai.getMap(pm);
+			List<Mondai> mondaiList = Mondai.getList(pm);
+			Map<String, Mondai> mondaiMap = Mondai.getMap(pm,mondaiList);
 			List<Genre> genreList = Genre.getList(pm);
 			
 			
 			Map<String , Integer> genreWinCount = new HashMap<String, Integer>();
 			Map<String , Integer> genreLoseCount = new HashMap<String, Integer>();
 			Map<String , Integer> genreAllCount = new HashMap<String, Integer>();
-			for(Genre s : genreList){
-				String gId = s.getId();
-				genreWinCount.put(gId, 0);
-				genreLoseCount.put(gId, 0);
-				genreAllCount.put(gId, s.getMondais().size());
+
+			for(Mondai m : mondaiList){
+				String mId = m.getId();
+				genreWinCount.put(mId, 0);
+				genreLoseCount.put(mId, 0);
+				genreAllCount.put(mId, 0);
 			}
 
 			int seikai = 0;
@@ -55,37 +59,41 @@ public class KakomonBunsekiServlet extends HttpServlet {
 
 			for (Kaitou k : list) {
 				String mId = k.getMondaiId();
-				String gId = mondaiMap.get(mId).getGenre();
 				if(k.isSeikai() == true){
 					seikai ++;
-					int i=genreWinCount.get(gId);
+					int i=genreWinCount.get(mId);
 					i++;
-					genreWinCount.put(gId, i);
+					genreWinCount.put(mId, i);
 				} else {
 					machigai++;
-					int i=genreLoseCount.get(gId);
+					int i=genreLoseCount.get(mId);
 					i++;
-					genreLoseCount.put(gId, i);
+					genreLoseCount.put(mId, i);
 				}
 			}
-			List<String[]> genreResult = new ArrayList<>();
+			List<String[]> mondaiResult = new ArrayList<>();
 			
-			for(Genre s : genreList){
-				String gId = s.getId();
-				String ss[]=new String[4];
-				ss[0] = s.getName();
-				ss[1] = 
-				genreWinCount.get(gId)+"";
+			for(Mondai m : mondaiList){
+				String mId = m.getId();
+				int tagSize = m.getTags().size();
+				String ss[]=new String[5 + tagSize];
+				ss[0] = m.getId();
+				ss[1] = m.getComment();
 				ss[2] = 
-				genreLoseCount.get(gId)+"";
-				ss[3] = (
-				genreAllCount.get(gId) - 
-				genreWinCount.get(gId) -
-				genreLoseCount.get(gId)) + "";
+				genreWinCount.get(mId)+"";
 				
-				genreResult.add(ss);
+				ss[3] = 
+				genreLoseCount.get(mId)+"";
+				ss[4] = (
+				genreAllCount.get(mId) + 
+				genreWinCount.get(mId) )+ "";
+				for(int i=0 ; i<tagSize ; i++){
+					ss[5+i]=m.getTags().get(i);
+				}
+				
+				mondaiResult.add(ss);
 			}
-			req.setAttribute("genreResult", genreResult);
+			req.setAttribute("mondaiResult", mondaiResult);
 
 			String[] s = new String[7];
 
@@ -96,10 +104,11 @@ public class KakomonBunsekiServlet extends HttpServlet {
 			req.setAttribute("result", s);
 			pm.close();
 
-			req.setAttribute("jsp_url", "/WEB-INF/jsp/quiz/bunseki.jsp");
+			req.setAttribute("jsp_url", "/WEB-INF/jsp/quiz/bunseki2.jsp");
 
 			RequestDispatcher rd = req
 					.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
+
 			rd.forward(req, resp);
 		} catch (IOException e) {
 			System.out.println(e.toString());
