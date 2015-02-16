@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kakomon3.jdo.Kaiin;
 import kakomon3.jdo.Kaitou;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.MondaiImage;
@@ -30,23 +31,36 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 		if (id == null) {
 			resp.sendRedirect("/");
 		}
-		try {
+//		try {
 			Kaitou kaitou = Kaitou.getById(pm, id);
+			Kaiin kaiin = Kaiin.getById(pm, kaitou.getUser());
 
 			String mondaiId = kaitou.getMondaiId();
 
 			Mondai mondai = Mondai.getById(pm, mondaiId);
 			MondaiImage mondaiImage = MondaiImage.getById(pm, mondaiId);
 
-			int i = Integer.parseInt(answer);
-			Sentaku ansSentaku = Sentaku.get(i);
+			// 解答と正解の取得
+
+			int kaitouNo = Integer.parseInt(answer);
+			Sentaku ansSentaku = Sentaku.get(kaitouNo);
 			Sentaku seikaiSentaku = mondai.getKotae();
 
+			// 正解・不正解の情報を格納
 			kaitou.setSentaku(ansSentaku);
 			boolean b = ansSentaku.equals(seikaiSentaku);
 			kaitou.setSeikai(b);
 
 			kaitou.makePersistent(pm);
+
+			// Kaiinの更新
+			if (b == true) {
+				kaiin.addWinMondaiIdMap(pm,mondai.getGenre(), mondaiId);
+			} else {
+				kaiin.addLoseMondaiIdMap(pm,mondai.getGenre(), mondaiId);
+			}
+
+			// 結果表示の準備
 
 			String[] s = new String[7];
 
@@ -67,13 +81,13 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 					.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
 
 			rd.forward(req, resp);
-		} catch (JDOObjectNotFoundException e) {
+/*		} catch (JDOObjectNotFoundException e) {
 			resp.sendRedirect("/");
 		} catch (JDOFatalInternalException e) {
 			resp.sendRedirect("/");
 		} catch (IllegalArgumentException e) {
 			resp.sendRedirect("/");
 		}
-
+*/
 	}
 }

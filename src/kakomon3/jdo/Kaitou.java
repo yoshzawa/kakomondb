@@ -132,17 +132,8 @@ public class Kaitou {
 			return result.get(0);
 		}
 	}
-	
-	public static List<Kaitou> getListByUser(PersistenceManager pm, User user){
-		Query query = pm.newQuery(Kaitou.class);
-		query.setFilter("user == newUser");
-		query.setOrdering("key");
-		query.declareParameters("com.google.appengine.api.users.User newUser");
-		
-		@SuppressWarnings("unchecked")
-		List<Kaitou> result = (List<Kaitou>) query.execute(user);
-		return result;
-	}
+
+
 
 	/**
 	 * インスタンスを永続化する
@@ -164,5 +155,18 @@ public class Kaitou {
 		String id = KeyFactory.keyToString(kk);
 		return id;
 	}
+
+	public static List<Kaitou> getListByUser(PersistenceManager pm, User user) {
+
+		Query query = pm.newQuery(Kaitou.class);
+		query.setFilter("user == newUser");
+		query.setOrdering("key");
+		query.declareParameters("com.google.appengine.api.users.User newUser");
+
+		@SuppressWarnings("unchecked")
+		List<Kaitou> result = (List<Kaitou>) query.execute(user);
+		return result;
+	}
+
 
 }
