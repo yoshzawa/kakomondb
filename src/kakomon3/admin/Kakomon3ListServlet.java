@@ -26,7 +26,7 @@ public class Kakomon3ListServlet extends HttpServlet {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
-		Map<String, String> mapGenre = Genre.getMap(pm);
+		Map<String, Genre> mapGenre = Genre.getMap(pm);
 
 //		List<Genre> listGenre = Genre.getList(pm);
 
@@ -46,7 +46,7 @@ public class Kakomon3ListServlet extends HttpServlet {
 		for(String s:mapGenre.keySet()){
 			String[] data=new String[2];
 			data[0] =s;
-			data[1] =mapGenre.get(s);
+			data[1] =mapGenre.get(s).getName();
 			genreList.add(data);
 		}
 
@@ -61,7 +61,7 @@ public class Kakomon3ListServlet extends HttpServlet {
 //			System.out.println(id);
 			s[1] = mapMondaiImage.get(id).getURL();
 			s[2] = m.getComment();
-			s[3] = mapGenre.get(m.getGenre());
+			s[3] = mapGenre.get(m.getGenre()).getName();
 			s[4] = m.getKotae().toString();
 			for (int i = 0; i < tagLength; i++) {
 				s[5 + i] = tagList.get(i);

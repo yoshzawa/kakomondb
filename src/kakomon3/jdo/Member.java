@@ -3,24 +3,20 @@ package kakomon3.jdo;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.jdo.JDOFatalUserException;
 import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.users.*;
+import com.google.appengine.api.users.User;
 
 @PersistenceCapable
-public class Kaiin {
+public class Member {
 
 	@PrimaryKey
 	@Persistent
@@ -30,19 +26,16 @@ public class Kaiin {
 	private User user;
 
 	@Persistent(mappedBy = "kaiin")
-	private List<KaiinGenre> kaiinGenreList;
-
-	@Persistent
-	private List<String> genreId;
+	private List<MemberGenre> kaiinGenreList;
 
 	@Persistent
 	private Date created;
 
-	public List<KaiinGenre> getKaiinGenreList() {
+	public List<MemberGenre> getKaiinGenreList() {
 		return kaiinGenreList;
 	}
 
-	public void setKaiinGenreList(List<KaiinGenre> kaiinGenreList) {
+	public void setKaiinGenreList(List<MemberGenre> kaiinGenreList) {
 		this.kaiinGenreList = kaiinGenreList;
 	}
 
@@ -62,14 +55,6 @@ public class Kaiin {
 		this.user = user;
 	}
 
-	public List<String> getGenreId() {
-		return genreId;
-	}
-
-	public void setGenreId(List<String> genreId) {
-		this.genreId = genreId;
-	}
-
 	public Date getCreated() {
 		return created;
 	}
@@ -78,21 +63,21 @@ public class Kaiin {
 		this.created = created;
 	}
 
-	public Kaiin(User user) {
+	public Member(User user) {
 		setMail(user.getEmail());
 		setUser(user);
 		setCreated(new java.util.Date());
-		KaiinGenre kg = new KaiinGenre("1-01",this);
-		ArrayList<KaiinGenre> list = new ArrayList<KaiinGenre>();
+		MemberGenre kg = new MemberGenre("1-01", this);
+		ArrayList<MemberGenre> list = new ArrayList<MemberGenre>();
 		list.add(kg);
 		setKaiinGenreList(list);
-		
+
 	}
 
-	private KaiinGenre getByGenreId(PersistenceManager pm, String genreId) {
-		List<KaiinGenre> list = getKaiinGenreList();
+	private MemberGenre getByGenreId(PersistenceManager pm, String genreId) {
+		List<MemberGenre> list = getKaiinGenreList();
 		if ((list != null) && (list.size() > 0)) {
-			for (KaiinGenre kaiinGenre : list) {
+			for (MemberGenre kaiinGenre : list) {
 				if (kaiinGenre.getGenreId().equals(genreId)) {
 					return kaiinGenre;
 				}
@@ -104,7 +89,7 @@ public class Kaiin {
 	public int[] addWinMondaiIdMap(PersistenceManager pm, String genreId,
 			String mondaiId) {
 		int i[] = new int[3];
-		KaiinGenre kaiinGenre = getByGenreId(pm, genreId);
+		MemberGenre kaiinGenre = getByGenreId(pm, genreId);
 		if (kaiinGenre != null) {
 			Set<String> mondaiList = kaiinGenre.getWinMondaiIdMap();
 
@@ -119,7 +104,7 @@ public class Kaiin {
 				kaiinGenre.setLoseMondaiIdMap(mondaiList);
 				kaiinGenre.makePersistent(pm);
 			}
-			 mondaiList = kaiinGenre.getPendingMondaiIdMap();
+			mondaiList = kaiinGenre.getPendingMondaiIdMap();
 			if (mondaiList.contains(mondaiId) == true) {
 				mondaiList.remove(mondaiId);
 				kaiinGenre.setPendingMondaiIdMap(mondaiList);
@@ -134,7 +119,7 @@ public class Kaiin {
 			String mondaiId) {
 		int i[] = new int[3];
 
-		KaiinGenre kaiinGenre = getByGenreId(pm, genreId);
+		MemberGenre kaiinGenre = getByGenreId(pm, genreId);
 		{
 			Set<String> mondaiList = kaiinGenre.getLoseMondaiIdMap();
 			if (mondaiList.contains(mondaiId) == false) {
@@ -152,7 +137,7 @@ public class Kaiin {
 	public int[] addPendingMondaiIdMap(PersistenceManager pm, String genreId,
 			String mondaiId) {
 		int i[] = new int[3];
-		KaiinGenre kaiinGenre = getByGenreId(pm, genreId);
+		MemberGenre kaiinGenre = getByGenreId(pm, genreId);
 		{
 			Set<String> mondaiList = kaiinGenre.getPendingMondaiIdMap();
 			if (mondaiList.contains(mondaiId) == false) {
@@ -171,9 +156,9 @@ public class Kaiin {
 		i[0] = 0;
 		i[1] = 0;
 		i[2] = 0;
-		List<KaiinGenre> list = getKaiinGenreList();
-		if((list != null)&&(list.size()>0)){
-			for (KaiinGenre k : list) {
+		List<MemberGenre> list = getKaiinGenreList();
+		if ((list != null) && (list.size() > 0)) {
+			for (MemberGenre k : list) {
 				i[0] += k.getWinMondaiIdMap().size();
 				i[1] += k.getLoseMondaiIdMap().size();
 				i[2] += k.getPendingMondaiIdMap().size();
@@ -198,13 +183,13 @@ public class Kaiin {
 		makePersistent(pm);
 	}
 
-	public static Kaiin getById(PersistenceManager pm, User user) {
+	public static Member getById(PersistenceManager pm, User user) {
 		try {
-			Kaiin kaiin = (Kaiin) pm
-					.getObjectById(Kaiin.class, user.getEmail());
+			Member kaiin = (Member) pm
+					.getObjectById(Member.class, user.getEmail());
 			return kaiin;
 		} catch (JDOObjectNotFoundException e) {
-			Kaiin kaiin = new Kaiin(user);
+			Member kaiin = new Member(user);
 			kaiin.makePersistent(pm);
 			return kaiin;
 		}
@@ -212,5 +197,27 @@ public class Kaiin {
 
 	public void makePersistent(PersistenceManager pm) {
 		pm.makePersistent(this);
+	}
+
+	public List<String> getGenreList() {
+		List<String> genreList = new ArrayList<>();
+		List<MemberGenre> l = getKaiinGenreList();
+		if ((l != null) && (l.size() > 0)) {
+			for (MemberGenre kg : l) {
+				genreList.add(kg.getGenreId());
+			}
+		}
+		return genreList;
+	}
+
+	public Map<String, MemberGenre> getKaiinGenreMap() {
+		Map<String, MemberGenre> list = new HashMap<String, MemberGenre>();
+		List<MemberGenre> l = getKaiinGenreList();
+		if ((l != null) && (l.size() > 0)) {
+			for (MemberGenre k : l) {
+				list.put(k.getGenreId(), k);
+			}
+		}
+		return list;
 	}
 }

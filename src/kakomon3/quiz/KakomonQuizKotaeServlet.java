@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kakomon3.jdo.Kaiin;
+import kakomon3.jdo.Member;
 import kakomon3.jdo.Kaitou;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.MondaiImage;
@@ -33,7 +33,7 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 		}
 //		try {
 			Kaitou kaitou = Kaitou.getById(pm, id);
-			Kaiin kaiin = Kaiin.getById(pm, kaitou.getUser());
+			Member kaiin = Member.getById(pm, kaitou.getUser());
 
 			String mondaiId = kaitou.getMondaiId();
 

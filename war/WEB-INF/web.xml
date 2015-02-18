@@ -52,7 +52,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	<servlet>
 		<servlet-name>QuizList</servlet-name>
-		<servlet-class>kakomon3.quiz.KakomonQuizListServlet</servlet-class>
+		<servlet-class>kakomon3.quiz.KakomonQuizList2Servlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>QuizList</servlet-name>

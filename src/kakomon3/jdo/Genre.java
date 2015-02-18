@@ -81,16 +81,16 @@ public class Genre {
 	 *            PersistenceManagerのインスタンス
 	 * @return Map
 	 */
-	public static Map<String, String> getMap(PersistenceManager pm) {
+	public static Map<String, Genre> getMap(PersistenceManager pm) {
 		List<Genre> list2 = Genre.getList(pm);
 		return getMap(pm,list2);
 	}
-	public static Map<String, String> getMap(PersistenceManager pm,List<Genre> genreList) {
+	public static Map<String, Genre> getMap(PersistenceManager pm,List<Genre> genreList) {
 
-		Map<String, String> mapTag = new HashMap<String, String>();
+		Map<String, Genre> mapTag = new HashMap<String, Genre>();
 
 		for (Genre g : genreList) {
-			mapTag.put(g.getId(), g.getName());
+			mapTag.put(g.getId(), g);
 		}
 		return mapTag;
 	}

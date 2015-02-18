@@ -25,7 +25,7 @@ public class Kakomon3TagServlet extends HttpServlet {
 			throws IOException, ServletException {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Map<String, String> mapGenre = Genre.getMap(pm);
+		Map<String, Genre> mapGenre = Genre.getMap(pm);
 		List<Tag> allTag = Tag.getList(pm);
 		Map<String, Mondai> mapMondai = Mondai.getMap(pm);
 		List<String[]> tagList = new ArrayList<String[]>();
@@ -42,7 +42,7 @@ public class Kakomon3TagServlet extends HttpServlet {
 
 				s[0] = tagName;
 				s[1] = mapMondaiImage.get(mondai.getId()).getURL();
-				s[2] = mapGenre.get(mondai.getGenre());
+				s[2] = mapGenre.get(mondai.getGenre()).getName();
 				s[3] = mondai.getComment();
 				s[4] = "";
 

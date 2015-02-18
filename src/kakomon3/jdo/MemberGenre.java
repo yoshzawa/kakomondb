@@ -14,14 +14,14 @@ import javax.jdo.annotations.PrimaryKey;
 import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
-public class KaiinGenre {
+public class MemberGenre {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Key key;
 
 	@Persistent
-	private Kaiin kaiin;
+	private Member kaiin;
 	
 	@Persistent
 	private String genreId;
@@ -35,7 +35,7 @@ public class KaiinGenre {
 	@Persistent
 	private Set<String> pendingMondaiIdMap;
 
-	public KaiinGenre(String genreId, Kaiin kaiin) {
+	public MemberGenre(String genreId, Member kaiin) {
 		setKaiin(kaiin);
 		setGenreId(genreId);
 		setWinMondaiIdMap(new HashSet<String>());
@@ -51,11 +51,11 @@ public class KaiinGenre {
 		this.key = key;
 	}
 
-	public Kaiin getKaiin() {
+	public Member getKaiin() {
 		return kaiin;
 	}
 
-	public void setKaiin(Kaiin kaiin) {
+	public void setKaiin(Member kaiin) {
 		this.kaiin = kaiin;
 	}
 
