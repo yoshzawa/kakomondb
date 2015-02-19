@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
@@ -12,17 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.datanucleus.query.evaluator.memory.MapGetMethodEvaluator;
-
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
-
 import kakomon3.jdo.Genre;
 import kakomon3.jdo.Member;
 import kakomon3.jdo.MemberGenre;
-import kakomon3.jdo.Mondai;
-import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
+
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 @SuppressWarnings("serial")
 public class KakomonQuizList2Servlet extends HttpServlet {
@@ -33,20 +30,19 @@ public class KakomonQuizList2Servlet extends HttpServlet {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
 		UserService service = UserServiceFactory.getUserService();
-		Member kaiin = Member.getById(pm, service.getCurrentUser());
-		Map<String , MemberGenre> kaiinGenreMap = kaiin.getKaiinGenreMap();
-		List<String> list = kaiin.getGenreList();
+		Member member = Member.getById(pm, service.getCurrentUser());
+		Map<String , MemberGenre> kaiinGenreMap = member.getKaiinGenreMap();
+		List<String> list = member.getGenreList();
 		Map<String, Genre> mapGenre = Genre.getMap(pm);
 		List<String[]> genreList = new ArrayList<String[]>();
-		Map<String, Genre> mondaiMap = Genre.getMap(pm);
-
 		for(String genreId:list){
 			
 			String[] s = new String[5];
 			s[0] = genreId;
 			s[1] = mapGenre.get(genreId).getName();
 			MemberGenre kaiinGenre = kaiinGenreMap.get(s[1]);
-			int w= kaiinGenre.getWinMondaiIdMap().size();
+			Set<String> mondaiIdMap = kaiinGenre.getWinMondaiIdMap();
+			int w= mondaiIdMap.size();
 			int l = kaiinGenre.getLoseMondaiIdMap().size();
 			s[2] = w+"";
 			s[3] = l+"";

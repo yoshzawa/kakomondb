@@ -13,6 +13,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.users.User;
 
 @PersistenceCapable
@@ -25,18 +26,39 @@ public class Member {
 	@Persistent
 	private User user;
 
-	@Persistent(mappedBy = "kaiin")
-	private List<MemberGenre> kaiinGenreList;
+	@Persistent(mappedBy = "member")
+	private List<MemberGenre> memberGenreList;
+	
+	@Persistent
+	private List<Key> kaitoukeyList;
 
 	@Persistent
 	private Date created;
 
-	public List<MemberGenre> getKaiinGenreList() {
-		return kaiinGenreList;
+	
+	
+	public List<MemberGenre> getMemberGenreList() {
+		return memberGenreList;
 	}
 
-	public void setKaiinGenreList(List<MemberGenre> kaiinGenreList) {
-		this.kaiinGenreList = kaiinGenreList;
+	public void setMemberGenreList(List<MemberGenre> memberGenreList) {
+		this.memberGenreList = memberGenreList;
+	}
+
+	public List<Key> getKaitoukeyList() {
+		return kaitoukeyList;
+	}
+
+	public void setKaitoukeyList(List<Key> kaitoukeyList) {
+		this.kaitoukeyList = kaitoukeyList;
+	}
+
+	public List<MemberGenre> getKaiinGenreList() {
+		return memberGenreList;
+	}
+
+	public void setKaiinGenreList(List<MemberGenre> memberGenreList) {
+		this.memberGenreList = memberGenreList;
 	}
 
 	public String getMail() {
@@ -219,5 +241,12 @@ public class Member {
 			}
 		}
 		return list;
+	}
+
+	public void addKaitouList(Kaitou kaitou) {
+		List<Key> list = getKaitoukeyList();
+		list.add(kaitou.getKey());
+		setKaitoukeyList(list);
+		
 	}
 }

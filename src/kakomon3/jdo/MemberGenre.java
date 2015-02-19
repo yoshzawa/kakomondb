@@ -1,8 +1,6 @@
 package kakomon3.jdo;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.jdo.PersistenceManager;
@@ -21,7 +19,7 @@ public class MemberGenre {
 	private Key key;
 
 	@Persistent
-	private Member kaiin;
+	private Member member;
 	
 	@Persistent
 	private String genreId;
@@ -52,11 +50,11 @@ public class MemberGenre {
 	}
 
 	public Member getKaiin() {
-		return kaiin;
+		return member;
 	}
 
 	public void setKaiin(Member kaiin) {
-		this.kaiin = kaiin;
+		this.member = kaiin;
 	}
 
 	public String getGenreId() {

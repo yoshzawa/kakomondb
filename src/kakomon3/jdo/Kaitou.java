@@ -31,6 +31,18 @@ public class Kaitou {
 
 	@Persistent
 	private boolean seikai;
+	
+	@Persistent
+	private Member member;
+	
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
 
 	public Key getKey() {
 		return key;
@@ -73,15 +85,19 @@ public class Kaitou {
 	}
 
 	public Kaitou(User user, String mondaiId) {
-		this(user, mondaiId, null, false);
+		this(user, mondaiId, null, false,null);
 
 	}
 
-	public Kaitou(User user, String mondaiId, Sentaku sentaku, boolean seikai) {
+	public Kaitou(User user, String mondaiId, Sentaku sentaku, boolean seikai , Member member) {
 		setUser(user);
 		setMondaiId(mondaiId);
 		setSentaku(sentaku);
 		setSeikai(seikai);
+		if(member != null){
+			member.addKaitouList(this);
+			setMember(member);
+		}
 	}
 
 	/**
