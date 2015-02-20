@@ -40,7 +40,7 @@ public class KakomonQuizList2Servlet extends HttpServlet {
 			String[] s = new String[5];
 			s[0] = genreId;
 			s[1] = mapGenre.get(genreId).getName();
-			MemberGenre kaiinGenre = kaiinGenreMap.get(s[1]);
+			MemberGenre kaiinGenre = kaiinGenreMap.get(s[0]);
 			Set<String> mondaiIdMap = kaiinGenre.getWinMondaiIdMap();
 			int w= mondaiIdMap.size();
 			int l = kaiinGenre.getLoseMondaiIdMap().size();

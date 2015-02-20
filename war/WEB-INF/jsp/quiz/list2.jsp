@@ -19,7 +19,7 @@
 		<th>まだ</th>
 	</tr>
 	<%
-		for (String[] m : mondaiList) {
+		for (String[] m : genreList) {
 	%>
 	<tr>
 		<th><a href='/quiz/genre?key=<%=m[0]%>'><%=m[1]%></a></th>
