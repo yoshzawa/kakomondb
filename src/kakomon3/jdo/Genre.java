@@ -83,9 +83,11 @@ public class Genre {
 	 */
 	public static Map<String, Genre> getMap(PersistenceManager pm) {
 		List<Genre> list2 = Genre.getList(pm);
-		return getMap(pm,list2);
+		return getMap(pm, list2);
 	}
-	public static Map<String, Genre> getMap(PersistenceManager pm,List<Genre> genreList) {
+
+	public static Map<String, Genre> getMap(PersistenceManager pm,
+			List<Genre> genreList) {
 
 		Map<String, Genre> mapTag = new HashMap<String, Genre>();
 
@@ -94,14 +96,13 @@ public class Genre {
 		}
 		return mapTag;
 	}
-	
 
 	public static Genre getById(PersistenceManager pm, String id) {
 		return pm.getObjectById(Genre.class, id);
 	}
-	
-	public void makePersistent(PersistenceManager pm){
-		Genre result = pm.makePersistent(this);
+
+	public void makePersistent(PersistenceManager pm) {
+		pm.makePersistent(this);
 	}
 
 	public static void init(PersistenceManager pm) {
@@ -111,7 +112,7 @@ public class Genre {
 		list.add(new String[] { "2-03", "コンピュータ構成要素" });
 
 		for (String[] s : list) {
-			Genre g = new Genre(s[0], s[1]); 
+			Genre g = new Genre(s[0], s[1]);
 			g.makePersistent(pm);
 		}
 	}

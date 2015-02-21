@@ -82,6 +82,7 @@ public class MondaiImage {
 	public static MondaiImage getById(PersistenceManager pm, String id) {
 		return pm.getObjectById(MondaiImage.class, id);
 	}
+
 	/**
 	 * インスタンスを永続化する
 	 * 

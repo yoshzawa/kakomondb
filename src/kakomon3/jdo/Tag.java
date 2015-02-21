@@ -111,7 +111,7 @@ public class Tag {
 	}
 	
 	public void makePersistent(PersistenceManager pm){
-		Tag result = pm.makePersistent(this);
+		pm.makePersistent(this);
 	}
 
 }

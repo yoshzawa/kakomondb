@@ -13,19 +13,19 @@ import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class MemberGenre {
-	
+
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Key key;
 
 	@Persistent
 	private Member member;
-	
+
 	@Persistent
 	private String genreId;
 
 	@Persistent
-	private  Set<String> winMondaiIdMap;
+	private Set<String> winMondaiIdMap;
 
 	@Persistent
 	private Set<String> loseMondaiIdMap;
@@ -91,9 +91,7 @@ public class MemberGenre {
 
 	public void makePersistent(PersistenceManager pm) {
 		pm.makePersistent(this);
-		
+
 	}
 
-	
-	
 }

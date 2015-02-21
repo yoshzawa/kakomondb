@@ -28,15 +28,13 @@ public class Member {
 
 	@Persistent(mappedBy = "member")
 	private List<MemberGenre> memberGenreList;
-	
+
 	@Persistent
 	private List<Key> kaitoukeyList;
 
 	@Persistent
 	private Date created;
 
-	
-	
 	public List<MemberGenre> getMemberGenreList() {
 		return memberGenreList;
 	}
@@ -207,8 +205,8 @@ public class Member {
 
 	public static Member getById(PersistenceManager pm, User user) {
 		try {
-			Member kaiin = (Member) pm
-					.getObjectById(Member.class, user.getEmail());
+			Member kaiin = (Member) pm.getObjectById(Member.class,
+					user.getEmail());
 			return kaiin;
 		} catch (JDOObjectNotFoundException e) {
 			Member kaiin = new Member(user);
@@ -247,6 +245,6 @@ public class Member {
 		List<Key> list = getKaitoukeyList();
 		list.add(kaitou.getKey());
 		setKaitoukeyList(list);
-		
+
 	}
 }

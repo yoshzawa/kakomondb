@@ -31,10 +31,9 @@ public class Kaitou {
 
 	@Persistent
 	private boolean seikai;
-	
+
 	@Persistent
 	private Member member;
-	
 
 	public Member getMember() {
 		return member;
@@ -85,16 +84,17 @@ public class Kaitou {
 	}
 
 	public Kaitou(User user, String mondaiId) {
-		this(user, mondaiId, null, false,null);
+		this(user, mondaiId, null, false, null);
 
 	}
 
-	public Kaitou(User user, String mondaiId, Sentaku sentaku, boolean seikai , Member member) {
+	public Kaitou(User user, String mondaiId, Sentaku sentaku, boolean seikai,
+			Member member) {
 		setUser(user);
 		setMondaiId(mondaiId);
 		setSentaku(sentaku);
 		setSeikai(seikai);
-		if(member != null){
+		if (member != null) {
 			member.addKaitouList(this);
 			setMember(member);
 		}
@@ -149,8 +149,6 @@ public class Kaitou {
 		}
 	}
 
-
-
 	/**
 	 * インスタンスを永続化する
 	 * 
@@ -183,6 +181,5 @@ public class Kaitou {
 		List<Kaitou> result = (List<Kaitou>) query.execute(user);
 		return result;
 	}
-
 
 }
