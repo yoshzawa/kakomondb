@@ -5,13 +5,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+
+import kakomon3.PersonalData;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.users.User;
@@ -87,11 +88,10 @@ public class Member {
 		setMail(user.getEmail());
 		setUser(user);
 		setCreated(new java.util.Date());
-		MemberGenre kg = new MemberGenre("1-01", this);
+		MemberGenre kg = new MemberGenre(PersonalData.defaultGenreId, this);
 		ArrayList<MemberGenre> list = new ArrayList<MemberGenre>();
 		list.add(kg);
 		setKaiinGenreList(list);
-
 	}
 
 	private MemberGenre getByGenreId(PersistenceManager pm, String genreId) {
@@ -106,65 +106,41 @@ public class Member {
 		return null;
 	}
 
-	public int[] addWinMondaiIdMap(PersistenceManager pm, String genreId,
+	public int[] addWinMondaiIdSet(PersistenceManager pm, String genreId,
 			String mondaiId) {
 		int i[] = new int[3];
 		MemberGenre kaiinGenre = getByGenreId(pm, genreId);
 		if (kaiinGenre != null) {
-			Set<String> mondaiList = kaiinGenre.getWinMondaiIdMap();
-
-			if (mondaiList.contains(mondaiId) == false) {
-				mondaiList.add(mondaiId);
-				kaiinGenre.setWinMondaiIdMap(mondaiList);
-				kaiinGenre.makePersistent(pm);
-			}
-			mondaiList = kaiinGenre.getLoseMondaiIdMap();
-			if (mondaiList.contains(mondaiId) == true) {
-				mondaiList.remove(mondaiId);
-				kaiinGenre.setLoseMondaiIdMap(mondaiList);
-				kaiinGenre.makePersistent(pm);
-			}
-			mondaiList = kaiinGenre.getPendingMondaiIdMap();
-			if (mondaiList.contains(mondaiId) == true) {
-				mondaiList.remove(mondaiId);
-				kaiinGenre.setPendingMondaiIdMap(mondaiList);
-				kaiinGenre.makePersistent(pm);
-			}
+			kaiinGenre.addWinMondaiIdSet(mondaiId);
+			kaiinGenre.removeLoseMondaiIdSet(mondaiId);
+			kaiinGenre.removePendingMondaiIdSet(mondaiId);
+			kaiinGenre.makePersistent(pm);
 		}
 		i = countMapAll();
 		return i;
 	}
 
-	public int[] addLoseMondaiIdMap(PersistenceManager pm, String genreId,
+	public int[] addLoseMondaiIdSet(PersistenceManager pm, String genreId,
 			String mondaiId) {
 		int i[] = new int[3];
 
 		MemberGenre kaiinGenre = getByGenreId(pm, genreId);
-		{
-			Set<String> mondaiList = kaiinGenre.getLoseMondaiIdMap();
-			if (mondaiList.contains(mondaiId) == false) {
-				mondaiList.add(mondaiId);
-				kaiinGenre.setLoseMondaiIdMap(mondaiList);
-				makePersistent(pm);
-
-			}
+		if (kaiinGenre != null) {
+			kaiinGenre.addLoseMondaiIdSet(mondaiId);
+			makePersistent(pm);
 		}
 		i = countMapAll();
 
 		return i;
 	}
 
-	public int[] addPendingMondaiIdMap(PersistenceManager pm, String genreId,
+	public int[] addPendingMondaiIdSet(PersistenceManager pm, String genreId,
 			String mondaiId) {
 		int i[] = new int[3];
 		MemberGenre kaiinGenre = getByGenreId(pm, genreId);
-		{
-			Set<String> mondaiList = kaiinGenre.getPendingMondaiIdMap();
-			if (mondaiList.contains(mondaiId) == false) {
-				mondaiList.add(mondaiId);
-				kaiinGenre.setPendingMondaiIdMap(mondaiList);
-				makePersistent(pm);
-			}
+		if (kaiinGenre != null) {
+			kaiinGenre.addPendingMondaiIdSet(mondaiId);
+			makePersistent(pm);
 		}
 		i = countMapAll();
 
@@ -179,9 +155,9 @@ public class Member {
 		List<MemberGenre> list = getKaiinGenreList();
 		if ((list != null) && (list.size() > 0)) {
 			for (MemberGenre k : list) {
-				i[0] += k.getWinMondaiIdMap().size();
-				i[1] += k.getLoseMondaiIdMap().size();
-				i[2] += k.getPendingMondaiIdMap().size();
+				i[0] += k.getWinMondaiIdSet().size();
+				i[1] += k.getLoseMondaiIdSet().size();
+				i[2] += k.getPendingMondaiIdSet().size();
 			}
 		}
 		return i;
@@ -195,9 +171,9 @@ public class Member {
 			Mondai mondai = mondaiMap.get(mondaiId);
 			String genreId = mondai.getGenre();
 			if (kaitou.isSeikai() == true) {
-				addWinMondaiIdMap(pm, genreId, mondaiId);
+				addWinMondaiIdSet(pm, genreId, mondaiId);
 			} else {
-				addLoseMondaiIdMap(pm, genreId, mondaiId);
+				addLoseMondaiIdSet(pm, genreId, mondaiId);
 			}
 		}
 		makePersistent(pm);
@@ -233,11 +209,11 @@ public class Member {
 	public Map<String, MemberGenre> getKaiinGenreMap() {
 		Map<String, MemberGenre> list = new HashMap<String, MemberGenre>();
 		List<MemberGenre> l = getKaiinGenreList();
-		if ((l != null) && (l.size() > 0)) {
-			for (MemberGenre k : l) {
-				list.put(k.getGenreId(), k);
-			}
+		// if ((l != null) && (l.size() > 0)) {
+		for (MemberGenre k : l) {
+			list.put(k.getGenreId(), k);
 		}
+		// }
 		return list;
 	}
 
@@ -245,6 +221,5 @@ public class Member {
 		List<Key> list = getKaitoukeyList();
 		list.add(kaitou.getKey());
 		setKaitoukeyList(list);
-
 	}
 }

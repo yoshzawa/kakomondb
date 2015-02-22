@@ -31,7 +31,7 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 		}
 //		try {
 			Kaitou kaitou = Kaitou.getById(pm, id);
-			Member kaiin = Member.getById(pm, kaitou.getUser());
+			Member member = Member.getById(pm, kaitou.getUser());
 
 			String mondaiId = kaitou.getMondaiId();
 
@@ -53,9 +53,9 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 
 			// Kaiinの更新
 			if (b == true) {
-				kaiin.addWinMondaiIdMap(pm,mondai.getGenre(), mondaiId);
+				member.addWinMondaiIdSet(pm,mondai.getGenre(), mondaiId);
 			} else {
-				kaiin.addLoseMondaiIdMap(pm,mondai.getGenre(), mondaiId);
+				member.addLoseMondaiIdSet(pm,mondai.getGenre(), mondaiId);
 			}
 
 			// 結果表示の準備

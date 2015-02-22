@@ -25,20 +25,20 @@ public class MemberGenre {
 	private String genreId;
 
 	@Persistent
-	private Set<String> winMondaiIdMap;
+	private Set<String> winMondaiIdSet;
 
 	@Persistent
-	private Set<String> loseMondaiIdMap;
+	private Set<String> loseMondaiIdSet;
 
 	@Persistent
-	private Set<String> pendingMondaiIdMap;
+	private Set<String> pendingMondaiIdSet;
 
 	public MemberGenre(String genreId, Member kaiin) {
 		setKaiin(kaiin);
 		setGenreId(genreId);
-		setWinMondaiIdMap(new HashSet<String>());
-		setLoseMondaiIdMap(new HashSet<String>());
-		setPendingMondaiIdMap(new HashSet<String>());
+		setWinMondaiIdSet(new HashSet<String>());
+		setLoseMondaiIdSet(new HashSet<String>());
+		setPendingMondaiIdSet(new HashSet<String>());
 	}
 
 	public Key getKey() {
@@ -65,28 +65,82 @@ public class MemberGenre {
 		this.genreId = genreId;
 	}
 
-	public Set<String> getWinMondaiIdMap() {
-		return winMondaiIdMap;
+	public Set<String> getWinMondaiIdSet() {
+		return winMondaiIdSet;
 	}
 
-	public void setWinMondaiIdMap(Set<String> winMondaiIdMap) {
-		this.winMondaiIdMap = winMondaiIdMap;
+	public void setWinMondaiIdSet(Set<String> winMondaiIdMap) {
+		this.winMondaiIdSet = winMondaiIdMap;
 	}
 
-	public Set<String> getLoseMondaiIdMap() {
-		return loseMondaiIdMap;
+	public Set<String> addWinMondaiIdSet(String mondaiId) {
+		Set<String> set = getWinMondaiIdSet();
+		if (set.contains(mondaiId) == false) {
+			set.add(mondaiId);
+			setWinMondaiIdSet(set);
+		}
+		return set;
 	}
 
-	public void setLoseMondaiIdMap(Set<String> loseMondaiIdMap) {
-		this.loseMondaiIdMap = loseMondaiIdMap;
+	public Set<String> removeWinMondaiIdSet(String mondaiId) {
+		Set<String> set = getWinMondaiIdSet();
+		if (set.contains(mondaiId) == true) {
+			set.remove(mondaiId);
+			setWinMondaiIdSet(set);
+		}
+		return set;
 	}
 
-	public Set<String> getPendingMondaiIdMap() {
-		return pendingMondaiIdMap;
+	public Set<String> getLoseMondaiIdSet() {
+		return loseMondaiIdSet;
 	}
 
-	public void setPendingMondaiIdMap(Set<String> pendingMondaiIdMap) {
-		this.pendingMondaiIdMap = pendingMondaiIdMap;
+	public void setLoseMondaiIdSet(Set<String> loseMondaiIdMap) {
+		this.loseMondaiIdSet = loseMondaiIdMap;
+	}
+
+	public Set<String> addLoseMondaiIdSet(String mondaiId) {
+		Set<String> set = getLoseMondaiIdSet();
+		if (set.contains(mondaiId) == false) {
+			set.add(mondaiId);
+			setLoseMondaiIdSet(set);
+		}
+		return set;
+	}
+
+	public Set<String> removeLoseMondaiIdSet(String mondaiId) {
+		Set<String> set = getLoseMondaiIdSet();
+		if (set.contains(mondaiId) == true) {
+			set.remove(mondaiId);
+			setLoseMondaiIdSet(set);
+		}
+		return set;
+	}
+
+	public Set<String> getPendingMondaiIdSet() {
+		return pendingMondaiIdSet;
+	}
+
+	public void setPendingMondaiIdSet(Set<String> pendingMondaiIdMap) {
+		this.pendingMondaiIdSet = pendingMondaiIdMap;
+	}
+
+	public Set<String> addPendingMondaiIdSet(String mondaiId) {
+		Set<String> set = getPendingMondaiIdSet();
+		if (set.contains(mondaiId) == false) {
+			set.add(mondaiId);
+			setPendingMondaiIdSet(set);
+		}
+		return set;
+	}
+
+	public Set<String> removePendingMondaiIdSet(String mondaiId) {
+		Set<String> set = getPendingMondaiIdSet();
+		if (set.contains(mondaiId) == true) {
+			set.remove(mondaiId);
+			setPendingMondaiIdSet(set);
+		}
+		return set;
 	}
 
 	public void makePersistent(PersistenceManager pm) {
