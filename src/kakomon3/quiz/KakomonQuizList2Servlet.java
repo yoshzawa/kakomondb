@@ -46,7 +46,7 @@ public class KakomonQuizList2Servlet extends HttpServlet {
 			int l = kaiinGenre.getLoseMondaiIdMap().size();
 			s[2] = w+"";
 			s[3] = l+"";
-			s[4] = (mapGenre.get(genreId).getMondais().size()-w-l)+"";
+			s[4] = (mapGenre.get(genreId).getMondaiList().size()-w-l)+"";
 			
 			genreList.add(s);
 		}

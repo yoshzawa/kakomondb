@@ -31,7 +31,7 @@ public class KakomonGenreServlet extends HttpServlet {
 			String[] s = new String[3];
 			s[0] = g.getId();
 			s[1] = g.getName();
-			s[2] = g.getMondais().size() + "";
+			s[2] = g.getMondaiList().size() + "";
 			genreList.add(s);
 		}
 

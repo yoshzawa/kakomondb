@@ -22,7 +22,7 @@ public class Genre {
 	private String name;
 
 	@Persistent
-	private List<String> mondais;
+	private List<String> mondaiList;
 
 	public String getId() {
 		return id;
@@ -40,24 +40,24 @@ public class Genre {
 		this.name = name;
 	}
 
-	public List<String> getMondais() {
-		return mondais;
+	public List<String> getMondaiList() {
+		return mondaiList;
 	}
 
-	public void setMondais(List<String> mondais) {
-		this.mondais = mondais;
+	public void setMondaiList(List<String> mondais) {
+		this.mondaiList = mondais;
 	}
 
 	public void addMondais(String mondaiId) {
-		List<String> list = getMondais();
+		List<String> list = getMondaiList();
 		list.add(mondaiId);
-		setMondais(list);
+		setMondaiList(list);
 	}
 
 	public Genre(String id, String name) {
 		setId(id);
 		setName(name);
-		setMondais(new ArrayList<String>());
+		setMondaiList(new ArrayList<String>());
 	}
 
 	/**
