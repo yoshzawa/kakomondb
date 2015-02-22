@@ -35,6 +35,53 @@ public class Member {
 
 	@Persistent
 	private Date created;
+	
+	@Persistent
+	private Date modified;
+	
+	@Persistent
+	private int exp;
+
+	@Persistent
+	private int coin;
+	
+
+	public Member(User user) {
+		setMail(user.getEmail());
+		setUser(user);
+		setCreated(new java.util.Date());
+		setModified(modified);
+		setExp(0);
+		setCoin(100);
+		MemberGenre kg = new MemberGenre(PersonalData.defaultGenreId, this);
+		ArrayList<MemberGenre> list = new ArrayList<MemberGenre>();
+		list.add(kg);
+		setKaiinGenreList(list);
+	}
+
+	public Date getModified() {
+		return modified;
+	}
+
+	public void setModified(Date modified) {
+		this.modified = modified;
+	}
+
+	public int getExp() {
+		return exp;
+	}
+
+	public void setExp(int exp) {
+		this.exp = exp;
+	}
+
+	public int getCoin() {
+		return coin;
+	}
+
+	public void setCoin(int coin) {
+		this.coin = coin;
+	}
 
 	public List<MemberGenre> getMemberGenreList() {
 		return memberGenreList;
@@ -82,16 +129,6 @@ public class Member {
 
 	public void setCreated(Date created) {
 		this.created = created;
-	}
-
-	public Member(User user) {
-		setMail(user.getEmail());
-		setUser(user);
-		setCreated(new java.util.Date());
-		MemberGenre kg = new MemberGenre(PersonalData.defaultGenreId, this);
-		ArrayList<MemberGenre> list = new ArrayList<MemberGenre>();
-		list.add(kg);
-		setKaiinGenreList(list);
 	}
 
 	private MemberGenre getByGenreId(PersistenceManager pm, String genreId) {
