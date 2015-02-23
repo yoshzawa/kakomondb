@@ -18,6 +18,8 @@ import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
 import kakomon3.jdo.Tag;
 
+//@WebServlet(name="tag",urlPatterns={"/admin/tag"})
+
 @SuppressWarnings("serial")
 public class Kakomon3TagServlet extends HttpServlet {
 

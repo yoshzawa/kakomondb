@@ -21,6 +21,8 @@ import kakomon3.jdo.PMF;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+//@WebServlet(name="QuizList",urlPatterns={"/quiz/list"})
+
 @SuppressWarnings("serial")
 public class KakomonQuizList2Servlet extends HttpServlet {
 
@@ -42,11 +44,13 @@ public class KakomonQuizList2Servlet extends HttpServlet {
 			s[1] = mapGenre.get(genreId).getName();
 			MemberGenre kaiinGenre = kaiinGenreMap.get(s[0]);
 			Set<String> mondaiIdMap = kaiinGenre.getWinMondaiIdSet();
-			int w= mondaiIdMap.size();
-			int l = kaiinGenre.getLoseMondaiIdSet().size();
-			s[2] = w+"";
-			s[3] = l+"";
-			s[4] = (mapGenre.get(genreId).getMondaiList().size()-w-l)+"";
+			int win= mondaiIdMap.size();
+			int lose = kaiinGenre.getLoseMondaiIdSet().size();
+			s[2] = win+"";
+			s[3] = lose+"";
+			Genre g = mapGenre.get(genreId);
+			List<String> mondaiList = g.getMondaiList();
+			s[4] = (mondaiList.size()-win-lose)+"";
 			
 			genreList.add(s);
 		}

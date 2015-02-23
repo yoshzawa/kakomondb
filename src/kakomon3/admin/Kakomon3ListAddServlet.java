@@ -15,6 +15,8 @@ import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
 import kakomon3.jdo.Sentaku;
 
+//@WebServlet(name="mondaiAdd",urlPatterns={"/admin/mondaiAdd"})
+
 @SuppressWarnings("serial")
 public class Kakomon3ListAddServlet extends HttpServlet {
 

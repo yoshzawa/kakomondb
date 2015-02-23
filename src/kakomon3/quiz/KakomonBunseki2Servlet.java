@@ -22,6 +22,8 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+//@WebServlet(name="Bunseki",urlPatterns={"/quiz/bunseki"})
+
 @SuppressWarnings("serial")
 public class KakomonBunseki2Servlet extends HttpServlet {
 

@@ -18,6 +18,8 @@ import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
 import kakomon3.jdo.Sentaku;
 
+//@WebServlet(name="mondai",urlPatterns={"/admin/mondai"})
+
 @SuppressWarnings("serial")
 public class Kakomon3ListServlet extends HttpServlet {
 
@@ -27,8 +29,6 @@ public class Kakomon3ListServlet extends HttpServlet {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
 		Map<String, Genre> mapGenre = Genre.getMap(pm);
-
-//		List<Genre> listGenre = Genre.getList(pm);
 
 		List<Mondai> list = Mondai.getList(pm);
 
@@ -58,7 +58,6 @@ public class Kakomon3ListServlet extends HttpServlet {
 			String[] s = new String[5 + tagLength];
 			s[0] = m.getId();
 			String id = m.getId();
-//			System.out.println(id);
 			s[1] = mapMondaiImage.get(id).getURL();
 			s[2] = m.getComment();
 			s[3] = mapGenre.get(m.getGenre()).getName();

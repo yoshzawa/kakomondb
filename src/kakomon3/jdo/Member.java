@@ -75,12 +75,23 @@ public class Member {
 		this.exp = exp;
 	}
 
+	public int addExp( int exp) {
+		exp += getExp();
+		setExp(exp);
+		return exp;
+	}
+
 	public int getCoin() {
 		return coin;
 	}
 
 	public void setCoin(int coin) {
 		this.coin = coin;
+	}
+	public int addCoin(int coin) {
+		coin += getCoin();
+		setCoin(coin);
+		return coin;
 	}
 
 	public List<MemberGenre> getMemberGenreList() {

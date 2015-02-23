@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import kakomon3.jdo.Genre;
 import kakomon3.jdo.PMF;
 
+//@WebServlet(name="genreAdd",urlPatterns={"/admin/genreAdd"})
+
 @SuppressWarnings("serial")
 public class KakomonGenreAddServlet extends HttpServlet {
 

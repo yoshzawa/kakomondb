@@ -16,6 +16,8 @@ import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
 import kakomon3.jdo.Sentaku;
 
+//@WebServlet(name="QuizKotae",urlPatterns={"/quiz/answer"})
+
 @SuppressWarnings("serial")
 public class KakomonQuizKotaeServlet extends HttpServlet {
 
@@ -54,22 +56,29 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 			// Kaiinの更新
 			if (b == true) {
 				member.addWinMondaiIdSet(pm,mondai.getGenre(), mondaiId);
+				member.addExp(100);
+				member.addCoin(100);
+				
 			} else {
 				member.addLoseMondaiIdSet(pm,mondai.getGenre(), mondaiId);
+				member.addExp(1);
+				member.addCoin(1);
 			}
 
 			// 結果表示の準備
 
-			String[] s = new String[7];
+			String[] s = new String[8];
 
 			s[0] = mondai.getId();
 			s[1] = mondaiImage.getURL();
 			s[2] = mondai.getComment();
 			s[3] = mondai.getKotae().toString();
 			s[4] = kaitou.getSentaku().toString();
-			s[5] = kaitou.isSeikai() ? "◯" : "×";
+			s[5] = kaitou.isSeikai() ? "正解" : "不正解";
 			s[6] = id;
+			s[7] = kaitou.isSeikai() ? "100" : "1";
 
+			
 			req.setAttribute("mondaiList", s);
 			pm.close();
 

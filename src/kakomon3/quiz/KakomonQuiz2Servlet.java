@@ -19,6 +19,8 @@ import kakomon3.jdo.PMF;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+//@WebServlet(name="Quiz",urlPatterns={"/quiz/toi"})
+
 @SuppressWarnings("serial")
 public class KakomonQuiz2Servlet extends HttpServlet {
 
