@@ -30,11 +30,17 @@
 	<%
 		for (String[] m : genreList) {
 
-			out.print("<tr>");
-			out.print("<th>" + m[0] + "</th>");
-			out.print("<td>" + m[1] + "</td>");
-			out.print("<td>" + m[2] + "</td>");
-			out.print("</tr>");
+			%>
+			<TR><TH><%= m[0] %>
+			</TH>
+			<TD><%= m[1] %>
+			<input type="button" onClick="location.href='/admin/modifyMondai?id=<%= m[0]%>&param=name'" value="更新">
+			</TD>
+			<TD><%= m[2] %>
+			<input type="button" onClick="location.href='/admin/modifyMondai?id=<%= m[0]%>&param=recalc'" value="再計算">
+			</TD>
+			</TR>
+			<% 
 		}
 	%>
 </table>

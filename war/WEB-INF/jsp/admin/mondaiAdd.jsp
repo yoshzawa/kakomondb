@@ -4,9 +4,9 @@
 <%
 	String message = (String) request.getAttribute("message");
 	if (message == null) {
-		message = "";
+		message = "メッセージがありませんでした";
 	}
 %>
 
-<H2>追加しました</H2>
+<H2><%= message %></H2>
 <a href="/admin/mondai">リストに戻る</a>
