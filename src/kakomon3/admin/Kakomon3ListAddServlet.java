@@ -1,6 +1,7 @@
 package kakomon3.admin;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
@@ -57,17 +58,21 @@ public class Kakomon3ListAddServlet extends HttpServlet {
 					.getRequestDispatcher("/WEB-INF/jsp/admin/mondaiAdd.jsp");
 			rd.forward(req, resp);
 		}
-		Genre genre = Genre.getById(pm, genreId);
-		Sentaku kotae = Sentaku.get(kotaeInt);
-
-		Mondai m = new Mondai(mondaiId, comment, genre, kotae);
-		m.makePersistent(pm);
-		MondaiImage mi = new MondaiImage(mondaiId, mondaiImage);
-		mi.makePersistent(pm);
-
-		req.setAttribute("message", "登録しました");
-		pm.close();
-
+		Mondai m = Mondai.getById(pm, mondaiId);
+		if( m  == null){
+			Genre genre = Genre.getById(pm, genreId);
+			Sentaku kotae = Sentaku.get(kotaeInt);
+			m = new Mondai(mondaiId, comment, genre, kotae);
+			genre.addMondais(mondaiId);
+			m.makePersistent(pm);
+			MondaiImage mi = new MondaiImage(mondaiId, mondaiImage);
+			mi.makePersistent(pm);
+			req.setAttribute("message", "登録しました");
+			pm.close();
+		} else {
+			req.setAttribute("message", "重複したキーが検出されました。登録を中止します。");
+			pm.close();
+		}
 		req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/mondaiAdd.jsp");
 
 		RequestDispatcher rd = req
