@@ -16,12 +16,11 @@
 
 <h1>問題一覧</H1>
 
-<table border=1>
+<table class="table table-hover">
 	<tr>
 		<th>ID</th>
 		<th>Comment</th>
 		<th>Genre</th>
-		<th>Tag</th>
 		<th>StorageImage</th>
 		<th>Answer</th>
 	</tr>
@@ -41,7 +40,6 @@
 					%>
 
 			</select></td>
-			<td>---</td>
 			<td><input type='text' name='mondaiImage'></td>
 			<td><select name='kotae'>
 					<%
@@ -63,19 +61,23 @@
 
 			String s = "http://storage.googleapis.com/"
 					+ PersonalData.googleStorageBucket + "/" + m[1];
-
-			out.print("<tr>");
-			out.print("<th>" + m[0] + "</th>");
-			out.print("<td>" + m[2] + "</td>");
-			out.print("<td>" + m[3] + "</td>");
-			out.print("<td>");
-			for (int i = 5; i < m.length; i++) {
-				out.print("[" + m[i] + "]");
-			}
-			out.println("</td><td><a href='" + s + "'>" + m[1] + "</td>");
-			out.print("<td>" + m[4] + "</td>");
-
-			out.print("</tr>");
+	%>
+	<TR>
+		<TH><%= m[0] %>
+			<button type="button"
+				onClick="location.href='/admin/modifyMondai?id=<%= m[0]%>&param=name'">
+				<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+			</button></TH>
+		<TD><%= m[2] %> <%
+		for (int i = 5; i < m.length; i++) {
+			out.print(" <span class='label label-default'>#" + m[i] +"</span>");
+		}
+		%></TD>
+		<TD><%= m[3] %></TD>
+		<TD><a href='<%= s %>'><%= m[1] %></TD>
+		<TD><%= m[4] %></TD>
+	</TR>
+	<%
 		}
 	%>
 </table>

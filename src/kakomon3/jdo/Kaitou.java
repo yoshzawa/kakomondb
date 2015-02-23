@@ -149,9 +149,11 @@ public class Kaitou {
 	 * 
 	 * @param pm
 	 *            PersistenceManagerのインスタンス
+	 * @return 
 	 */
-	public void makePersistent(PersistenceManager pm) {
-		pm.makePersistent(this);
+	public Kaitou makePersistent(PersistenceManager pm) {
+		Kaitou result = pm.makePersistent(this);
+		return (result);
 	}
 
 	/**

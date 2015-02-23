@@ -59,7 +59,8 @@ public class Tag {
 		return list;
 	}
 
-	public static Map<String, Tag> getMap(PersistenceManager pm,List<Tag> tagList) {
+	public static Map<String, Tag> getMap(PersistenceManager pm,
+			List<Tag> tagList) {
 
 		Map<String, Tag> map = new HashMap<String, Tag>();
 
@@ -109,9 +110,10 @@ public class Tag {
 			m.makePersistent(pm);
 		}
 	}
-	
-	public void makePersistent(PersistenceManager pm){
+
+	public Tag makePersistent(PersistenceManager pm) {
 		Tag result = pm.makePersistent(this);
+		return result;
 	}
 
 }

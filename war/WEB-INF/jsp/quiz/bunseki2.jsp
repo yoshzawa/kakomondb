@@ -27,7 +27,7 @@ List<String[]> mondaiResult = (List<String[]>)request.getAttribute("mondaiResult
 <%= s[1] %></a> 
 <% 
 for (int i=5;i<s.length;i++){
-	out.print(" #" + s[i]);
+	out.print(" <span class='label label-default '>#"  + s[i]+"</span>");
 }
 %>
 </td>

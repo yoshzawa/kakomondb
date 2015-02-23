@@ -1,7 +1,6 @@
 package kakomon3.admin;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
@@ -59,7 +58,7 @@ public class Kakomon3ListAddServlet extends HttpServlet {
 			rd.forward(req, resp);
 		}
 		Mondai m = Mondai.getById(pm, mondaiId);
-		if( m  == null){
+		if (m == null) {
 			Genre genre = Genre.getById(pm, genreId);
 			Sentaku kotae = Sentaku.get(kotaeInt);
 			m = new Mondai(mondaiId, comment, genre, kotae);

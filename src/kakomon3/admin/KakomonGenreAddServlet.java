@@ -10,10 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kakomon3.jdo.Genre;
-import kakomon3.jdo.Mondai;
-import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
-import kakomon3.jdo.Sentaku;
 
 @SuppressWarnings("serial")
 public class KakomonGenreAddServlet extends HttpServlet {

@@ -10,11 +10,15 @@
 
 <h1>ジャンル一覧</H1>
 
-<table border=1>
+<table class="table table-hover">
 	<tr>
 		<th>ID</th>
 		<th>Comment</th>
-		<th>問題数</th>
+		<th>問題数
+			<button type="button" onClick="location.href='/admin/reloadMondai'">
+				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+			</button>
+		</th>
 	</tr>
 	<tr>
 		<form method='post' action="/admin/genreAdd">
@@ -31,16 +35,16 @@
 		for (String[] m : genreList) {
 
 			%>
-			<TR><TH><%= m[0] %>
-			</TH>
-			<TD><%= m[1] %>
-			<input type="button" onClick="location.href='/admin/modifyMondai?id=<%= m[0]%>&param=name'" value="更新">
-			</TD>
-			<TD><%= m[2] %>
-			<input type="button" onClick="location.href='/admin/modifyMondai?id=<%= m[0]%>&param=recalc'" value="再計算">
-			</TD>
-			</TR>
-			<% 
+	<TR>
+		<TH><%= m[0] %>
+			<button type="button"
+				onClick="location.href='/admin/modifyGenre?id=<%= m[0]%>'">
+				<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+			</button></TH>
+		<TD><%= m[1] %></TD>
+		<TD><%= m[2] %></TD>
+	</TR>
+	<% 
 		}
 	%>
 </table>

@@ -100,8 +100,9 @@ public class Genre {
 		return pm.getObjectById(Genre.class, id);
 	}
 	
-	public void makePersistent(PersistenceManager pm){
+	public Genre makePersistent(PersistenceManager pm){
 		Genre result = pm.makePersistent(this);
+		return result;
 	}
 
 	public static void init(PersistenceManager pm) {

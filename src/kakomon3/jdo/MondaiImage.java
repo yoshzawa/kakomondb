@@ -82,14 +82,17 @@ public class MondaiImage {
 	public static MondaiImage getById(PersistenceManager pm, String id) {
 		return pm.getObjectById(MondaiImage.class, id);
 	}
+
 	/**
 	 * インスタンスを永続化する
 	 * 
 	 * @param pm
 	 *            PersistenceManagerのインスタンス
+	 * @return
 	 */
-	public void makePersistent(PersistenceManager pm) {
-		pm.makePersistent(this);
+	public MondaiImage makePersistent(PersistenceManager pm) {
+		MondaiImage result = pm.makePersistent(this);
+		return result;
 	}
 
 }
