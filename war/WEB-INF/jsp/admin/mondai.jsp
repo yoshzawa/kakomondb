@@ -64,18 +64,31 @@
 	%>
 	<TR>
 		<TH><%= m[0] %>
-			<button type="button"
-				onClick="location.href='/admin/modifyMondai?id=<%= m[0]%>&param=name'">
+</TH>
+		<TD>
+					<button type="button"
+				onClick="location.href='/admin/mondaiModify?id=<%= m[0]%>&param=comment'">
 				<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-			</button></TH>
-		<TD><%= m[2] %> <%
+			</button><%= m[2] %> <%
 		for (int i = 5; i < m.length; i++) {
 			out.print(" <span class='label label-default'>#" + m[i] +"</span>");
 		}
 		%></TD>
-		<TD><%= m[3] %></TD>
-		<TD><a href='<%= s %>'><%= m[1] %></TD>
-		<TD><%= m[4] %></TD>
+		<TD>
+					<button type="button"
+				onClick="location.href='/admin/mondaiModify?id=<%= m[0]%>&param=genre'">
+				<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+			</button><%= m[3] %></TD>
+		<TD>			<button type="button"
+				onClick="location.href='/admin/mondaiModify?id=<%= m[0]%>&param=storage'">
+				<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+			</button>
+			<a href='<%= s %>'><%= m[1] %></TD>
+		<TD>			<button type="button"
+				onClick="location.href='/admin/mondaiModify?id=<%= m[0]%>&param=answer'">
+				<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+			</button>
+			<%= m[4] %></TD>
 	</TR>
 	<%
 		}

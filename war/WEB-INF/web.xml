@@ -48,7 +48,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>mondaiAdd</servlet-name>
 		<url-pattern>/admin/mondaiAdd</url-pattern>
 	</servlet-mapping>
-
+	
+	<servlet>
+		<servlet-name>mondaiModify</servlet-name>
+		<servlet-class>kakomon3.admin.KakomonMondaiModifyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mondaiModify</servlet-name>
+		<url-pattern>/admin/mondaiModify</url-pattern>
+	</servlet-mapping>
 	<servlet>
 		<servlet-name>tag</servlet-name>
 		<servlet-class>kakomon3.admin.Kakomon3TagServlet</servlet-class>
