@@ -26,9 +26,9 @@
 	</tr>
 	<tr>
 		<form method='post' action="/admin/mondaiAdd">
-			<td><input type='text' name='mondaiId'></td>
-			<td><input type='text' name='comment'></td>
-			<td><select name='genreId'>
+			<td><input   class="form-control" type='text' name='mondaiId'></td>
+			<td><input  class="form-control" type='text' name='comment'></td>
+			<td><select class='form-control' name='genreId'>
 					<%
 						for (String[] k : genreList) {
 							out.print("<option value='");
@@ -41,7 +41,7 @@
 
 			</select></td>
 			<td><input type='text' name='mondaiImage'></td>
-			<td><select name='kotae'>
+			<td><select class='form-control' name='kotae'>
 					<%
 						for (String[] k : kotaeList) {
 							out.print("<option value='");
@@ -63,32 +63,24 @@
 					+ PersonalData.googleStorageBucket + "/" + m[1];
 	%>
 	<TR>
-		<TH><%= m[0] %>
-</TH>
-		<TD>
-					<button type="button"
-				onClick="location.href='/admin/mondaiModify?id=<%= m[0]%>&param=comment'">
-				<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-			</button><%= m[2] %> <%
+		<TH><%= m[0] %></TH>
+		<TD><%= m[2] %> <%
 		for (int i = 5; i < m.length; i++) {
 			out.print(" <span class='label label-default'>#" + m[i] +"</span>");
 		}
-		%></TD>
-		<TD>
-					<button type="button"
-				onClick="location.href='/admin/mondaiModify?id=<%= m[0]%>&param=genre'">
-				<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-			</button><%= m[3] %></TD>
-		<TD>			<button type="button"
-				onClick="location.href='/admin/mondaiModify?id=<%= m[0]%>&param=storage'">
-				<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-			</button>
-			<a href='<%= s %>'><%= m[1] %></TD>
-		<TD>			<button type="button"
-				onClick="location.href='/admin/mondaiModify?id=<%= m[0]%>&param=answer'">
-				<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-			</button>
-			<%= m[4] %></TD>
+		%> <a href='/admin/mondaiModify?id=<%= m[0]%>&param=comment'> <span
+				class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+		</a></TD>
+		<TD><%= m[3] %> <a
+			href='/admin/mondaiModify?id=<%= m[0]%>&param=genre'> <span
+				class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+		</a>
+		<TD><a href='<%= s %>'><%= m[1] %></a> <a
+			href='/admin/mondaiModify?id=<%= m[0]%>&param=storage'> <span
+				class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></TD>
+		<TD><%= m[4] %> <a
+			href='/admin/mondaiModify?id=<%= m[0]%>&param=answer'> <span
+				class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></TD>
 	</TR>
 	<%
 		}
