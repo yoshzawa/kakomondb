@@ -25,7 +25,7 @@ public class KakomonQuizListServlet extends HttpServlet {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
-		Map<String, String> mapGenre = Genre.getMap(pm);
+		Map<String, Genre> mapGenre = Genre.getMap(pm);
 
 		List<Mondai> list = Mondai.getList(pm);
 		
@@ -42,7 +42,7 @@ public class KakomonQuizListServlet extends HttpServlet {
 			String id = m.getId();
 			s[1] = mapMondaiImage.get(id).getURL();
 			s[2] = m.getComment();
-			s[3] = mapGenre.get(m.getGenre());
+			s[3] = mapGenre.get(m.getGenre()).getName();
 			s[4] = m.getKotae().toString();
 			for(int i=0 ; i<tagLength ; i++){
 				s[5+i]=tagList.get(i);

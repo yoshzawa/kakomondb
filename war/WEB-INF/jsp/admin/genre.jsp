@@ -15,7 +15,7 @@
 		<th>ID</th>
 		<th>Comment</th>
 		<th>問題数
-			<button type="button" onClick="location.href='/admin/reloadMondai'">
+			<button type="button" onClick="location.href='/admin/genreReload'">
 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 			</button>
 		</th>

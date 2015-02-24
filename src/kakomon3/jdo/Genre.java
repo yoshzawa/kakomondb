@@ -2,8 +2,10 @@ package kakomon3.jdo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -22,7 +24,7 @@ public class Genre {
 	private String name;
 
 	@Persistent
-	private List<String> mondais;
+	private Set<String> mondais;
 
 	public String getId() {
 		return id;
@@ -40,24 +42,24 @@ public class Genre {
 		this.name = name;
 	}
 
-	public List<String> getMondais() {
+	public Set<String> getMondais() {
 		return mondais;
 	}
 
-	public void setMondais(List<String> mondais) {
+	public void setMondais(Set<String> mondais) {
 		this.mondais = mondais;
 	}
 
 	public void addMondais(String mondaiId) {
-		List<String> list = getMondais();
-		list.add(mondaiId);
-		setMondais(list);
+		Set<String> set = getMondais();
+		set.add(mondaiId);
+		setMondais(set);
 	}
 
 	public Genre(String id, String name) {
 		setId(id);
 		setName(name);
-		setMondais(new ArrayList<String>());
+		setMondais(new HashSet<String>());
 	}
 
 	/**
@@ -81,16 +83,16 @@ public class Genre {
 	 *            PersistenceManagerのインスタンス
 	 * @return Map
 	 */
-	public static Map<String, String> getMap(PersistenceManager pm) {
+	public static Map<String, Genre> getMap(PersistenceManager pm) {
 		List<Genre> list2 = Genre.getList(pm);
 		return getMap(pm,list2);
 	}
-	public static Map<String, String> getMap(PersistenceManager pm,List<Genre> genreList) {
+	public static Map<String, Genre> getMap(PersistenceManager pm,List<Genre> genreList) {
 
-		Map<String, String> mapTag = new HashMap<String, String>();
+		Map<String, Genre> mapTag = new HashMap<String, Genre>();
 
 		for (Genre g : genreList) {
-			mapTag.put(g.getId(), g.getName());
+			mapTag.put(g.getId(), g);
 		}
 		return mapTag;
 	}

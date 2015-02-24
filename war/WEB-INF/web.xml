@@ -23,6 +23,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/admin/genreAdd</url-pattern>
 	</servlet-mapping>
 	
+		<servlet>
+		<servlet-name>genreReload</servlet-name>
+		<servlet-class>kakomon3.admin.KakomonGenreReloadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>genreReload</servlet-name>
+		<url-pattern>/admin/genreReload</url-pattern>
+	</servlet-mapping>
 	<servlet>
 		<servlet-name>mondai</servlet-name>
 		<servlet-class>kakomon3.admin.Kakomon3ListServlet</servlet-class>
