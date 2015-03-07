@@ -63,9 +63,10 @@ public class KakomonMondaiModifyServlet extends HttpServlet {
 			
 			ArrayList<String[]> kotaeList = new ArrayList<String[]>();
 			for(Sentaku s:Sentaku.values()){
-				String[] data=new String[2];
+				String[] data=new String[3];
 				data[0] = s.getNo()+"";
 				data[1] = s.toString();
+				data[2] = (mondai[4].equals(data[0]))?"default":"";
 				kotaeList.add(data);
 			}
 
