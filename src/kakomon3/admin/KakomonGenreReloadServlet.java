@@ -33,7 +33,7 @@ public class KakomonGenreReloadServlet extends HttpServlet {
 			String genreId = m.getGenre();
 			Genre genre = genreMap.get(genreId);
 			Set<String> genreMondaiList = genre.getMondais();
-			if(genreMondaiList.contains(m.getId())){
+			if(genreMondaiList.contains(m.getId()) == false){
 				genreMondaiList.add(m.getId());
 				genre.setMondais(genreMondaiList);
 				genre.makePersistent(pm);
@@ -52,6 +52,8 @@ public class KakomonGenreReloadServlet extends HttpServlet {
 
 		}
 
+
+		
 			req.setAttribute("message", "GenreごとのMondaiを再構築しました");
 			req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/genreAdd.jsp");
 

@@ -1,6 +1,8 @@
 package kakomon3.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
@@ -46,8 +48,32 @@ public class KakomonMondaiModifyServlet extends HttpServlet {
 			mondai[4]=m.getKotae().getNo()+"";
 			mondai[5]=param;
 			
+			
+			List<Genre> genreList = Genre.getList(pm);
+			ArrayList<String[]> genreStr = new ArrayList();
+			for(Genre g:genreList){
+				String[] str = new String[3];
+				str[0] = g.getId();
+				str[1] = g.getName();
+				str[2] = (mondai[2].equals(str[0]))?"default":"";
+				
+				genreStr.add( str);
+
+			}
+			
+			ArrayList<String[]> kotaeList = new ArrayList<String[]>();
+			for(Sentaku s:Sentaku.values()){
+				String[] data=new String[2];
+				data[0] = s.getNo()+"";
+				data[1] = s.toString();
+				kotaeList.add(data);
+			}
+
 			req.setAttribute("message", "編集してください");
 			req.setAttribute("mondai", mondai);
+			req.setAttribute("genreStr", genreStr);
+			req.setAttribute("kotaeList", kotaeList);
+			
 			pm.close();
 		}
 		req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/mondaiModify.jsp");
