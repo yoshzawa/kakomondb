@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
-import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
 import kakomon3.jdo.Sentaku;
 
@@ -30,8 +29,6 @@ public class KakomonMondaiModifyServlet extends HttpServlet {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
-		boolean isOK = true;
-
 		String mondaiId = req.getParameter("id");
 		String param = req.getParameter("param");
 
@@ -44,13 +41,16 @@ public class KakomonMondaiModifyServlet extends HttpServlet {
 			String[] mondai = new String[6];
 			mondai[0]=m.getId();
 			mondai[1]=m.getComment();
+			for(String s : m.getTags()){
+				mondai[1] += " #" + s;
+			}
 			mondai[2]=m.getGenre();
 			mondai[4]=m.getKotae().getNo()+"";
 			mondai[5]=param;
 			
 			
 			List<Genre> genreList = Genre.getList(pm);
-			ArrayList<String[]> genreStr = new ArrayList();
+			ArrayList<String[]> genreStr = new ArrayList<String[]>();
 			for(Genre g:genreList){
 				String[] str = new String[3];
 				str[0] = g.getId();
