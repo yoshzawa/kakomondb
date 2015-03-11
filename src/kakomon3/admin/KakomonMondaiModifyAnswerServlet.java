@@ -1,8 +1,6 @@
 package kakomon3.admin;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Set;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.PMF;
 import kakomon3.jdo.Sentaku;
