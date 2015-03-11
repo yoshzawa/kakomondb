@@ -13,7 +13,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>genre</servlet-name>
 		<url-pattern>/admin/genre</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>genreAdd</servlet-name>
 		<servlet-class>kakomon3.admin.KakomonGenreAddServlet</servlet-class>
@@ -22,8 +22,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>genreAdd</servlet-name>
 		<url-pattern>/admin/genreAdd</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>genreReload</servlet-name>
 		<servlet-class>kakomon3.admin.KakomonGenreReloadServlet</servlet-class>
 	</servlet>
@@ -48,7 +48,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>mondaiAdd</servlet-name>
 		<url-pattern>/admin/mondaiAdd</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>mondaiModify</servlet-name>
 		<servlet-class>kakomon3.admin.KakomonMondaiModifyServlet</servlet-class>
@@ -58,7 +58,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/admin/mondaiModify</url-pattern>
 	</servlet-mapping>
 
-		<servlet>
+	<servlet>
 		<servlet-name>mondaiComment</servlet-name>
 		<servlet-class>kakomon3.admin.KakomonMondaiModifyCommentServlet</servlet-class>
 	</servlet>
@@ -66,8 +66,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>mondaiComment</servlet-name>
 		<url-pattern>/admin/mondaiComment</url-pattern>
 	</servlet-mapping>
-		
-		<servlet>
+
+	<servlet>
 		<servlet-name>mondaiGenre</servlet-name>
 		<servlet-class>kakomon3.admin.KakomonMondaiModifyGenreServlet</servlet-class>
 	</servlet>
@@ -75,7 +75,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>mondaiGenre</servlet-name>
 		<url-pattern>/admin/mondaiGenre</url-pattern>
 	</servlet-mapping>
-	
+
+	<servlet>
+		<servlet-name>mondaiAnswer</servlet-name>
+		<servlet-class>kakomon3.admin.KakomonMondaiModifyAnswerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mondaiAnswer</servlet-name>
+		<url-pattern>/admin/mondaiAnswer</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>tag</servlet-name>
 		<servlet-class>kakomon3.admin.Kakomon3TagServlet</servlet-class>

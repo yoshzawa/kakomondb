@@ -96,10 +96,10 @@
 	<div class="form-group">
 		<label for="Answer" class="col-sm-2 control-label">Answer</label>
 		<div class="col-sm-6">
-		<form method="post" action="/admin/mondaiComment">
+		<form method="post" action="/admin/mondaiAnswer">
 		<input type="hidden" name="id" value="<%= mondai[0] %>">
-			<%= makeOption(kotaeList) %>
-			<%=makeButton("Go!", (mondai[5].equals("answer")))%>
+			<%= makeOption(kotaeList,"Answer",(mondai[5].equals("answer"))) %>
+			<%= makeButton("Go!", (mondai[5].equals("answer")))%>
 		</form>
 
 		</div>
@@ -114,12 +114,15 @@
 		return s;
 	}
 
-	private String makeOption(ArrayList<String[]> list) {
-		String s = "<select class='form-control' id='Genre'> ";
+	private String makeOption(ArrayList<String[]> list,String id,boolean b) {
+		String s = "<select class='form-control' id='" + id + "' name='"+id+"' "+
+		(b?"":"disabled") + "> ";
 		for (String[] str : list) {
 			s += "<option value='" + str[0]+"'"
 					+ (str[2].equals("default") == true ? "selected" : "")
 					+ ">" + str[1] + "</option>";
 		}
+		s+="</select>";
 		return s;
-	}%>
+	}
+	%>

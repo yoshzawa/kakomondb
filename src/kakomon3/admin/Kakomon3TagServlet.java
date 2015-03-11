@@ -44,7 +44,6 @@ public class Kakomon3TagServlet extends HttpServlet {
 				s[1] = mapMondaiImage.get(mondai.getId()).getURL();
 				s[2] = mapGenre.get(mondai.getGenre()).getName();
 				s[3] = mondai.getComment();
-				s[4] = "";
 
 				// List<String> tList = mondai.getTags();
 				for (int i = 0; i < tags.size(); i++) {
@@ -52,7 +51,7 @@ public class Kakomon3TagServlet extends HttpServlet {
 				}
 
 				tagList.add(s);
-				System.out.println(s[0] + ";" + s[2] + ";" + s[3]);
+//				System.out.println(s[0] + ";" + s[2] + ";" + s[3]);
 			}
 		}
 

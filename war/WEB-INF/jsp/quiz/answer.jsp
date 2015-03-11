@@ -22,7 +22,7 @@
 			out.println("<br><img src='" + s
 					+ "' width=800 class='img-thumbnail'><br>");
 		%>
-		解答：<%= m[3] %>　
+		解答：<%= m[4] %>　
 		<%= m[5] %>
 		<a href='/quiz/bunseki'>結果分析</a>
 

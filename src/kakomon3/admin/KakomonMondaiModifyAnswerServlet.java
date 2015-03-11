@@ -1,9 +1,8 @@
 package kakomon3.admin;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
+import java.util.Set;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
@@ -12,12 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.PMF;
-import kakomon3.jdo.Tag;
+import kakomon3.jdo.Sentaku;
 
 @SuppressWarnings("serial")
-public class KakomonMondaiModifyCommentServlet extends HttpServlet {
+public class KakomonMondaiModifyAnswerServlet extends HttpServlet {
 
 	private boolean checkParam(String s) {
 		boolean b = ((s != null) && (s.length() > 0));
@@ -30,52 +30,18 @@ public class KakomonMondaiModifyCommentServlet extends HttpServlet {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
 		String mondaiId = req.getParameter("id");
-		String comment = req.getParameter("Comment");
+		String answer = req.getParameter("Answer");
 
-		if ((checkParam(mondaiId) == false) || (checkParam(comment) == false)) {
+		if ((checkParam(mondaiId) == false) || (checkParam(answer) == false)) {
 			req.setAttribute("message", "指定された問題が見つかりませんでした");
 			pm.close();
 		} else {
 				Mondai m = Mondai.getById(pm, mondaiId);
-				Map<String, Tag> tagMap = Tag.getMap(pm);
-				
-				{
-					List<String> taglist = m.getTags();
-					for(String tag:taglist){
-						Tag t = tagMap.get(tag);
-						List<String> mondais = t.getMondais();
-						mondais.remove(mondaiId);
-						t.setMondais(mondais);
-						t.makePersistent(pm);
-						
-						taglist.remove(tag);
-					}
-				}
-							
-				StringTokenizer st = new StringTokenizer(comment," #");
-				
-				{
-					m.setComment(st.nextToken());
-					while(st.hasMoreTokens()){
-						String token = st.nextToken();
-						Tag t = tagMap.get(token);
-						if(t == null){
-							t = new Tag(token);
-							t.makePersistent(pm);
-						} 
-							List<String> mondais = t.getMondais();
-							mondais.add(mondaiId);
-							t.setMondais(mondais);
-							t.makePersistent(pm);
-						
-						List<String> tags = m.getTags();
-						tags.add(token);
-						m.setTags(tags);
-				}
-
+				int i = Integer.parseInt(answer);
+				m.setKotae(Sentaku.get(i));
 				m.makePersistent(pm);
+				
 				req.setAttribute("message", "データを変更しました");
-			}
 
 			pm.close();
 		}
