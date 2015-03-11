@@ -59,6 +59,11 @@ public class Tag {
 		return list;
 	}
 
+	public static Map<String, Tag> getMap(PersistenceManager pm){
+		List<Tag> list = getList(pm);
+		return getMap(pm,list);
+	}
+
 	public static Map<String, Tag> getMap(PersistenceManager pm,
 			List<Tag> tagList) {
 

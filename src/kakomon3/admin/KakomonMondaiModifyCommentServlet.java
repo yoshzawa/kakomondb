@@ -1,8 +1,11 @@
 package kakomon3.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
@@ -14,9 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.PMF;
+import kakomon3.jdo.Sentaku;
+import kakomon3.jdo.Tag;
 
 @SuppressWarnings("serial")
-public class KakomonMondaiModifyGenreServlet extends HttpServlet {
+public class KakomonMondaiModifyCommentServlet extends HttpServlet {
 
 	private boolean checkParam(String s) {
 		boolean b = ((s != null) && (s.length() > 0));
@@ -29,36 +34,51 @@ public class KakomonMondaiModifyGenreServlet extends HttpServlet {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
 		String mondaiId = req.getParameter("id");
-		String genre = req.getParameter("Genre");
+		String comment = req.getParameter("Comment");
 
-		if ((checkParam(mondaiId) == false) || (checkParam(genre) == false)) {
+		if ((checkParam(mondaiId) == false) || (checkParam(comment) == false)) {
 			req.setAttribute("message", "指定された問題が見つかりませんでした");
 			pm.close();
 		} else {
-			Map<String, Genre> genreMap = Genre.getMap(pm);
-			if (genreMap.containsKey(genre) == true) {
 				Mondai m = Mondai.getById(pm, mondaiId);
+				Map<String, Tag> tagMap = Tag.getMap(pm);
+				
 				{
-					Genre g = genreMap.get(m.getGenre());
-					Set<String> mondais = g.getMondais();
-					mondais.remove(m.getId());
-					g.setMondais(mondais);
-					g.makePersistent(pm);
+					List<String> taglist = m.getTags();
+					for(String tag:taglist){
+						Tag t = tagMap.get(tag);
+						List<String> mondais = t.getMondais();
+						mondais.remove(mondaiId);
+						t.setMondais(mondais);
+						t.makePersistent(pm);
+						
+						taglist.remove(tag);
+					}
+				}
+							
+				StringTokenizer st = new StringTokenizer(comment," #");
+				
+				{
+					m.setComment(st.nextToken());
+					while(st.hasMoreTokens()){
+						String token = st.nextToken();
+						Tag t = tagMap.get(token);
+						if(t == null){
+							t = new Tag(token);
+							t.makePersistent(pm);
+						} 
+							List<String> mondais = t.getMondais();
+							mondais.add(mondaiId);
+							t.setMondais(mondais);
+							t.makePersistent(pm);
+						
+						List<String> tags = m.getTags();
+						tags.add(token);
+						m.setTags(tags);
 				}
 
-				m.setGenre(genre);
-				{
-					Genre g = genreMap.get(genre);
-					Set<String> mondais = g.getMondais();
-					mondais.add(mondaiId);
-					g.setMondais(mondais);
-					g.makePersistent(pm);
-				}
-				
-				
 				m.makePersistent(pm);
-				
-					req.setAttribute("message", "データを変更しました");
+				req.setAttribute("message", "データを変更しました");
 			}
 
 			pm.close();

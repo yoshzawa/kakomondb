@@ -36,7 +36,7 @@
 		<div class="col-sm-6">
 		<form method="post" action="/admin/mondaiComment">
 		<input type="hidden" name="id" value="<%= mondai[0] %>">
-			<input class="form-control" id="Comment" value="<%=mondai[1]%>"
+			<input class="form-control" id="Comment" name="Comment" value="<%=mondai[1]%>"
 				<%=(mondai[5].equals("comment") != true) ? "disabled" : ""%>>
 			<%=makeButton("Go!", (mondai[5].equals("comment")))%>
 		</form>
