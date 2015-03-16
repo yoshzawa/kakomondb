@@ -14,6 +14,8 @@ import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
 import kakomon3.jdo.Tag;
 
+//@WebServlet(name="Kakomon3Init",urlPatterns={"/admin/init"})
+
 @SuppressWarnings("serial")
 public class Kakomon3InitServlet extends HttpServlet {
 
