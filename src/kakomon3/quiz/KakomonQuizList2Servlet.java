@@ -33,36 +33,36 @@ public class KakomonQuizList2Servlet extends HttpServlet {
 
 		UserService service = UserServiceFactory.getUserService();
 		Member member = Member.getById(pm, service.getCurrentUser());
-		Map<String , MemberGenre> kaiinGenreMap = member.getKaiinGenreMap();
+		Map<String, MemberGenre> kaiinGenreMap = member.getKaiinGenreMap();
 		List<String> list = member.getGenreList();
 		Map<String, Genre> mapGenre = Genre.getMap(pm);
 		List<String[]> genreList = new ArrayList<String[]>();
-		for(String genreId:list){
-			
+		for (String genreId : list) {
+
 			String[] s = new String[5];
 			s[0] = genreId;
 			s[1] = mapGenre.get(genreId).getName();
 			MemberGenre kaiinGenre = kaiinGenreMap.get(s[0]);
 			Set<String> mondaiIdMap = kaiinGenre.getWinMondaiIdSet();
-			int win= mondaiIdMap.size();
+			int win = mondaiIdMap.size();
 			int lose = kaiinGenre.getLoseMondaiIdSet().size();
-			s[2] = win+"";
-			s[3] = lose+"";
+			s[2] = win + "";
+			s[3] = lose + "";
 			Genre g = mapGenre.get(genreId);
 			Set<String> mondaiList = g.getMondaiList();
-			s[4] = (mondaiList.size()-win-lose)+"";
-			
+			s[4] = (mondaiList.size() - win - lose) + "";
+
 			genreList.add(s);
 		}
 
 		req.setAttribute("genreList", genreList);
 		pm.close();
-	
+
 		req.setAttribute("jsp_url", "/WEB-INF/jsp/quiz/list2.jsp");
-		
+
 		RequestDispatcher rd = req
 				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
-		
+
 		rd.forward(req, resp);
 	}
 }
