@@ -132,10 +132,11 @@ public class Mondai {
 
 	public static Map<String, Mondai> getMap(PersistenceManager pm) {
 		List<Mondai> list = Mondai.getList(pm);
-		return getMap(pm,list);
+		return getMap(pm, list);
 	}
-	
-	public static Map<String, Mondai> getMap(PersistenceManager pm,List<Mondai> mondaiList) {
+
+	public static Map<String, Mondai> getMap(PersistenceManager pm,
+			List<Mondai> mondaiList) {
 
 		Map<String, Mondai> map = new HashMap<String, Mondai>();
 
@@ -150,15 +151,16 @@ public class Mondai {
 		return pm.getObjectById(Mondai.class, id);
 
 	}
+
 	/**
 	 * インスタンスを永続化する
 	 * 
 	 * @param pm
 	 *            PersistenceManagerのインスタンス
-	 * @return 
+	 * @return
 	 */
 	public Mondai makePersistent(PersistenceManager pm) {
 		Mondai result = pm.makePersistent(this);
-		return(result);
+		return (result);
 	}
 }
