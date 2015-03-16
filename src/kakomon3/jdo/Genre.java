@@ -2,8 +2,10 @@ package kakomon3.jdo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -22,7 +24,7 @@ public class Genre {
 	private String name;
 
 	@Persistent
-	private List<String> mondaiList;
+	private Set<String> mondaiList;
 
 	public String getId() {
 		return id;
@@ -40,24 +42,24 @@ public class Genre {
 		this.name = name;
 	}
 
-	public List<String> getMondaiList() {
+	public Set<String> getMondaiList() {
 		return mondaiList;
 	}
 
-	public void setMondaiList(List<String> mondais) {
+	public void setMondaiList(Set<String> mondais) {
 		this.mondaiList = mondais;
 	}
 
 	public void addMondais(String mondaiId) {
-		List<String> list = getMondaiList();
-		list.add(mondaiId);
-		setMondaiList(list);
+		Set<String> set = getMondaiList();
+		set.add(mondaiId);
+		setMondaiList(set);
 	}
 
 	public Genre(String id, String name) {
 		setId(id);
 		setName(name);
-		setMondaiList(new ArrayList<String>());
+		setMondaiList(new HashSet<String>());
 	}
 
 	/**
@@ -101,8 +103,9 @@ public class Genre {
 		return pm.getObjectById(Genre.class, id);
 	}
 
-	public void makePersistent(PersistenceManager pm) {
-		pm.makePersistent(this);
+	public Genre makePersistent(PersistenceManager pm) {
+		Genre result = pm.makePersistent(this);
+		return result;
 	}
 
 	public static void init(PersistenceManager pm) {

@@ -49,7 +49,7 @@ public class KakomonQuizList2Servlet extends HttpServlet {
 			s[2] = win+"";
 			s[3] = lose+"";
 			Genre g = mapGenre.get(genreId);
-			List<String> mondaiList = g.getMondaiList();
+			Set<String> mondaiList = g.getMondaiList();
 			s[4] = (mondaiList.size()-win-lose)+"";
 			
 			genreList.add(s);
