@@ -24,7 +24,7 @@ public class Genre {
 	private String name;
 
 	@Persistent
-	private Set<String> mondais;
+	private Set<String> mondaiList;
 
 	public String getId() {
 		return id;
@@ -43,11 +43,11 @@ public class Genre {
 	}
 
 	public Set<String> getMondais() {
-		return mondais;
+		return mondaiList;
 	}
 
 	public void setMondais(Set<String> mondais) {
-		this.mondais = mondais;
+		this.mondaiList = mondais;
 	}
 
 	public void addMondais(String mondaiId) {

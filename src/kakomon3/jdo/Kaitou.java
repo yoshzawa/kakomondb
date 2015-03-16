@@ -32,6 +32,17 @@ public class Kaitou {
 	@Persistent
 	private boolean seikai;
 
+	@Persistent
+	private Member member;
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
 	public Key getKey() {
 		return key;
 	}
@@ -132,13 +143,13 @@ public class Kaitou {
 			return result.get(0);
 		}
 	}
-	
-	public static List<Kaitou> getListByUser(PersistenceManager pm, User user){
+
+	public static List<Kaitou> getListByUser(PersistenceManager pm, User user) {
 		Query query = pm.newQuery(Kaitou.class);
 		query.setFilter("user == newUser");
 		query.setOrdering("key");
 		query.declareParameters("com.google.appengine.api.users.User newUser");
-		
+
 		@SuppressWarnings("unchecked")
 		List<Kaitou> result = (List<Kaitou>) query.execute(user);
 		return result;
@@ -149,7 +160,7 @@ public class Kaitou {
 	 * 
 	 * @param pm
 	 *            PersistenceManagerのインスタンス
-	 * @return 
+	 * @return
 	 */
 	public Kaitou makePersistent(PersistenceManager pm) {
 		Kaitou result = pm.makePersistent(this);
