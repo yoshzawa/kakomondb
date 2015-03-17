@@ -22,9 +22,11 @@
 			out.println("<br><img src='" + s
 					+ "' width=800 class='img-thumbnail'><br>");
 		%>
-		解答：<%= m[4] %>　
-		<%= m[5] %>
+		<P>解答：<%= m[4] %>　
+		<%= m[5] %><br>
+		<%= m[7] %>ポイントのExpとcoinを獲得</br>
 		<a href='/quiz/bunseki'>結果分析</a>
+		</P>
 
 
 

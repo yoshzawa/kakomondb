@@ -2,8 +2,6 @@ package kakomon3.quiz;
 
 import java.io.IOException;
 
-import javax.jdo.JDOFatalInternalException;
-import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,10 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kakomon3.jdo.Kaitou;
+import kakomon3.jdo.Member;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
 import kakomon3.jdo.Sentaku;
+
+//@WebServlet(name="QuizKotae",urlPatterns={"/quiz/answer"})
 
 @SuppressWarnings("serial")
 public class KakomonQuizKotaeServlet extends HttpServlet {
@@ -30,34 +31,54 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 		if (id == null) {
 			resp.sendRedirect("/");
 		}
-		try {
+//		try {
 			Kaitou kaitou = Kaitou.getById(pm, id);
+			Member member = Member.getById(pm, kaitou.getUser());
 
 			String mondaiId = kaitou.getMondaiId();
 
 			Mondai mondai = Mondai.getById(pm, mondaiId);
 			MondaiImage mondaiImage = MondaiImage.getById(pm, mondaiId);
 
-			int i = Integer.parseInt(answer);
-			Sentaku ansSentaku = Sentaku.get(i);
+			// 解答と正解の取得
+
+			int kaitouNo = Integer.parseInt(answer);
+			Sentaku ansSentaku = Sentaku.get(kaitouNo);
 			Sentaku seikaiSentaku = mondai.getKotae();
 
+			// 正解・不正解の情報を格納
 			kaitou.setSentaku(ansSentaku);
 			boolean b = ansSentaku.equals(seikaiSentaku);
 			kaitou.setSeikai(b);
 
 			kaitou.makePersistent(pm);
 
-			String[] s = new String[7];
+			// Kaiinの更新
+			if (b == true) {
+				member.addWinMondaiIdSet(pm,mondai.getGenre(), mondaiId);
+				member.addExp(100);
+				member.addCoin(100);
+				
+			} else {
+				member.addLoseMondaiIdSet(pm,mondai.getGenre(), mondaiId);
+				member.addExp(1);
+				member.addCoin(1);
+			}
+
+			// 結果表示の準備
+
+			String[] s = new String[8];
 
 			s[0] = mondai.getId();
 			s[1] = mondaiImage.getURL();
 			s[2] = mondai.getComment();
 			s[3] = mondai.getKotae().toString();
 			s[4] = kaitou.getSentaku().toString();
-			s[5] = kaitou.isSeikai() ? "◯" : "×";
+			s[5] = kaitou.isSeikai() ? "正解" : "不正解";
 			s[6] = id;
+			s[7] = kaitou.isSeikai() ? "100" : "1";
 
+			
 			req.setAttribute("mondaiList", s);
 			pm.close();
 
@@ -67,13 +88,13 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 					.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
 
 			rd.forward(req, resp);
-		} catch (JDOObjectNotFoundException e) {
+/*		} catch (JDOObjectNotFoundException e) {
 			resp.sendRedirect("/");
 		} catch (JDOFatalInternalException e) {
 			resp.sendRedirect("/");
 		} catch (IllegalArgumentException e) {
 			resp.sendRedirect("/");
 		}
-
+*/
 	}
 }

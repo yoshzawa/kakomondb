@@ -28,8 +28,6 @@ public class Kakomon3ListServlet extends HttpServlet {
 
 		Map<String, Genre> mapGenre = Genre.getMap(pm);
 
-//		List<Genre> listGenre = Genre.getList(pm);
-
 		List<Mondai> list = Mondai.getList(pm);
 
 		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMap(pm);

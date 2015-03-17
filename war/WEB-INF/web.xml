@@ -105,7 +105,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	<servlet>
 		<servlet-name>QuizList</servlet-name>
-		<servlet-class>kakomon3.quiz.KakomonQuizList2Servlet</servlet-class>
+		<servlet-class>kakomon3.quiz.KakomonQuizListServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>QuizList</servlet-name>
@@ -132,7 +132,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	<servlet>
 		<servlet-name>Bunseki</servlet-name>
-		<servlet-class>kakomon3.quiz.KakomonBunseki2Servlet</servlet-class>
+		<servlet-class>kakomon3.quiz.KakomonBunsekiServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Bunseki</servlet-name>
