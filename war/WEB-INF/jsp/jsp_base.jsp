@@ -49,12 +49,14 @@
 					if (service.isUserLoggedIn()) {
 				%>
 				<li><a href="/quiz/list">問題一覧</a></li>
-				<li><a href="/quiz/bunseki">結果分析</a></li>
+				<li><a href="/quiz/bunseki">結果分析1</a></li>
+				<li><a href="/quiz/bunseki2">結果分析2</a></li>
 				<%
 					} else {
 				%>
 				<li><a>問題一覧</a></li>
-				<li><a>結果分析</a></li>
+				<li><a>結果分析1</a></li>
+				<li><a>結果分析2</a></li>
 				<%
 					}
 				%>
