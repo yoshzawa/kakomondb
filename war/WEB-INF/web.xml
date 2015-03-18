@@ -86,6 +86,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>memberList</servlet-name>
+		<servlet-class>kakomon3.admin.KakomonMemberListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>memberList</servlet-name>
+		<url-pattern>/admin/memberList</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>tag</servlet-name>
 		<servlet-class>kakomon3.admin.Kakomon3TagServlet</servlet-class>
 	</servlet>

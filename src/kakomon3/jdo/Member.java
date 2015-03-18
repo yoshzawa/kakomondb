@@ -272,25 +272,25 @@ public class Member {
 		setKaitoukeyList(list);
 	}
 
-	public static List<Mondai> getList(PersistenceManager pm) {
-		Query query = pm.newQuery(Mondai.class);
+	public static List<Member> getList(PersistenceManager pm) {
+		Query query = pm.newQuery(Member.class);
 		@SuppressWarnings("unchecked")
-		List<Mondai> list = (List<Mondai>) query.execute();
+		List<Member> list = (List<Member>) query.execute();
 		return list;
 	}
 
-	public static Map<String, Mondai> getMap(PersistenceManager pm) {
-		List<Mondai> list = Mondai.getList(pm);
+	public static Map<String, Member> getMap(PersistenceManager pm) {
+		List<Member> list = Member.getList(pm);
 		return getMap(pm, list);
 	}
 
-	public static Map<String, Mondai> getMap(PersistenceManager pm,
-			List<Mondai> mondaiList) {
+	public static Map<String, Member> getMap(PersistenceManager pm,
+			List<Member> memberList) {
 
-		Map<String, Mondai> mapMember = new HashMap<String, Mondai>();
+		Map<String, Member> mapMember = new HashMap<String, Member>();
 
-		for (Mondai g : mondaiList) {
-			mapMember.put(g.getId(), g);
+		for (Member m : memberList) {
+			mapMember.put(m.getMail(), m);
 		}
 		return mapMember;
 	}

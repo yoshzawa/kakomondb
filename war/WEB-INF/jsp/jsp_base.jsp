@@ -98,6 +98,7 @@
             <li><a href="/admin/mondai">List of "Mondai"</a></li>
             <li><a href="/admin/tag">List of "Tag"</a></li>
             <li><a href="/admin/genre">List of "Genre"</a></li>
+            <li><a href="/admin/memberList">List of "Member"</a></li>
         </ul>
     </div>
 	</nav>
