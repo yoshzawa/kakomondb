@@ -23,7 +23,7 @@
 		for (String[] m : memberList) {
 	%>
 	<TR>
-		<TH><%= m[0] %></TH>
+		<TH><a href="/admin/member?id=<%= m[0] %>"><%= m[0] %></a></TH>
 		<td><%= m[1] %></td>
 		<td><%= m[2] %></td>
 	<%

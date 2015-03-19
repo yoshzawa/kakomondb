@@ -5,7 +5,6 @@
 
 <%
 	String url = (String) request.getAttribute("jsp_url");
-	//	HttpSession session = request.getSession();
 	UserService service = UserServiceFactory.getUserService();
 %>
 
