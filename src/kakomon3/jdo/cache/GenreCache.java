@@ -15,6 +15,7 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
 public class GenreCache {
 
 	public static final String keyListStr = "__keyList";
+	public static final String memCacheName = "GenreCache";
 
 	private static void toCache(PersistenceManager pm, MemcacheService memcache) {
 		boolean containList = memcache.contains(keyListStr);
@@ -34,7 +35,7 @@ public class GenreCache {
 
 	public static Genre getById(PersistenceManager pm, String id) {
 		MemcacheService memcache = MemcacheServiceFactory
-				.getMemcacheService("GenreCache");
+				.getMemcacheService(memCacheName);
 		toCache(pm, memcache);
 
 		boolean contains = memcache.contains(id);
@@ -48,7 +49,7 @@ public class GenreCache {
 	@SuppressWarnings("unchecked")
 	public static List<Genre> getList(PersistenceManager pm) {
 		MemcacheService memcache = MemcacheServiceFactory
-				.getMemcacheService("GenreCache");
+				.getMemcacheService(memCacheName);
 		toCache(pm, memcache);
 		List<Genre> genreList;
 		Set<String> keyList = (Set<String>) memcache.get(keyListStr);
@@ -63,7 +64,7 @@ public class GenreCache {
 	@SuppressWarnings("unchecked")
 	public static Genre makePersistent(PersistenceManager pm, Genre genre) {
 		MemcacheService memcache = MemcacheServiceFactory
-				.getMemcacheService("GenreCache");
+				.getMemcacheService(memCacheName);
 		toCache(pm, memcache);
 		String id = genre.getId();
 		memcache.put(id, genre);
