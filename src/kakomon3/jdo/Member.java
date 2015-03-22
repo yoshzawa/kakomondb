@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -35,16 +36,15 @@ public class Member {
 
 	@Persistent
 	private Date created;
-	
+
 	@Persistent
 	private Date modified;
-	
+
 	@Persistent
 	private int exp;
 
 	@Persistent
 	private int coin;
-	
 
 	public Member(User user) {
 		setMail(user.getEmail());
@@ -75,7 +75,7 @@ public class Member {
 		this.exp = exp;
 	}
 
-	public int addExp( int exp) {
+	public int addExp(int exp) {
 		exp += getExp();
 		setExp(exp);
 		return exp;
@@ -88,6 +88,7 @@ public class Member {
 	public void setCoin(int coin) {
 		this.coin = coin;
 	}
+
 	public int addCoin(int coin) {
 		coin += getCoin();
 		setCoin(coin);
@@ -269,5 +270,28 @@ public class Member {
 		List<Key> list = getKaitoukeyList();
 		list.add(kaitou.getKey());
 		setKaitoukeyList(list);
+	}
+
+	public static List<Member> getList(PersistenceManager pm) {
+		Query query = pm.newQuery(Member.class);
+		@SuppressWarnings("unchecked")
+		List<Member> list = (List<Member>) query.execute();
+		return list;
+	}
+
+	public static Map<String, Member> getMap(PersistenceManager pm) {
+		List<Member> list = Member.getList(pm);
+		return getMap(pm, list);
+	}
+
+	public static Map<String, Member> getMap(PersistenceManager pm,
+			List<Member> memberList) {
+
+		Map<String, Member> mapMember = new HashMap<String, Member>();
+
+		for (Member m : memberList) {
+			mapMember.put(m.getMail(), m);
+		}
+		return mapMember;
 	}
 }

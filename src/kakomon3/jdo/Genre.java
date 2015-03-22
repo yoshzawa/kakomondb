@@ -1,5 +1,6 @@
 package kakomon3.jdo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,8 +14,15 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import kakomon3.jdo.cache.GenreCache;
+
 @PersistenceCapable
-public class Genre {
+public class Genre implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5697303811337883999L;
 
 	@PrimaryKey
 	@Persistent
@@ -69,11 +77,19 @@ public class Genre {
 	 *            PersistenceManagerのインスタンス
 	 * @return 全件分のList
 	 */
+	public static List<Genre> getList(PersistenceManager pm, boolean useCache) {
+		if (useCache == true) {
+			return GenreCache.getList(pm);
+		} else {
+			Query query = pm.newQuery(Genre.class);
+			@SuppressWarnings("unchecked")
+			List<Genre> list = (List<Genre>) query.execute();
+			return list;
+		}
+	}
+
 	public static List<Genre> getList(PersistenceManager pm) {
-		Query query = pm.newQuery(Genre.class);
-		@SuppressWarnings("unchecked")
-		List<Genre> list = (List<Genre>) query.execute();
-		return list;
+		return (getList(pm, true));
 	}
 
 	/**
@@ -85,9 +101,11 @@ public class Genre {
 	 */
 	public static Map<String, Genre> getMap(PersistenceManager pm) {
 		List<Genre> list2 = Genre.getList(pm);
-		return getMap(pm,list2);
+		return getMap(pm, list2);
 	}
-	public static Map<String, Genre> getMap(PersistenceManager pm,List<Genre> genreList) {
+
+	public static Map<String, Genre> getMap(PersistenceManager pm,
+			List<Genre> genreList) {
 
 		Map<String, Genre> mapTag = new HashMap<String, Genre>();
 
@@ -96,15 +114,34 @@ public class Genre {
 		}
 		return mapTag;
 	}
-	
+
+	public static Genre getById(PersistenceManager pm, String id,
+			boolean useCache) {
+		if (useCache == true) {
+			Genre genre = GenreCache.getById(pm, id);
+			return genre;
+		} else {
+			return pm.getObjectById(Genre.class, id);
+		}
+	}
 
 	public static Genre getById(PersistenceManager pm, String id) {
-		return pm.getObjectById(Genre.class, id);
+		// return pm.getObjectById(Genre.class, id);
+		return getById(pm, id, true);
 	}
-	
-	public Genre makePersistent(PersistenceManager pm){
-		Genre result = pm.makePersistent(this);
+
+	public Genre makePersistent(PersistenceManager pm, boolean useCache) {
+		Genre result;
+		if (useCache == true) {
+			result = GenreCache.makePersistent(pm, this);
+		} else {
+			result = pm.makePersistent(this);
+		}
 		return result;
+	}
+
+	public Genre makePersistent(PersistenceManager pm) {
+		return makePersistent(pm, true);
 	}
 
 	public static void init(PersistenceManager pm) {
@@ -114,7 +151,7 @@ public class Genre {
 		list.add(new String[] { "2-03", "コンピュータ構成要素" });
 
 		for (String[] s : list) {
-			Genre g = new Genre(s[0], s[1]); 
+			Genre g = new Genre(s[0], s[1]);
 			g.makePersistent(pm);
 		}
 	}
