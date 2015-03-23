@@ -126,7 +126,6 @@ public class Genre implements Serializable {
 	}
 
 	public static Genre getById(PersistenceManager pm, String id) {
-		// return pm.getObjectById(Genre.class, id);
 		return getById(pm, id, true);
 	}
 

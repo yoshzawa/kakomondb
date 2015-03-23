@@ -1,19 +1,26 @@
 package kakomon3.jdo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.jdo.JDOFatalInternalException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import kakomon3.jdo.cache.MondaiCache;
+
 @PersistenceCapable
-public class Mondai {
+public class Mondai implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6227615161093816961L;
 
 	@PrimaryKey
 	@Persistent
@@ -123,13 +130,21 @@ public class Mondai {
 
 	}
 
-	public static List<Mondai> getList(PersistenceManager pm) {
-		Query query = pm.newQuery(Mondai.class);
-		@SuppressWarnings("unchecked")
-		List<Mondai> list = (List<Mondai>) query.execute();
-		return list;
+	public static List<Mondai> getList(PersistenceManager pm, boolean useCache) {
+		if (useCache == true) {
+			return MondaiCache.getList(pm);
+		} else {
+			Query query = pm.newQuery(Mondai.class);
+			@SuppressWarnings("unchecked")
+			List<Mondai> list = (List<Mondai>) query.execute();
+			return list;
+		}
 	}
 
+	public static List<Mondai> getList(PersistenceManager pm) {
+		return (getList(pm, true));
+	}
+	
 	public static Map<String, Mondai> getMap(PersistenceManager pm) {
 		List<Mondai> list = Mondai.getList(pm);
 		return getMap(pm, list);
@@ -146,10 +161,17 @@ public class Mondai {
 		return map;
 	}
 
-	public static Mondai getById(PersistenceManager pm, String id)
-			throws JDOFatalInternalException {
-		return pm.getObjectById(Mondai.class, id);
-
+	public static Mondai getById(PersistenceManager pm, String id,
+			boolean useCache) {
+		if (useCache == true) {
+			Mondai mondai = MondaiCache.getById(pm, id);
+			return mondai;
+		} else {
+			return pm.getObjectById(Mondai.class, id);
+		}
+	}
+	public static Mondai getById(PersistenceManager pm, String id) {
+		return getById(pm, id, true);
 	}
 
 	/**
@@ -159,8 +181,18 @@ public class Mondai {
 	 *            PersistenceManagerのインスタンス
 	 * @return
 	 */
+
+	public Mondai makePersistent(PersistenceManager pm, boolean useCache) {
+		Mondai result;
+		if (useCache == true) {
+			result = MondaiCache.makePersistent(pm, this);
+		} else {
+			result = pm.makePersistent(this);
+		}
+		return result;
+	}
+
 	public Mondai makePersistent(PersistenceManager pm) {
-		Mondai result = pm.makePersistent(this);
-		return (result);
+		return makePersistent(pm, true);
 	}
 }
