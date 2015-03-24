@@ -3,7 +3,6 @@ package kakomon3.admin;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
@@ -12,14 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.appengine.api.users.User;
-
-import kakomon3.jdo.Genre;
 import kakomon3.jdo.Kaitou;
 import kakomon3.jdo.Member;
 import kakomon3.jdo.MemberGenre;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.PMF;
+
+import com.google.appengine.api.users.User;
 
 @SuppressWarnings("serial")
 public class KakomonMemberReloadServlet extends HttpServlet {
@@ -31,9 +29,6 @@ public class KakomonMemberReloadServlet extends HttpServlet {
 		
 		List<Mondai> mondaiList = Mondai.getList(pm);
 		Map<String, Mondai> mondaiMap = Mondai.getMap(pm, mondaiList);
-		List<Genre> genreList = Genre.getList(pm);
-		Map<String, Genre> genreMap = Genre.getMap(pm, genreList);
-		
 		List<Kaitou> kaitouList = Kaitou.getList(pm);
 		
 		Map<String, Member> memberMap =  Member.getMap(pm);

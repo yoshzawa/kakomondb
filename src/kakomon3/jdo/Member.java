@@ -15,7 +15,6 @@ import javax.jdo.annotations.PrimaryKey;
 
 import kakomon3.PersonalData;
 
-import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.users.User;
 
 @PersistenceCapable
