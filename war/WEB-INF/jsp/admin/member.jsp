@@ -15,7 +15,11 @@
 		<th>Mail</th>
 		<th>Coin</th>
 		<th>Exp</th>
-		<th>Genres</th>
+		<th>Genres
+			<button type="button" onClick="location.href='/admin/memberReload'">
+				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+			</button>
+		</th>
 	</tr>
 
 
@@ -23,16 +27,16 @@
 		for (String[] m : memberList) {
 	%>
 	<TR>
-		<TH><a href="/admin/member?id=<%= m[0] %>"><%= m[0] %></a></TH>
-		<td><%= m[1] %></td>
-		<td><%= m[2] %></td>
-	<%
-		for (int i=3;i<m.length;i++) {
-	%>
-		<td><%= m[i] %></td>
-	<%
-		}
-	%>
+		<TH><a href="/admin/member?id=<%=m[0]%>"><%=m[0]%></a></TH>
+		<td><%=m[1]%></td>
+		<td><%=m[2]%></td>
+		<%
+			for (int i = 3; i < m.length; i++) {
+		%>
+		<td><%=m[i]%></td>
+		<%
+			}
+		%>
 	</TR>
 	<%
 		}

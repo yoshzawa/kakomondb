@@ -7,7 +7,6 @@ import java.util.TreeSet;
 
 import javax.jdo.PersistenceManager;
 
-import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
 
 import com.google.appengine.api.memcache.MemcacheService;

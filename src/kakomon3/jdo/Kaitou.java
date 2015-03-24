@@ -32,17 +32,6 @@ public class Kaitou {
 	@Persistent
 	private boolean seikai;
 
-	@Persistent
-	private Member member;
-
-	public Member getMember() {
-		return member;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
-
 	public Key getKey() {
 		return key;
 	}
@@ -176,6 +165,13 @@ public class Kaitou {
 		Key kk = getKey();
 		String id = KeyFactory.keyToString(kk);
 		return id;
+	}
+
+	public static List<Kaitou> getList(PersistenceManager pm) {
+		Query query = pm.newQuery(Kaitou.class);
+		@SuppressWarnings("unchecked")
+		List<Kaitou> list = (List<Kaitou>) query.execute();
+		return list;
 	}
 
 }

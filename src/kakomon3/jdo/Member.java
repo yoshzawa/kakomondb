@@ -98,6 +98,14 @@ public class Member {
 	public List<MemberGenre> getMemberGenreList() {
 		return memberGenreList;
 	}
+	
+	public Map<String, MemberGenre> getMemberGenreMap() {
+		Map<String , MemberGenre> memberGenreMap = new HashMap<String, MemberGenre>();
+		for(MemberGenre mg : getMemberGenreList()){
+			memberGenreMap.put(mg.getGenreId(), mg);
+		}
+		return memberGenreMap;
+	}
 
 	public void setMemberGenreList(List<MemberGenre> memberGenreList) {
 		this.memberGenreList = memberGenreList;

@@ -1,9 +1,8 @@
 package kakomon3.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
@@ -12,8 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kakomon3.jdo.Genre;
-import kakomon3.jdo.Mondai;
+import kakomon3.jdo.Member;
 import kakomon3.jdo.PMF;
 
 @SuppressWarnings("serial")
@@ -23,48 +21,32 @@ public class KakomonGenreReloadServlet extends HttpServlet {
 			throws IOException, ServletException {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		List<Mondai> mondaiList = Mondai.getList(pm);
-		Map<String, Mondai> mondaiMap = Mondai.getMap(pm, mondaiList);
-		List<Genre> genreList = Genre.getList(pm);
-		Map<String, Genre> genreMap = Genre.getMap(pm, genreList);
-		
-		for(Mondai m:mondaiList){
-			String genreId = m.getGenre();
-			Genre genre = genreMap.get(genreId);
-			Set<String> genreMondaiList = genre.getMondais();
-			if(genreMondaiList.contains(m.getId()) == false){
-				genreMondaiList.add(m.getId());
-				genre.setMondais(genreMondaiList);
-				genre.makePersistent(pm);
+
+		List<Member> members = Member.getList(pm);
+
+		ArrayList<String[]> memberList = new ArrayList<>();
+
+		for (Member m : members) {
+			List<String> genreList;
+			genreList = m.getGenreList();
+			String[] s = new String[3 + genreList.size()];
+			s[0] = m.getMail();
+			s[1] = m.getCoin()+"";
+			s[2] = m.getExp()+"";
+			for(int i = 0 ; i<genreList.size() ; i++){
+				s[3+i]=genreList.get(i);
 			}
-		}
-		for(Genre g:genreList){
-			Set<String> list = g.getMondais();
-			for(String id:list){
-				Mondai m = mondaiMap.get(id);
-				if(m.getGenre().equals(g.getId()) == false){
-					list.remove(id);
-					g.setMondais(list);
-					g.makePersistent(pm);
-				}
-			}
+			memberList.add(s);
 
 		}
 
+		req.setAttribute("memberList", memberList);
+		pm.close();
 
-		
-			req.setAttribute("message", "GenreごとのMondaiを再構築しました");
-			req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/genreAdd.jsp");
+		req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/member.jsp");
 
-			RequestDispatcher rd = req
-					.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
-			rd.forward(req, resp);
-		
-	}
-
-	public void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException, ServletException {
-		doGet(req, resp);
+		RequestDispatcher rd = req
+				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
+		rd.forward(req, resp);
 	}
 }
