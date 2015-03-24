@@ -32,9 +32,6 @@ public class Member {
 	private List<MemberGenre> memberGenreList;
 
 	@Persistent
-	private List<Key> kaitoukeyList;
-
-	@Persistent
 	private Date created;
 
 	@Persistent
@@ -111,13 +108,7 @@ public class Member {
 		this.memberGenreList = memberGenreList;
 	}
 
-	public List<Key> getKaitoukeyList() {
-		return kaitoukeyList;
-	}
 
-	public void setKaitoukeyList(List<Key> kaitoukeyList) {
-		this.kaitoukeyList = kaitoukeyList;
-	}
 
 	public List<MemberGenre> getKaiinGenreList() {
 		return memberGenreList;
@@ -272,12 +263,6 @@ public class Member {
 		}
 		// }
 		return list;
-	}
-
-	public void addKaitouList(Kaitou kaitou) {
-		List<Key> list = getKaitoukeyList();
-		list.add(kaitou.getKey());
-		setKaitoukeyList(list);
 	}
 
 	public static List<Member> getList(PersistenceManager pm) {

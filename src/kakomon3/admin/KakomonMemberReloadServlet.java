@@ -74,7 +74,6 @@ public class KakomonMemberReloadServlet extends HttpServlet {
 					
 					m.addCoin(100);
 					m.addExp(100);
-					m.addKaitouList(k);
 					m.makePersistent(pm);
 					memberMap.put(eMail, m);
 				}
@@ -85,7 +84,6 @@ public class KakomonMemberReloadServlet extends HttpServlet {
 					
 					m.addCoin(1);
 					m.addExp(1);
-					m.addKaitouList(k);
 					m.makePersistent(pm);
 					memberMap.put(eMail, m);
 				}
@@ -97,8 +95,8 @@ public class KakomonMemberReloadServlet extends HttpServlet {
 
 
 		
-			req.setAttribute("message", "GenreごとのMondaiを再構築しました");
-			req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/genreAdd.jsp");
+			req.setAttribute("message", "KaitouごとのMemberを再構築しました");
+			req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/memberAdd.jsp");
 
 			RequestDispatcher rd = req
 					.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
