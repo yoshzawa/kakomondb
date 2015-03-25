@@ -34,31 +34,31 @@ public class Genre implements Serializable {
 	@Persistent
 	private Set<String> mondaiList;
 
-	public String getId() {
+	public final String getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public final void setId(String id) {
 		this.id = id;
 	}
 
-	public String getName() {
+	public final String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public final void setName(String name) {
 		this.name = name;
 	}
 
-	public Set<String> getMondais() {
+	public final Set<String> getMondais() {
 		return mondaiList;
 	}
 
-	public void setMondais(Set<String> mondais) {
+	public final void setMondais(Set<String> mondais) {
 		this.mondaiList = mondais;
 	}
 
-	public void addMondais(String mondaiId) {
+	public final void addMondais(String mondaiId) {
 		Set<String> set = getMondais();
 		set.add(mondaiId);
 		setMondais(set);
@@ -77,7 +77,7 @@ public class Genre implements Serializable {
 	 *            PersistenceManagerのインスタンス
 	 * @return 全件分のList
 	 */
-	public static List<Genre> getList(PersistenceManager pm, boolean useCache) {
+	public static final List<Genre> getList(PersistenceManager pm, boolean useCache) {
 		if (useCache == true) {
 			return GenreCache.getList(pm);
 		} else {
@@ -88,8 +88,8 @@ public class Genre implements Serializable {
 		}
 	}
 
-	public static List<Genre> getList(PersistenceManager pm) {
-		return (getList(pm, true));
+	public static final List<Genre> getList(PersistenceManager pm) {
+		return (getList(pm, useCache));
 	}
 
 	/**
@@ -99,23 +99,24 @@ public class Genre implements Serializable {
 	 *            PersistenceManagerのインスタンス
 	 * @return Map
 	 */
-	public static Map<String, Genre> getMap(PersistenceManager pm) {
+	public static final Map<String, Genre> getMap(PersistenceManager pm) {
 		List<Genre> list2 = Genre.getList(pm);
 		return getMap(pm, list2);
 	}
 
-	public static Map<String, Genre> getMap(PersistenceManager pm,
+	public static final Map<String, Genre> getMap(PersistenceManager pm,
 			List<Genre> genreList) {
 
 		Map<String, Genre> mapTag = new HashMap<String, Genre>();
 
 		for (Genre g : genreList) {
-			mapTag.put(g.getId(), g);
+			String genreId = g.getId();
+			mapTag.put(genreId, g);
 		}
 		return mapTag;
 	}
 
-	public static Genre getById(PersistenceManager pm, String id,
+	public static final Genre getById(PersistenceManager pm, String id,
 			boolean useCache) {
 		if (useCache == true) {
 			Genre genre = GenreCache.getById(pm, id);
@@ -125,11 +126,11 @@ public class Genre implements Serializable {
 		}
 	}
 
-	public static Genre getById(PersistenceManager pm, String id) {
-		return getById(pm, id, true);
+	public static final Genre getById(PersistenceManager pm, String id) {
+		return getById(pm, id, useCache);
 	}
 
-	public Genre makePersistent(PersistenceManager pm, boolean useCache) {
+	public final Genre makePersistent(PersistenceManager pm, boolean useCache) {
 		Genre result;
 		if (useCache == true) {
 			result = GenreCache.makePersistent(pm, this);
@@ -139,11 +140,11 @@ public class Genre implements Serializable {
 		return result;
 	}
 
-	public Genre makePersistent(PersistenceManager pm) {
-		return makePersistent(pm, true);
+	public final Genre makePersistent(PersistenceManager pm) {
+		return makePersistent(pm, useCache);
 	}
 
-	public static void init(PersistenceManager pm) {
+	public static final void init(PersistenceManager pm) {
 		List<String[]> list = new ArrayList<String[]>();
 		list.add(new String[] { "1-01", "基礎理論" });
 		list.add(new String[] { "1-02", "アルゴリズムとプログラミング" });
@@ -154,4 +155,6 @@ public class Genre implements Serializable {
 			g.makePersistent(pm);
 		}
 	}
+	
+	private static final boolean useCache=false;
 }

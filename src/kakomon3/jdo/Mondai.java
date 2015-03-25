@@ -38,47 +38,47 @@ public class Mondai implements Serializable{
 	@Persistent
 	private List<String> tags;
 
-	public String getId() {
+	public final  String getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public final void setId(String id) {
 		this.id = id;
 	}
 
-	public String getComment() {
+	public final String getComment() {
 		return comment;
 	}
 
-	public void setComment(String comment) {
+	public final void setComment(String comment) {
 		this.comment = comment;
 	}
 
-	public Sentaku getKotae() {
+	public final Sentaku getKotae() {
 		return kotae;
 	}
 
-	public void setKotae(Sentaku kotae) {
+	public final void setKotae(Sentaku kotae) {
 		this.kotae = kotae;
 	}
 
-	public String getGenre() {
+	public final String getGenre() {
 		return genre;
 	}
 
-	public void setGenre(String genre) {
+	public final void setGenre(String genre) {
 		this.genre = genre;
 	}
 
-	public List<String> getTags() {
+	public final List<String> getTags() {
 		return tags;
 	}
 
-	public void setTags(List<String> list) {
+	public final void setTags(List<String> list) {
 		this.tags = list;
 	}
 
-	public void addTags(String string) {
+	public final void addTags(String string) {
 		List<String> list = getTags();
 		list.add(string);
 		setTags(list);
@@ -130,7 +130,7 @@ public class Mondai implements Serializable{
 
 	}
 
-	public static List<Mondai> getList(PersistenceManager pm, boolean useCache) {
+	public static final List<Mondai> getList(PersistenceManager pm, boolean useCache) {
 		if (useCache == true) {
 			return MondaiCache.getList(pm);
 		} else {
@@ -141,27 +141,28 @@ public class Mondai implements Serializable{
 		}
 	}
 
-	public static List<Mondai> getList(PersistenceManager pm) {
-		return (getList(pm, true));
+	public static final List<Mondai> getList(PersistenceManager pm) {
+		return (getList(pm, useCache));
 	}
 	
-	public static Map<String, Mondai> getMap(PersistenceManager pm) {
+	public static final Map<String, Mondai> getMap(PersistenceManager pm) {
 		List<Mondai> list = Mondai.getList(pm);
 		return getMap(pm, list);
 	}
 
-	public static Map<String, Mondai> getMap(PersistenceManager pm,
+	public static final Map<String, Mondai> getMap(PersistenceManager pm,
 			List<Mondai> mondaiList) {
 
 		Map<String, Mondai> map = new HashMap<String, Mondai>();
 
 		for (Mondai g : mondaiList) {
-			map.put(g.getId(), g);
+			String mondaiId = g.getId();
+			map.put(mondaiId, g);
 		}
 		return map;
 	}
 
-	public static Mondai getById(PersistenceManager pm, String id,
+	public static final Mondai getById(PersistenceManager pm, String id,
 			boolean useCache) {
 		if (useCache == true) {
 			Mondai mondai = MondaiCache.getById(pm, id);
@@ -170,8 +171,8 @@ public class Mondai implements Serializable{
 			return pm.getObjectById(Mondai.class, id);
 		}
 	}
-	public static Mondai getById(PersistenceManager pm, String id) {
-		return getById(pm, id, true);
+	public static final Mondai getById(PersistenceManager pm, String id) {
+		return getById(pm, id, useCache);
 	}
 
 	/**
@@ -182,7 +183,7 @@ public class Mondai implements Serializable{
 	 * @return
 	 */
 
-	public Mondai makePersistent(PersistenceManager pm, boolean useCache) {
+	public final Mondai makePersistent(PersistenceManager pm, boolean useCache) {
 		Mondai result;
 		if (useCache == true) {
 			result = MondaiCache.makePersistent(pm, this);
@@ -192,7 +193,9 @@ public class Mondai implements Serializable{
 		return result;
 	}
 
-	public Mondai makePersistent(PersistenceManager pm) {
-		return makePersistent(pm, true);
+	public final Mondai makePersistent(PersistenceManager pm) {
+		return makePersistent(pm, useCache);
 	}
+	private static final boolean useCache=false;
+
 }
