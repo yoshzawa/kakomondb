@@ -18,11 +18,11 @@ public class GenreCache {
 	public static final String memCacheName = "GenreCache";
 
 	private static void toCache(PersistenceManager pm, MemcacheService memcache) {
+
 		boolean containList = memcache.contains(keyListStr);
 
-		List<Genre> genreList;
 		if (containList == false) {
-			genreList = Genre.getList(pm, false);
+			List<Genre> genreList = Genre.getList(pm, false);
 			Set<String> keyList = new TreeSet<>();
 			for (Genre g : genreList) {
 				String id = g.getId();
@@ -34,8 +34,7 @@ public class GenreCache {
 	}
 
 	public static Genre getById(PersistenceManager pm, String id) {
-		MemcacheService memcache = MemcacheServiceFactory
-				.getMemcacheService(memCacheName);
+		MemcacheService memcache = getMemcacheService();
 		toCache(pm, memcache);
 
 		boolean contains = memcache.contains(id);
@@ -46,32 +45,48 @@ public class GenreCache {
 		return genre;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static List<Genre> getList(PersistenceManager pm) {
-		MemcacheService memcache = MemcacheServiceFactory
-				.getMemcacheService(memCacheName);
+		MemcacheService memcache = getMemcacheService();
 		toCache(pm, memcache);
-		List<Genre> genreList;
-		Set<String> keyList = (Set<String>) memcache.get(keyListStr);
-		genreList = new ArrayList<Genre>();
+		List<Genre> genreList = new ArrayList<Genre>();
+
+		Set<String> keyList = getKeySet(memcache);
 		for (String id : keyList) {
-			genreList.add((Genre) memcache.get(id));
+			Genre g = (Genre) memcache.get(id);
+			genreList.add(g);
 		}
+		
+		System.out.println("GENRE SIZE:" + genreList.size());
 
 		return genreList;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static Genre makePersistent(PersistenceManager pm, Genre genre) {
-		MemcacheService memcache = MemcacheServiceFactory
-				.getMemcacheService(memCacheName);
+		MemcacheService memcache = getMemcacheService();
 		toCache(pm, memcache);
+		
 		String id = genre.getId();
 		memcache.put(id, genre);
-		Set<String> keyList = (Set<String>) memcache.get(keyListStr);
-		keyList.add(id);
-		memcache.put(keyListStr, keyList);
+		addKeySet(memcache, id);
 		genre.makePersistent(pm, false);
 		return genre;
+	}
+
+	private static void addKeySet(MemcacheService memcache, String id) {
+		Set<String> keyList = getKeySet(memcache);
+		keyList.add(id);
+		memcache.put(keyListStr, keyList);
+	}
+
+	@SuppressWarnings("unchecked")
+	private static Set<String> getKeySet(MemcacheService memcache) {
+		Set<String> keyList = (Set<String>) memcache.get(keyListStr);
+		return keyList;
+	}
+
+	private static MemcacheService getMemcacheService() {
+		MemcacheService memcache = MemcacheServiceFactory
+				.getMemcacheService(memCacheName);
+		return memcache;
 	}
 }

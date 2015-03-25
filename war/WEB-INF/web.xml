@@ -6,37 +6,37 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
 	<servlet>
-		<servlet-name>genre</servlet-name>
+		<servlet-name>adminGenre</servlet-name>
 		<servlet-class>kakomon3.admin.KakomonGenreServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>genre</servlet-name>
+		<servlet-name>adminGenre</servlet-name>
 		<url-pattern>/admin/genre</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>genreAdd</servlet-name>
+		<servlet-name>adminGenreAdd</servlet-name>
 		<servlet-class>kakomon3.admin.KakomonGenreAddServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>genreAdd</servlet-name>
+		<servlet-name>adminGenreAdd</servlet-name>
 		<url-pattern>/admin/genreAdd</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>genreReload</servlet-name>
+		<servlet-name>adminGenreReload</servlet-name>
 		<servlet-class>kakomon3.admin.KakomonGenreReloadServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>genreReload</servlet-name>
+		<servlet-name>adminGenreReload</servlet-name>
 		<url-pattern>/admin/genreReload</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>mondai</servlet-name>
+		<servlet-name>adminMondai</servlet-name>
 		<servlet-class>kakomon3.admin.Kakomon3ListServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>mondai</servlet-name>
+		<servlet-name>adminMondai</servlet-name>
 		<url-pattern>/admin/mondai</url-pattern>
 	</servlet-mapping>
 
@@ -122,6 +122,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/admin/init</url-pattern>
 	</servlet-mapping>
 
+
+	<servlet>
+		<servlet-name>QuizIndex</servlet-name>
+		<servlet-class>kakomon3.quiz.KakomonQuizIndexServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QuizIndex</servlet-name>
+		<url-pattern>/quiz/index</url-pattern>
+	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>QuizList</servlet-name>
 		<servlet-class>kakomon3.quiz.KakomonQuizListServlet</servlet-class>
@@ -132,11 +142,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>Quiz</servlet-name>
+		<servlet-name>QuizToi</servlet-name>
 		<servlet-class>kakomon3.quiz.KakomonQuiz2Servlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Quiz</servlet-name>
+		<servlet-name>QuizToi</servlet-name>
 		<url-pattern>/quiz/toi</url-pattern>
 	</servlet-mapping>
 

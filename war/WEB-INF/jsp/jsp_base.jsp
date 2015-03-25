@@ -43,16 +43,17 @@
 				<a class="navbar-brand">過去問学習システム</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="/">TOP</a></li>
 				<%
 					if (service.isUserLoggedIn()) {
 				%>
+				<li><a href="/quiz/index">TOP</a></li>
 				<li><a href="/quiz/list">問題一覧</a></li>
 				<li><a href="/quiz/bunseki">結果分析1</a></li>
 				<li><a href="/quiz/bunseki2">結果分析2</a></li>
 				<%
 					} else {
 				%>
+				<li><a href="/">TOP</a></li>
 				<li><a>問題一覧</a></li>
 				<li><a>結果分析1</a></li>
 				<li><a>結果分析2</a></li>
@@ -75,7 +76,7 @@
 				</a></li>
 				<%
 					} else {
-						String loginurl = service.createLoginURL("/");
+						String loginurl = service.createLoginURL("/quiz/index");
 				%>
 				<li><a href="<%=loginurl%>"> <span
 						class="glyphicon glyphicon glyphicon-log-in"></span> login
