@@ -71,14 +71,14 @@
 					[<%=isAdmin + loginName%>]でログイン
 				</p>
 				<li><a href="/logout"> <span
-						class="glyphicon glyphicon glyphicon-log-in"></span> logout
+						class="glyphicon glyphicon glyphicon-log-out"></span> logout
 				</a></li>
 				<%
 					} else {
 						String loginurl = service.createLoginURL("/");
 				%>
 				<li><a href="<%=loginurl%>"> <span
-						class="glyphicon glyphicon glyphicon-log-out"></span> login
+						class="glyphicon glyphicon glyphicon-log-in"></span> login
 				</a></li>
 				<%
 					}
