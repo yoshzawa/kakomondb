@@ -168,7 +168,12 @@ public class Mondai implements Serializable{
 			Mondai mondai = MondaiCache.getById(pm, id);
 			return mondai;
 		} else {
-			return pm.getObjectById(Mondai.class, id);
+			try{
+			Mondai obj = pm.getObjectById(Mondai.class, id);
+			return obj ;
+			} catch (javax.jdo.JDOObjectNotFoundException e){
+				return null;
+			}
 		}
 	}
 	public static final Mondai getById(PersistenceManager pm, String id) {

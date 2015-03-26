@@ -122,7 +122,11 @@ public class Genre implements Serializable {
 			Genre genre = GenreCache.getById(pm, id);
 			return genre;
 		} else {
+			try{
 			return pm.getObjectById(Genre.class, id);
+			} catch(javax.jdo.JDOObjectNotFoundException e){
+				return null;
+			}
 		}
 	}
 
