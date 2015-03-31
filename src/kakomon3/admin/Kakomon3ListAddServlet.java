@@ -5,10 +5,10 @@ import java.io.IOException;
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kakomon3.MyHttpServlet;
 import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.MondaiImage;
@@ -18,12 +18,7 @@ import kakomon3.jdo.Sentaku;
 //@WebServlet(name="mondai",urlPatterns={"/admin/mondai"})
 
 @SuppressWarnings("serial")
-public class Kakomon3ListAddServlet extends HttpServlet {
-
-	private boolean checkParam(String s) {
-		boolean b = ((s != null) && (s.length() > 0));
-		return b;
-	}
+public class Kakomon3ListAddServlet extends MyHttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
@@ -74,11 +69,8 @@ public class Kakomon3ListAddServlet extends HttpServlet {
 			req.setAttribute("message", "重複したキーが検出されました。登録を中止します。");
 			pm.close();
 		}
-		req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/mondaiAdd.jsp");
-
-		RequestDispatcher rd = req
-				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
-		rd.forward(req, resp);
+		String jsp_url = "/WEB-INF/jsp/admin/mondaiAdd.jsp";
+		forwardJsp(req, resp, jsp_url);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)

@@ -33,7 +33,11 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 		}
 //		try {
 			Kaitou kaitou = Kaitou.getById(pm, id);
-			Member member = Member.getById(pm, kaitou.getUser());
+			Member member = Member.getById(pm, kaitou.getUser().getEmail());
+			if(member == null){
+				member = new Member(kaitou.getUser());
+				member.makePersistent(pm);
+			}
 
 			String mondaiId = kaitou.getMondaiId();
 

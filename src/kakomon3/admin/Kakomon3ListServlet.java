@@ -6,12 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.jdo.PersistenceManager;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kakomon3.MyHttpServlet;
 import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.MondaiImage;
@@ -19,7 +18,7 @@ import kakomon3.jdo.PMF;
 import kakomon3.jdo.Sentaku;
 
 @SuppressWarnings("serial")
-public class Kakomon3ListServlet extends HttpServlet {
+public class Kakomon3ListServlet extends MyHttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
@@ -72,10 +71,7 @@ public class Kakomon3ListServlet extends HttpServlet {
 		req.setAttribute("genreList", genreList);
 		pm.close();
 		
-		req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/mondai.jsp");
-
-		RequestDispatcher rd = req
-				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
-		rd.forward(req, resp);
+		String jsp_url = "/WEB-INF/jsp/admin/mondai.jsp";
+		forwardJsp(req, resp, jsp_url);
 	}
 }

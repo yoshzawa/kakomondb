@@ -1,47 +1,47 @@
 package kakomon3.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kakomon3.jdo.Genre;
+import kakomon3.MyHttpServlet;
+import kakomon3.jdo.Member;
+import kakomon3.jdo.MemberGenre;
 import kakomon3.jdo.PMF;
 
 @SuppressWarnings("serial")
-public class KakomonMemberServlet extends HttpServlet {
+public class KakomonMemberServlet extends MyHttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
+		String id = req.getParameter("id");
 
-		// Map<String, String> mapGenre = Genre.getMap(pm);
-		List<Genre> listGenre = Genre.getList(pm);
+		Member member = Member.getById(pm, id);
+		List<MemberGenre> memberGenreList = member.getMemberGenreList();
 
-		List<String[]> genreList = new ArrayList<String[]>();
-		for (Genre g : listGenre) {
+		int size = memberGenreList.size();
+		String[] s = new String[4 + size];
+		s[0] = member.getMail();
+		s[1] = member.getCoin() + "";
+		s[2] = member.getExp() + "";
+		s[3] = member.getCreated() + "";
+		for (int i = 0; i < size; i++) {
+			MemberGenre mg = memberGenreList.get(i);
+			s[4 + i] = mg.getGenreId();
 
-			String[] s = new String[3];
-			s[0] = g.getId();
-			s[1] = g.getName();
-			s[2] = g.getMondais().size() + "";
-			genreList.add(s);
 		}
 
-		req.setAttribute("genreList", genreList);
+		req.setAttribute("memberList", s);
 		pm.close();
 
-		req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/genre.jsp");
+		String jsp_url = "/WEB-INF/jsp/admin/member.jsp";
 
-		RequestDispatcher rd = req
-				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
-		rd.forward(req, resp);
+		forwardJsp(req, resp, jsp_url);
 	}
 }

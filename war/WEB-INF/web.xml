@@ -96,6 +96,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 
 	<servlet>
+		<servlet-name>member</servlet-name>
+		<servlet-class>kakomon3.admin.KakomonMemberServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>member</servlet-name>
+		<url-pattern>/admin/member</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
 		<servlet-name>memberReload</servlet-name>
 		<servlet-class>kakomon3.admin.KakomonMemberReloadServlet</servlet-class>
 	</servlet>

@@ -8,23 +8,22 @@ import java.util.Map;
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kakomon3.MyHttpServlet;
 import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.MondaiImage;
-import kakomon3.jdo.PMF;
 import kakomon3.jdo.Tag;
 
 @SuppressWarnings("serial")
-public class Kakomon3TagServlet extends HttpServlet {
+public class Kakomon3TagServlet extends MyHttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 
-		PersistenceManager pm = PMF.get().getPersistenceManager();
+		PersistenceManager pm = getPersistenceManager();
 		Map<String, Genre> mapGenre = Genre.getMap(pm);
 		List<Tag> allTag = Tag.getList(pm);
 		Map<String, Mondai> mapMondai = Mondai.getMap(pm);
@@ -45,13 +44,11 @@ public class Kakomon3TagServlet extends HttpServlet {
 				s[2] = mapGenre.get(mondai.getGenre()).getName();
 				s[3] = mondai.getComment();
 
-				// List<String> tList = mondai.getTags();
 				for (int i = 0; i < tags.size(); i++) {
 					s[4 + i] = tags.get(i);
 				}
 
 				tagList.add(s);
-//				System.out.println(s[0] + ";" + s[2] + ";" + s[3]);
 			}
 		}
 
@@ -64,4 +61,6 @@ public class Kakomon3TagServlet extends HttpServlet {
 				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
 		rd.forward(req, resp);
 	}
+
+
 }

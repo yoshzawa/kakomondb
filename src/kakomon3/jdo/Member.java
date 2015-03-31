@@ -226,15 +226,12 @@ public class Member {
 		makePersistent(pm);
 	}
 
-	public static Member getById(PersistenceManager pm, User user) {
+	public static Member getById(PersistenceManager pm, String id) {
 		try {
-			Member kaiin = (Member) pm.getObjectById(Member.class,
-					user.getEmail());
+			Member kaiin = (Member) pm.getObjectById(Member.class, id);
 			return kaiin;
 		} catch (JDOObjectNotFoundException e) {
-			Member kaiin = new Member(user);
-			kaiin.makePersistent(pm);
-			return kaiin;
+			return null;
 		}
 	}
 
@@ -256,11 +253,9 @@ public class Member {
 	public Map<String, MemberGenre> getKaiinGenreMap() {
 		Map<String, MemberGenre> list = new HashMap<String, MemberGenre>();
 		List<MemberGenre> l = getKaiinGenreList();
-		// if ((l != null) && (l.size() > 0)) {
 		for (MemberGenre k : l) {
 			list.put(k.getGenreId(), k);
 		}
-		// }
 		return list;
 	}
 
@@ -286,4 +281,6 @@ public class Member {
 		}
 		return mapMember;
 	}
+
+
 }
