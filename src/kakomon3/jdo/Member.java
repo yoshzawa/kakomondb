@@ -6,9 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -18,7 +16,7 @@ import kakomon3.PersonalData;
 import com.google.appengine.api.users.User;
 
 @PersistenceCapable
-public class Member {
+public class Member extends MemberStatic {
 
 	@PrimaryKey
 	@Persistent
@@ -55,93 +53,91 @@ public class Member {
 		setKaiinGenreList(list);
 	}
 
-	public Date getModified() {
+	final public Date getModified() {
 		return modified;
 	}
 
-	public void setModified(Date modified) {
+	final public void setModified(Date modified) {
 		this.modified = modified;
 	}
 
-	public int getExp() {
+	final public int getExp() {
 		return exp;
 	}
 
-	public void setExp(int exp) {
+	final public void setExp(int exp) {
 		this.exp = exp;
 	}
 
-	public int addExp(int exp) {
+	final public int addExp(int exp) {
 		exp += getExp();
 		setExp(exp);
 		return exp;
 	}
 
-	public int getCoin() {
+	final public int getCoin() {
 		return coin;
 	}
 
-	public void setCoin(int coin) {
+	final public void setCoin(int coin) {
 		this.coin = coin;
 	}
 
-	public int addCoin(int coin) {
+	final public int addCoin(int coin) {
 		coin += getCoin();
 		setCoin(coin);
 		return coin;
 	}
 
-	public List<MemberGenre> getMemberGenreList() {
+	final public List<MemberGenre> getMemberGenreList() {
 		return memberGenreList;
 	}
-	
-	public Map<String, MemberGenre> getMemberGenreMap() {
-		Map<String , MemberGenre> memberGenreMap = new HashMap<String, MemberGenre>();
-		for(MemberGenre mg : getMemberGenreList()){
+
+	final public Map<String, MemberGenre> getMemberGenreMap() {
+		Map<String, MemberGenre> memberGenreMap = new HashMap<String, MemberGenre>();
+		for (MemberGenre mg : getMemberGenreList()) {
 			memberGenreMap.put(mg.getGenreId(), mg);
 		}
 		return memberGenreMap;
 	}
 
-	public void setMemberGenreList(List<MemberGenre> memberGenreList) {
+	final public void setMemberGenreList(List<MemberGenre> memberGenreList) {
 		this.memberGenreList = memberGenreList;
 	}
 
-
-
-	public List<MemberGenre> getKaiinGenreList() {
+	final public List<MemberGenre> getKaiinGenreList() {
 		return memberGenreList;
 	}
 
-	public void setKaiinGenreList(List<MemberGenre> memberGenreList) {
+	final public void setKaiinGenreList(List<MemberGenre> memberGenreList) {
 		this.memberGenreList = memberGenreList;
 	}
 
-	public String getMail() {
+	final public String getMail() {
 		return mail;
 	}
 
-	public void setMail(String mail) {
+	final public void setMail(String mail) {
 		this.mail = mail;
 	}
 
-	public User getUser() {
+	final public User getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	final public void setUser(User user) {
 		this.user = user;
 	}
 
-	public Date getCreated() {
+	final public Date getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	final public void setCreated(Date created) {
 		this.created = created;
 	}
 
-	private MemberGenre getByGenreId(PersistenceManager pm, String genreId) {
+	final private MemberGenre getByGenreId(PersistenceManager pm, String genreId) {
 		List<MemberGenre> list = getKaiinGenreList();
 		if ((list != null) && (list.size() > 0)) {
 			for (MemberGenre kaiinGenre : list) {
@@ -153,7 +149,7 @@ public class Member {
 		return null;
 	}
 
-	public int[] addWinMondaiIdSet(PersistenceManager pm, String genreId,
+	final public int[] addWinMondaiIdSet(PersistenceManager pm, String genreId,
 			String mondaiId) {
 		int i[] = new int[3];
 		MemberGenre kaiinGenre = getByGenreId(pm, genreId);
@@ -167,8 +163,8 @@ public class Member {
 		return i;
 	}
 
-	public int[] addLoseMondaiIdSet(PersistenceManager pm, String genreId,
-			String mondaiId) {
+	final public int[] addLoseMondaiIdSet(PersistenceManager pm,
+			String genreId, String mondaiId) {
 		int i[] = new int[3];
 
 		MemberGenre kaiinGenre = getByGenreId(pm, genreId);
@@ -181,8 +177,8 @@ public class Member {
 		return i;
 	}
 
-	public int[] addPendingMondaiIdSet(PersistenceManager pm, String genreId,
-			String mondaiId) {
+	final public int[] addPendingMondaiIdSet(PersistenceManager pm,
+			String genreId, String mondaiId) {
 		int i[] = new int[3];
 		MemberGenre kaiinGenre = getByGenreId(pm, genreId);
 		if (kaiinGenre != null) {
@@ -194,7 +190,7 @@ public class Member {
 		return i;
 	}
 
-	private int[] countMapAll() {
+	final private int[] countMapAll() {
 		int i[] = new int[3];
 		i[0] = 0;
 		i[1] = 0;
@@ -210,7 +206,7 @@ public class Member {
 		return i;
 	}
 
-	public void makeMap(PersistenceManager pm) {
+	final public void makeMap(PersistenceManager pm) {
 		List<Kaitou> list = Kaitou.getListByUser(pm, getUser());
 		Map<String, Mondai> mondaiMap = Mondai.getMap(pm);
 		for (Kaitou kaitou : list) {
@@ -226,20 +222,11 @@ public class Member {
 		makePersistent(pm);
 	}
 
-	public static Member getById(PersistenceManager pm, String id) {
-		try {
-			Member kaiin = (Member) pm.getObjectById(Member.class, id);
-			return kaiin;
-		} catch (JDOObjectNotFoundException e) {
-			return null;
-		}
-	}
-
-	public void makePersistent(PersistenceManager pm) {
+	final public void makePersistent(PersistenceManager pm) {
 		pm.makePersistent(this);
 	}
 
-	public List<String> getGenreList() {
+	final public List<String> getGenreList() {
 		List<String> genreList = new ArrayList<>();
 		List<MemberGenre> l = getKaiinGenreList();
 		if ((l != null) && (l.size() > 0)) {
@@ -250,7 +237,7 @@ public class Member {
 		return genreList;
 	}
 
-	public Map<String, MemberGenre> getKaiinGenreMap() {
+	final public Map<String, MemberGenre> getKaiinGenreMap() {
 		Map<String, MemberGenre> list = new HashMap<String, MemberGenre>();
 		List<MemberGenre> l = getKaiinGenreList();
 		for (MemberGenre k : l) {
@@ -258,29 +245,5 @@ public class Member {
 		}
 		return list;
 	}
-
-	public static List<Member> getList(PersistenceManager pm) {
-		Query query = pm.newQuery(Member.class);
-		@SuppressWarnings("unchecked")
-		List<Member> list = (List<Member>) query.execute();
-		return list;
-	}
-
-	public static Map<String, Member> getMap(PersistenceManager pm) {
-		List<Member> list = Member.getList(pm);
-		return getMap(pm, list);
-	}
-
-	public static Map<String, Member> getMap(PersistenceManager pm,
-			List<Member> memberList) {
-
-		Map<String, Member> mapMember = new HashMap<String, Member>();
-
-		for (Member m : memberList) {
-			mapMember.put(m.getMail(), m);
-		}
-		return mapMember;
-	}
-
 
 }

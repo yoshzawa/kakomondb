@@ -43,7 +43,7 @@ public class KakomonMemberListServlet extends HttpServlet {
 		req.setAttribute("memberList", memberList);
 		pm.close();
 
-		req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/member.jsp");
+		req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/memberList.jsp");
 
 		RequestDispatcher rd = req
 				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");

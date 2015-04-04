@@ -17,16 +17,16 @@ import com.google.appengine.api.users.UserServiceFactory;
 
 public class MyHttpServlet extends HttpServlet {
 
-	protected PersistenceManager getPersistenceManager() {
+	final protected PersistenceManager getPersistenceManager() {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		return pm;
 	}
-	protected boolean checkParam(String s) {
+	final protected boolean checkParam(String s) {
 		boolean b = ((s != null) && (s.length() > 0));
 		return b;
 	}
 
-	protected void forwardJsp(HttpServletRequest req, HttpServletResponse resp,
+	final protected void forwardJsp(HttpServletRequest req, HttpServletResponse resp,
 			String jsp_url) throws ServletException, IOException {
 		req.setAttribute("jsp_url", jsp_url);
 
@@ -34,15 +34,15 @@ public class MyHttpServlet extends HttpServlet {
 				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
 		rd.forward(req, resp);
 	}
-	protected User getUser() {
+	final protected User getUser() {
 		UserService service = UserServiceFactory.getUserService();
 		User user = service.getCurrentUser();
 		return user;
 	}
-	protected String getUserId() {
+	final protected String getUserId() {
 		return getUserId(getUser());
 	}
-	protected String getUserId(User user) {
+	final protected String getUserId(User user) {
 		return user.getEmail();
 	}
 

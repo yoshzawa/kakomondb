@@ -3,7 +3,7 @@
 <%@page import="java.util.List"%>
 
 <%
-	List<String[]> memberList = (List<String[]>) request
+	String[] memberList = (String[]) request
 			.getAttribute("memberList");
 %>
 
@@ -13,32 +13,31 @@
 <table class="table table-hover">
 	<tr>
 		<th>Mail</th>
-		<th>Coin</th>
-		<th>Exp</th>
-		<th>Genres
-			<button type="button" onClick="location.href='/admin/memberReload'">
-				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-			</button>
-		</th>
+		<td><%=memberList[0]%></td>
 	</tr>
-
-
-	<%
-		for (String[] m : memberList) {
-	%>
-	<TR>
-		<TH><a href="/admin/member?id=<%=m[0]%>"><%=m[0]%></a></TH>
-		<td><%=m[1]%></td>
-		<td><%=m[2]%></td>
-		<%
-			for (int i = 3; i < m.length; i++) {
+	<tr>
+		<th>Coin</th>
+		<td><%=memberList[1]%></td>
+	</tr>
+	<tr>
+		<th>Exp</th>
+		<td><%=memberList[2]%></td>
+	</tr>
+	<tr>
+		<th>Created</th>
+		<td><%=memberList[3]%></td>
+	</tr>
+	<tr>
+		<% 
+			for(int i=4;i<memberList.length;i++){
 		%>
-		<td><%=m[i]%></td>
+		<th>Genre</th>
+		<td></td>
 		<%
 			}
 		%>
-	</TR>
-	<%
-		}
-	%>
+	</tr>
+
+
+
 </table>
