@@ -17,31 +17,38 @@ import com.google.appengine.api.users.UserServiceFactory;
 
 public class MyHttpServlet extends HttpServlet {
 
+	private static final long serialVersionUID = -8323178877407556776L;
+
 	final protected PersistenceManager getPersistenceManager() {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		return pm;
 	}
+
 	final protected boolean checkParam(String s) {
 		boolean b = ((s != null) && (s.length() > 0));
 		return b;
 	}
 
-	final protected void forwardJsp(HttpServletRequest req, HttpServletResponse resp,
-			String jsp_url) throws ServletException, IOException {
+	final protected void forwardJsp(HttpServletRequest req,
+			HttpServletResponse resp, String jsp_url) throws ServletException,
+			IOException {
 		req.setAttribute("jsp_url", jsp_url);
 
 		RequestDispatcher rd = req
 				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
 		rd.forward(req, resp);
 	}
+
 	final protected User getUser() {
 		UserService service = UserServiceFactory.getUserService();
 		User user = service.getCurrentUser();
 		return user;
 	}
+
 	final protected String getUserId() {
 		return getUserId(getUser());
 	}
+
 	final protected String getUserId(User user) {
 		return user.getEmail();
 	}

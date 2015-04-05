@@ -6,14 +6,11 @@ import java.util.Map;
 
 import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 
-public class MemberStatic {
+public class MemberStatic extends StaticCommon {
 	final public static List<Member> getList(PersistenceManager pm) {
-		Query query = pm.newQuery(Member.class);
-		@SuppressWarnings("unchecked")
-		List<Member> list = (List<Member>) query.execute();
-		return list;
+
+		return getList(pm, Member.class);
 	}
 
 	final public static Map<String, Member> getMap(PersistenceManager pm) {

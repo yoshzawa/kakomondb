@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 
 import kakomon3.jdo.cache.GenreCache;
 
-public class GenreStatic {
+public class GenreStatic extends StaticCommon {
 
 	protected static final boolean useCache = false;
 
@@ -26,10 +25,7 @@ public class GenreStatic {
 		if (useCache == true) {
 			return GenreCache.getList(pm);
 		} else {
-			Query query = pm.newQuery(Genre.class);
-			@SuppressWarnings("unchecked")
-			List<Genre> list = (List<Genre>) query.execute();
-			return list;
+			return (List<Genre>) getList(pm, Genre.class);
 		}
 	}
 

@@ -5,19 +5,17 @@ import java.util.List;
 import java.util.Map;
 
 import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 
-public class TagStatic {
+public class TagStatic extends StaticCommon {
 	public static List<Tag> getList(PersistenceManager pm) {
-		Query query = pm.newQuery(Tag.class);
-		@SuppressWarnings("unchecked")
-		List<Tag> list = (List<Tag>) query.execute();
-		return list;
+
+		return getList(pm, Tag.class);
+
 	}
 
-	public static Map<String, Tag> getMap(PersistenceManager pm){
+	public static Map<String, Tag> getMap(PersistenceManager pm) {
 		List<Tag> list = getList(pm);
-		return getMap(pm,list);
+		return getMap(pm, list);
 	}
 
 	public static Map<String, Tag> getMap(PersistenceManager pm,
@@ -30,7 +28,6 @@ public class TagStatic {
 		}
 		return map;
 	}
-	
 
 	public static void init(PersistenceManager pm) {
 

@@ -9,7 +9,11 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.users.User;
 
-public class KaitouStatic {
+public class KaitouStatic extends StaticCommon {
+	public static List<Kaitou> getList(PersistenceManager pm) {
+		return (List<Kaitou>) getList(pm, Kaitou.class);
+	}
+
 	/**
 	 * 指定されたkeyに該当するKaitouのインスタンスを返す
 	 * 
@@ -27,7 +31,7 @@ public class KaitouStatic {
 		Key key = KeyFactory.stringToKey(keyString);
 		return getById(pm, key);
 	}
-	
+
 	/**
 	 * userを指定し、該当するKaitouのインスタンスを返す。
 	 * 該当するuserの、未解答のKaitouがある場合はそれを返す（一番先頭にあるもの）。
@@ -58,7 +62,7 @@ public class KaitouStatic {
 			return result.get(0);
 		}
 	}
-	
+
 	public static List<Kaitou> getListByUser(PersistenceManager pm, User user) {
 		Query query = pm.newQuery(Kaitou.class);
 		query.setFilter("user == newUser");
@@ -68,12 +72,5 @@ public class KaitouStatic {
 		@SuppressWarnings("unchecked")
 		List<Kaitou> result = (List<Kaitou>) query.execute(user);
 		return result;
-	}
-	
-	public static List<Kaitou> getList(PersistenceManager pm) {
-		Query query = pm.newQuery(Kaitou.class);
-		@SuppressWarnings("unchecked")
-		List<Kaitou> list = (List<Kaitou>) query.execute();
-		return list;
 	}
 }

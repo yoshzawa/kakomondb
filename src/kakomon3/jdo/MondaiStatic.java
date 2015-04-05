@@ -5,13 +5,26 @@ import java.util.List;
 import java.util.Map;
 
 import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 
 import kakomon3.jdo.cache.MondaiCache;
 
-public class MondaiStatic {
-	
-	protected static final boolean useCache=false;
+public class MondaiStatic extends StaticCommon {
+
+	protected static final boolean useCache = false;
+
+	public static final List<Mondai> getList(PersistenceManager pm,
+			boolean useCache) {
+		if (useCache == true) {
+			return MondaiCache.getList(pm);
+		} else {
+			return getList(pm, Mondai.class);
+
+		}
+	}
+
+	public static final List<Mondai> getList(PersistenceManager pm) {
+		return (getList(pm, useCache));
+	}
 
 	public static void init(PersistenceManager pm) {
 
@@ -49,22 +62,7 @@ public class MondaiStatic {
 				Sentaku.a));
 
 	}
-	
-	public static final List<Mondai> getList(PersistenceManager pm, boolean useCache) {
-		if (useCache == true) {
-			return MondaiCache.getList(pm);
-		} else {
-			Query query = pm.newQuery(Mondai.class);
-			@SuppressWarnings("unchecked")
-			List<Mondai> list = (List<Mondai>) query.execute();
-			return list;
-		}
-	}
 
-	public static final List<Mondai> getList(PersistenceManager pm) {
-		return (getList(pm, useCache));
-	}
-	
 	public static final Map<String, Mondai> getMap(PersistenceManager pm) {
 		List<Mondai> list = Mondai.getList(pm);
 		return getMap(pm, list);
@@ -81,24 +79,24 @@ public class MondaiStatic {
 		}
 		return map;
 	}
-	
+
 	public static final Mondai getById(PersistenceManager pm, String id,
 			boolean useCache) {
 		if (useCache == true) {
 			Mondai mondai = MondaiCache.getById(pm, id);
 			return mondai;
 		} else {
-			try{
-			Mondai obj = pm.getObjectById(Mondai.class, id);
-			return obj ;
-			} catch (javax.jdo.JDOObjectNotFoundException e){
+			try {
+				Mondai obj = pm.getObjectById(Mondai.class, id);
+				return obj;
+			} catch (javax.jdo.JDOObjectNotFoundException e) {
 				return null;
 			}
 		}
 	}
+
 	public static final Mondai getById(PersistenceManager pm, String id) {
 		return getById(pm, id, useCache);
 	}
-	
-	
+
 }

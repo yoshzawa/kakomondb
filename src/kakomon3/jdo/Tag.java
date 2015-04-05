@@ -18,23 +18,23 @@ public class Tag extends TagStatic{
 	@Persistent
 	private List<String> mondais;
 
-	public String getName() {
+	public final String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public final void setName(String name) {
 		this.name = name;
 	}
 
-	public List<String> getMondais() {
+	public final List<String> getMondais() {
 		return mondais;
 	}
 
-	public void setMondais(List<String> mondais) {
+	public final void setMondais(List<String> mondais) {
 		this.mondais = mondais;
 	}
 
-	public void addMondais(Mondai mondai) {
+	public final void addMondais(Mondai mondai) {
 		String mondaiURL = mondai.getId();
 
 		List<String> list = getMondais();
@@ -51,7 +51,7 @@ public class Tag extends TagStatic{
 
 
 
-	public Tag makePersistent(PersistenceManager pm) {
+	public final Tag makePersistent(PersistenceManager pm) {
 		Tag result = pm.makePersistent(this);
 		return result;
 	}
