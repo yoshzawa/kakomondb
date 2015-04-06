@@ -1,4 +1,4 @@
-package kakomon3.jdo;
+package kakomon3.jdo.jdostatic;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
+
+import kakomon3.jdo.Member;
 
 public class MemberStatic extends StaticCommon {
 	final public static List<Member> getList(PersistenceManager pm) {

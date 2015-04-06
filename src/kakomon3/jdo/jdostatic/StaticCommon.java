@@ -1,4 +1,4 @@
-package kakomon3.jdo;
+package kakomon3.jdo.jdostatic;
 
 import java.util.List;
 

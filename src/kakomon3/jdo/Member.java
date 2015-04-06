@@ -12,6 +12,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import kakomon3.PersonalData;
+import kakomon3.jdo.jdostatic.MemberStatic;
 
 import com.google.appengine.api.users.User;
 

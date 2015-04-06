@@ -1,10 +1,13 @@
-package kakomon3.jdo;
+package kakomon3.jdo.jdostatic;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.jdo.PersistenceManager;
+
+import kakomon3.jdo.Mondai;
+import kakomon3.jdo.Tag;
 
 public class TagStatic extends StaticCommon {
 	public static List<Tag> getList(PersistenceManager pm) {

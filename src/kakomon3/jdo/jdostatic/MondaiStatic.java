@@ -1,4 +1,4 @@
-package kakomon3.jdo;
+package kakomon3.jdo.jdostatic;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,6 +6,9 @@ import java.util.Map;
 
 import javax.jdo.PersistenceManager;
 
+import kakomon3.jdo.Genre;
+import kakomon3.jdo.Mondai;
+import kakomon3.jdo.Sentaku;
 import kakomon3.jdo.cache.MondaiCache;
 
 public class MondaiStatic extends StaticCommon {

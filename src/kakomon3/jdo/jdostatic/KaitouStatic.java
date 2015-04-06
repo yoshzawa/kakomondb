@@ -1,9 +1,11 @@
-package kakomon3.jdo;
+package kakomon3.jdo.jdostatic;
 
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
+import kakomon3.jdo.Kaitou;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;

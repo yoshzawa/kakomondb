@@ -1,4 +1,4 @@
-package kakomon3.jdo;
+package kakomon3.jdo.jdostatic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.jdo.PersistenceManager;
 
+import kakomon3.jdo.Genre;
 import kakomon3.jdo.cache.GenreCache;
 
 public class GenreStatic extends StaticCommon {

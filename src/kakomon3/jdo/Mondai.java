@@ -10,6 +10,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import kakomon3.jdo.cache.MondaiCache;
+import kakomon3.jdo.jdostatic.MondaiStatic;
 
 @PersistenceCapable
 public class Mondai extends MondaiStatic implements Serializable {

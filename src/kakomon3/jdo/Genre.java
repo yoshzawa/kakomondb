@@ -10,6 +10,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import kakomon3.jdo.cache.GenreCache;
+import kakomon3.jdo.jdostatic.GenreStatic;
 
 @PersistenceCapable
 public class Genre extends GenreStatic implements Serializable {
