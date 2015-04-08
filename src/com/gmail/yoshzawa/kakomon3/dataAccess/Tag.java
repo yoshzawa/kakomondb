@@ -10,7 +10,6 @@ import kakomon3.jdo.Mondai;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
@@ -40,12 +39,17 @@ public class Tag extends TagStatic{
 	public final void addMondais(Mondai mondai) {
 		String mondaiURL = mondai.getId();
 
-		List<String> list = getMondais();
-		list.add(mondaiURL);
-		setMondais(list);
+		addMondais(mondaiURL);
 
 		mondai.addTags(getName());
 	}
+	
+	public final void addMondais(String mondaiId) {
+		List<String> list = getMondais();
+		list.add(mondaiId);
+		setMondais(list);
+	}
+	
 
 	public Tag(String name) {
 		setName(name);
@@ -63,23 +67,18 @@ public class Tag extends TagStatic{
 	}
 
 	public final Tag makePersistent() {
-
-		// TODO
-		return null;
+		DatastoreService datastoreService = DatastoreServiceFactory
+				.getDatastoreService();
+		Key key = KeyFactory.createKey("Tag", getName());
+		Entity entity = new Entity(key);
+		entity.setProperty("mondais", getMondais());
+		
+		datastoreService.put(entity);
+		
+		return this;
 	}
 
-	public static Tag GetObjectById(String name) {
-		try {
-			DatastoreService datastoreService = DatastoreServiceFactory
-					.getDatastoreService();
-			Key key = KeyFactory.createKey("Tag", name);
-			Entity entity = datastoreService.get(key);
-			Tag tag = new Tag(entity);
-			return tag;
-		} catch (EntityNotFoundException e) {
-			return null;
-		}
-	}
+
 
 
 

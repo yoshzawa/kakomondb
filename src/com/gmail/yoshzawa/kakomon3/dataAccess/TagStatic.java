@@ -8,6 +8,9 @@ import java.util.Map;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.EntityNotFoundException;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
@@ -43,6 +46,17 @@ public class TagStatic {
 		}
 		return tagList;
 	}
-
+	public static Tag GetObjectById(String name) {
+		try {
+			DatastoreService datastoreService = DatastoreServiceFactory
+					.getDatastoreService();
+			Key key = KeyFactory.createKey("Tag", name);
+			Entity entity = datastoreService.get(key);
+			Tag tag = new Tag(entity);
+			return tag;
+		} catch (EntityNotFoundException e) {
+			return null;
+		}
+	}
 
 }

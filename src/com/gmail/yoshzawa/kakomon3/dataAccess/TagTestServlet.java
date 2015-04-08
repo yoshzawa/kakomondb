@@ -32,6 +32,19 @@ public class TagTestServlet extends MyHttpServlet {
 			out.println(tag2.getMondais());
 			out.println("<br>");
 		}
+		
+		Tag t = new Tag("TestTag");
+		t.addMondais("APH261001");
+		t.makePersistent();
+		
+		List<Tag> tagList2 = Tag.getList();
+		for(Tag tag2 : tagList2){
+			out.println(tag2.getName());
+			out.println(tag2.getMondais());
+			out.println("<br>");
+		}
+		
+		
 
 	}
 
