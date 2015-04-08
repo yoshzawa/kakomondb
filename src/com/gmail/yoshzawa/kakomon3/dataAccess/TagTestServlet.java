@@ -20,7 +20,6 @@ public class TagTestServlet extends MyHttpServlet {
 		
 		PrintWriter out = resp.getWriter();
 		
-		out.println("Hello World!");
 		Tag tag = Tag.GetObjectById("BNF");
 		
 		out.println(tag.getName());

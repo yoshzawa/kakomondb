@@ -57,20 +57,24 @@ public class Tag extends TagStatic{
 		setMondais(mondais);
 	}
 
+	@SuppressWarnings("unchecked")
+	public Tag(Entity e) {
+		this(e.getKey().getName(),(List<String>) e.getProperty("mondais"));
+	}
+
 	public final Tag makePersistent() {
 
 		// TODO
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static Tag GetObjectById(String name) {
 		try {
 			DatastoreService datastoreService = DatastoreServiceFactory
 					.getDatastoreService();
 			Key key = KeyFactory.createKey("Tag", name);
 			Entity entity = datastoreService.get(key);
-			Tag tag = new Tag(name,(List<String>) entity.getProperty("mondais"));
+			Tag tag = new Tag(entity);
 			return tag;
 		} catch (EntityNotFoundException e) {
 			return null;
