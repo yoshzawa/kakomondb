@@ -1,32 +1,26 @@
 package com.gmail.yoshzawa.kakomon3.dataAccess;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
-
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
 
-import kakomon3.jdo.Mondai;
-import kakomon3.jdo.Tag;
+public class TagStatic {
 
-public class TagStatic  {
-	
-	public static List<Tag> getList(PersistenceManager pm) {
-
-		return getList(pm, Tag.class);
-
+	public static Map<String, Tag> getMap() {
+		List<Tag> list = getList();
+		return getMap( list);
 	}
 
-	public static Map<String, Tag> getMap(PersistenceManager pm) {
-		List<Tag> list = getList(pm);
-		return getMap(pm, list);
-	}
-
-	public static Map<String, Tag> getMap(PersistenceManager pm,
+	public static Map<String, Tag> getMap(
 			List<Tag> tagList) {
 
 		Map<String, Tag> map = new HashMap<String, Tag>();
@@ -38,11 +32,22 @@ public class TagStatic  {
 	}
 
 	@SuppressWarnings("unchecked")
-	private static <T> List<T> getList(PersistenceManager pm, Class<T> i) {
-		Query query = pm.newQuery(i);
-		List<T> list = (List<T>) query.execute();
-		return list;
-	}
-	
+	public static List<Tag> getList() {
 
+		DatastoreService datastoreService = DatastoreServiceFactory
+				.getDatastoreService();
+		Query query = new Query("Tag");
+		PreparedQuery pQuery = datastoreService.prepare(query);
+
+		List<Tag> tagList = new ArrayList<>();
+		for (Entity e : pQuery.asIterable()) {
+//			String name = (String) e.getProperty("Name");
+			Key key = e.getKey();
+			String name = key.getName();
+			List<String> mondais = (List<String>) e.getProperty("mondais");
+			Tag tag = new Tag(name, mondais);
+			tagList.add(tag);
+		}
+		return tagList;
+	}
 }

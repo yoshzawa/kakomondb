@@ -3,8 +3,9 @@ package com.gmail.yoshzawa.kakomon3.dataAccess;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.PersistenceCapable;
+
+import kakomon3.jdo.Mondai;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -13,10 +14,9 @@ import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
-import kakomon3.jdo.Mondai;
 
 @PersistenceCapable
-public class Tag  {
+public class Tag extends TagStatic{
 
 	private String name;
 	private List<String> mondais;
@@ -52,24 +52,31 @@ public class Tag  {
 		setMondais(new ArrayList<String>());
 	}
 
-	public final Tag makePersistent(PersistenceManager pm) {
+	public Tag(String name, List<String> mondais) {
+		setName(name);
+		setMondais(mondais);
+	}
 
-		//TODO
+	public final Tag makePersistent() {
+
+		// TODO
 		return null;
 	}
+
 	@SuppressWarnings("unchecked")
-	public static Tag GetObjectById(String name){
+	public static Tag GetObjectById(String name) {
 		try {
-		DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
-		Key key = KeyFactory.createKey("Tag",name);
-		Entity entity;
-			entity = datastoreService.get(key);
-		Tag tag=new Tag(name);
-		tag.setMondais((List<String>) entity.getProperty("mondais"));
-		return tag;
+			DatastoreService datastoreService = DatastoreServiceFactory
+					.getDatastoreService();
+			Key key = KeyFactory.createKey("Tag", name);
+			Entity entity = datastoreService.get(key);
+			Tag tag = new Tag(name,(List<String>) entity.getProperty("mondais"));
+			return tag;
 		} catch (EntityNotFoundException e) {
 			return null;
 		}
 	}
+
+
 
 }
