@@ -1,4 +1,4 @@
-package kakomon3.jdo;
+package kakomon3.jdo._old;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import kakomon3.jdo.Mondai;
 import kakomon3.jdo.jdostatic.TagStatic;
 
 @PersistenceCapable

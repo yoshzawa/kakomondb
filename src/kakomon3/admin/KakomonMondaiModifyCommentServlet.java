@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.PMF;
-import kakomon3.jdo.Tag;
+import com.gmail.yoshzawa.kakomon3.dataAccess.*;
 
 @SuppressWarnings("serial")
 public class KakomonMondaiModifyCommentServlet extends HttpServlet {
@@ -37,7 +37,7 @@ public class KakomonMondaiModifyCommentServlet extends HttpServlet {
 			pm.close();
 		} else {
 				Mondai m = Mondai.getById(pm, mondaiId);
-				Map<String, Tag> tagMap = Tag.getMap(pm);
+				Map<String, Tag> tagMap = Tag.getMap();
 				
 				{
 					List<String> taglist = m.getTags();
@@ -46,7 +46,7 @@ public class KakomonMondaiModifyCommentServlet extends HttpServlet {
 						List<String> mondais = t.getMondais();
 						mondais.remove(mondaiId);
 						t.setMondais(mondais);
-						t.makePersistent(pm);
+						t.makePersistent();
 						
 						taglist.remove(tag);
 					}
@@ -61,12 +61,12 @@ public class KakomonMondaiModifyCommentServlet extends HttpServlet {
 						Tag t = tagMap.get(token);
 						if(t == null){
 							t = new Tag(token);
-							t.makePersistent(pm);
+							t.makePersistent();
 						} 
 							List<String> mondais = t.getMondais();
 							mondais.add(mondaiId);
 							t.setMondais(mondais);
-							t.makePersistent(pm);
+							t.makePersistent();
 						
 						List<String> tags = m.getTags();
 						tags.add(token);

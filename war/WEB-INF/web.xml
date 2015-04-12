@@ -6,6 +6,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
 	<servlet>
+		<servlet-name>newTag</servlet-name>
+		<servlet-class>com.gmail.yoshzawa.kakomon3.dataAccess.TagTestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>newTag</servlet-name>
+		<url-pattern>/admin/newTag</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>adminGenre</servlet-name>
 		<servlet-class>kakomon3.admin.KakomonGenreServlet</servlet-class>
 	</servlet>

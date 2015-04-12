@@ -11,11 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gmail.yoshzawa.kakomon3.dataAccess.Tag;
+
 import kakomon3.MyHttpServlet;
 import kakomon3.jdo.Genre;
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.MondaiImage;
-import kakomon3.jdo.Tag;
 
 @SuppressWarnings("serial")
 public class Kakomon3TagServlet extends MyHttpServlet {
@@ -25,7 +26,7 @@ public class Kakomon3TagServlet extends MyHttpServlet {
 
 		PersistenceManager pm = getPersistenceManager();
 		Map<String, Genre> mapGenre = Genre.getMap(pm);
-		List<Tag> allTag = Tag.getList(pm);
+		List<Tag> allTag = Tag.getList();
 		Map<String, Mondai> mapMondai = Mondai.getMap(pm);
 		List<String[]> tagList = new ArrayList<String[]>();
 		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMap(pm);
