@@ -8,14 +8,12 @@ import javax.jdo.annotations.PersistenceCapable;
 import kakomon3.jdo.Mondai;
 
 import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
-
 @PersistenceCapable
-public class Tag extends TagStatic{
+public class Tag extends TagStatic {
 
 	private String name;
 	private List<String> mondais;
@@ -43,13 +41,12 @@ public class Tag extends TagStatic{
 
 		mondai.addTags(getName());
 	}
-	
+
 	public final void addMondais(String mondaiId) {
 		List<String> list = getMondais();
 		list.add(mondaiId);
 		setMondais(list);
 	}
-	
 
 	public Tag(String name) {
 		setName(name);
@@ -63,23 +60,19 @@ public class Tag extends TagStatic{
 
 	@SuppressWarnings("unchecked")
 	public Tag(Entity e) {
-		this(e.getKey().getName(),(List<String>) e.getProperty("mondais"));
+		this(e.getKey().getName(), (List<String>) e.getProperty("mondais"));
 	}
 
 	public final Tag makePersistent() {
-		DatastoreService datastoreService = DatastoreServiceFactory
-				.getDatastoreService();
+		DatastoreService datastoreService = getDatastoreService();
+
 		Key key = KeyFactory.createKey("Tag", getName());
 		Entity entity = new Entity(key);
 		entity.setProperty("mondais", getMondais());
-		
+
 		datastoreService.put(entity);
-		
+
 		return this;
 	}
-
-
-
-
 
 }

@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.jdo.PersistenceManager;
 
 import kakomon3.jdo.Mondai;
-import kakomon3.jdo.Tag;
+import kakomon3.jdo._old.Tag;
 
 public class TagStatic extends StaticCommon {
 	public static List<Tag> getList(PersistenceManager pm) {
