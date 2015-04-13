@@ -39,15 +39,14 @@ public class KakomonBunseki2Servlet extends HttpServlet {
 			List<Kaitou> list = Kaitou.getListByUser(pm, user);
 
 			List<Mondai> mondaiList = Mondai.getList(pm);
-			Map<String, Mondai> mondaiMap = Mondai.getMap(pm,mondaiList);
+			Map<String, Mondai> mondaiMap = Mondai.getMap(pm, mondaiList);
 			List<Genre> genreList = Genre.getList(pm);
-			
-			
-			Map<String , Integer> genreWinCount = new HashMap<String, Integer>();
-			Map<String , Integer> genreLoseCount = new HashMap<String, Integer>();
-			Map<String , Integer> genreAllCount = new HashMap<String, Integer>();
 
-			for(Mondai m : mondaiList){
+			Map<String, Integer> genreWinCount = new HashMap<String, Integer>();
+			Map<String, Integer> genreLoseCount = new HashMap<String, Integer>();
+			Map<String, Integer> genreAllCount = new HashMap<String, Integer>();
+
+			for (Mondai m : mondaiList) {
 				String mId = m.getId();
 				genreWinCount.put(mId, 0);
 				genreLoseCount.put(mId, 0);
@@ -59,38 +58,43 @@ public class KakomonBunseki2Servlet extends HttpServlet {
 
 			for (Kaitou k : list) {
 				String mId = k.getMondaiId();
-				if(k.isSeikai() == true){
-					seikai ++;
-					int i=genreWinCount.get(mId);
-					i++;
-					genreWinCount.put(mId, i);
+				if (k.isSeikai() == true) {
+					seikai++;
+					int i = 1;
+					try {
+						i = genreWinCount.get(mId);
+						i++;
+					} finally {
+						genreWinCount.put(mId, i);
+					}
 				} else {
 					machigai++;
-					int i=genreLoseCount.get(mId);
-					i++;
-					genreLoseCount.put(mId, i);
+					if(genreLoseCount.containsKey(mId)){
+						int i = 1;
+						i = genreLoseCount.get(mId);
+						i++;
+						genreLoseCount.put(mId, i);
+					} else {
+						genreLoseCount.put(mId, 1);
+					}
 				}
 			}
 			List<String[]> mondaiResult = new ArrayList<>();
-			
-			for(Mondai m : mondaiList){
+
+			for (Mondai m : mondaiList) {
 				String mId = m.getId();
 				int tagSize = m.getTags().size();
-				String ss[]=new String[5 + tagSize];
+				String ss[] = new String[5 + tagSize];
 				ss[0] = m.getId();
 				ss[1] = m.getComment();
-				ss[2] = 
-				genreWinCount.get(mId)+"";
-				
-				ss[3] = 
-				genreLoseCount.get(mId)+"";
-				ss[4] = (
-				genreAllCount.get(mId) + 
-				genreWinCount.get(mId) )+ "";
-				for(int i=0 ; i<tagSize ; i++){
-					ss[5+i]=m.getTags().get(i);
+				ss[2] = genreWinCount.get(mId) + "";
+
+				ss[3] = genreLoseCount.get(mId) + "";
+				ss[4] = (genreAllCount.get(mId) + genreWinCount.get(mId)) + "";
+				for (int i = 0; i < tagSize; i++) {
+					ss[5 + i] = m.getTags().get(i);
 				}
-				
+
 				mondaiResult.add(ss);
 			}
 			req.setAttribute("mondaiResult", mondaiResult);

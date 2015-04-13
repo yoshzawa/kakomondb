@@ -55,7 +55,9 @@ public class KakomonBunsekiServlet extends HttpServlet {
 
 			for (Kaitou k : list) {
 				String mId = k.getMondaiId();
-				String gId = mondaiMap.get(mId).getGenre();
+				Mondai m = mondaiMap.get(mId);
+				if (m != null){
+				String gId = m.getGenre();
 				if(k.isSeikai() == true){
 					seikai ++;
 					int i=genreWinCount.get(gId);
@@ -66,6 +68,7 @@ public class KakomonBunsekiServlet extends HttpServlet {
 					int i=genreLoseCount.get(gId);
 					i++;
 					genreLoseCount.put(gId, i);
+				}
 				}
 			}
 			List<String[]> genreResult = new ArrayList<>();
