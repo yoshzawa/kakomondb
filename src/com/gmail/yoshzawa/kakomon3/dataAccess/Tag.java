@@ -3,16 +3,11 @@ package com.gmail.yoshzawa.kakomon3.dataAccess;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.jdo.annotations.PersistenceCapable;
 
 import kakomon3.jdo.Mondai;
 
-import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 
-@PersistenceCapable
 public class Tag extends TagStatic {
 
 	private String name;
@@ -36,9 +31,7 @@ public class Tag extends TagStatic {
 
 	public final void addMondais(Mondai mondai) {
 		String mondaiURL = mondai.getId();
-
 		addMondais(mondaiURL);
-
 		mondai.addTags(getName());
 	}
 
@@ -64,15 +57,17 @@ public class Tag extends TagStatic {
 	}
 
 	public final Tag makePersistent() {
-		DatastoreService datastoreService = getDatastoreService();
-
-		Key key = KeyFactory.createKey("Tag", getName());
-		Entity entity = new Entity(key);
+		String kind = "Tag";
+		String name = getName();
+		
+		Entity entity = makeEntity(kind, name);
 		entity.setProperty("mondais", getMondais());
-
-		datastoreService.put(entity);
-
+		putEntity(entity);
 		return this;
 	}
+
+
+
+
 
 }
