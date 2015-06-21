@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kakomon3.jdo.Genre;
+
 import kakomon3.jdo.Mondai;
 import kakomon3.jdo.MondaiImage;
 import kakomon3.jdo.PMF;
@@ -26,7 +26,7 @@ public class Kakomon3InitServlet extends HttpServlet {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
-		Genre.init(pm);
+//		Genre.init(pm);
 		Mondai.init(pm);
 		MondaiImage.init(pm);
 //		Tag.init(pm);

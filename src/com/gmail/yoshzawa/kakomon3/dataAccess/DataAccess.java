@@ -9,7 +9,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
-public class DataAccess<T> {
+public class DataAccess {
 
 	/**
 	 * LowLevelApiのdatastoreServiceを取得する

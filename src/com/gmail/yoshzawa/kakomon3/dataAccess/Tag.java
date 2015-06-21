@@ -41,8 +41,9 @@ public class Tag extends TagStatic {
 	}
 
 	public Tag(String name) {
-		setName(name);
-		setMondais(new ArrayList<String>());
+//		setName(name);
+//		setMondais(new ArrayList<String>());
+		this(name,new ArrayList<String>());
 	}
 
 	public Tag(String name, List<String> mondais) {

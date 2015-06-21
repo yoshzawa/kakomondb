@@ -31,8 +31,10 @@
 		<% 
 			for(int i=4;i<memberList.length;i++){
 		%>
+		<tr>
 		<th>Genre</th>
-		<td></td>
+		<td><%=memberList[i]%></td>
+		</tr>
 		<%
 			}
 		%>
