@@ -9,10 +9,11 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
-public class DataAccess {
+public class DataAccess<T> {
 
 	/**
 	 * LowLevelApiのdatastoreServiceを取得する
+	 * 
 	 * @return datastoreService
 	 */
 	private static final DatastoreService getDatastoreService() {
@@ -23,7 +24,9 @@ public class DataAccess {
 
 	/**
 	 * LowLevelApiでEntityを保存
-	 * @param entity 保存するEntity
+	 * 
+	 * @param entity
+	 *            保存するEntity
 	 */
 	protected final void putEntity(Entity entity) {
 		DatastoreService datastoreService = getDatastoreService();
@@ -32,15 +35,19 @@ public class DataAccess {
 
 	/**
 	 * putEntityのAlias
-	 * @param entity 保存するEntity
-	 */ 
+	 * 
+	 * @param entity
+	 *            保存するEntity
+	 */
 	protected final void makePersistent(Entity entity) {
 		putEntity(entity);
 	}
 
 	/**
 	 * 一覧を取得
-	 * @param kind カインド名
+	 * 
+	 * @param kind
+	 *            カインド名
 	 * @return 取得した結果
 	 */
 	protected static final Iterable<Entity> getResults(String kind) {
@@ -54,8 +61,11 @@ public class DataAccess {
 
 	/**
 	 * エンティティを生成
-	 * @param kind カインド名
-	 * @param name キー値
+	 * 
+	 * @param kind
+	 *            カインド名
+	 * @param name
+	 *            キー値
 	 * @return 生成したエンティティ
 	 */
 	protected final Entity makeEntity(String kind, String name) {
@@ -66,8 +76,11 @@ public class DataAccess {
 
 	/**
 	 * キーを指定してエンティティを取得
-	 * @param name キー値
-	 * @param kind カインド名
+	 * 
+	 * @param name
+	 *            キー値
+	 * @param kind
+	 *            カインド名
 	 * @return 取得したエンティティ
 	 */
 	protected static final Entity getObjectById(String name, String kind) {

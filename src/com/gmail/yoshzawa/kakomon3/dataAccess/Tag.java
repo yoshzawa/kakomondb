@@ -3,7 +3,6 @@ package com.gmail.yoshzawa.kakomon3.dataAccess;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import kakomon3.jdo.Mondai;
 
 import com.google.appengine.api.datastore.Entity;
@@ -59,15 +58,11 @@ public class Tag extends TagStatic {
 	public final Tag makePersistent() {
 		String kind = "Tag";
 		String name = getName();
-		
+
 		Entity entity = makeEntity(kind, name);
 		entity.setProperty("mondais", getMondais());
 		putEntity(entity);
 		return this;
 	}
-
-
-
-
 
 }
