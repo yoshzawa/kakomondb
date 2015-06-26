@@ -66,8 +66,6 @@ public class Genre extends GenreStatic implements Serializable {
 		setMondais(new HashSet<String>());
 	}
 
-
-
 	public final Genre makePersistent(PersistenceManager pm, boolean useCache) {
 		Genre result;
 		if (useCache == true) {
@@ -81,6 +79,15 @@ public class Genre extends GenreStatic implements Serializable {
 	public final Genre makePersistent(PersistenceManager pm) {
 		return makePersistent(pm, useCache);
 	}
-
+	public final void removeMondai(String mondaiId){
+		Set<String> mondais = getMondais();
+		mondais.remove(mondaiId);
+		setMondais(mondais);
+	}
+	public final void addMondai(String mondaiId){
+		Set<String> mondais = getMondais();
+		mondais.add(mondaiId);
+		setMondais(mondais);
+	}
 
 }

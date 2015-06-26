@@ -40,25 +40,19 @@ public class KakomonMondaiModifyGenreServlet extends HttpServlet {
 				Mondai m = Mondai.getById(pm, mondaiId);
 				{
 					Genre g = genreMap.get(m.getGenre());
-					Set<String> mondais = g.getMondais();
-					mondais.remove(m.getId());
-					g.setMondais(mondais);
+					g.removeMondai(m.getId());
 					g.makePersistent(pm);
 				}
-
 				m.setGenre(genre);
 				{
 					Genre g = genreMap.get(genre);
-					Set<String> mondais = g.getMondais();
-					mondais.add(mondaiId);
-					g.setMondais(mondais);
+					g.addMondai(mondaiId);
 					g.makePersistent(pm);
 				}
-				
-				
+
 				m.makePersistent(pm);
-				
-					req.setAttribute("message", "データを変更しました");
+
+				req.setAttribute("message", "データを変更しました");
 			}
 
 			pm.close();
