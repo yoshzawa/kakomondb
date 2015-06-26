@@ -26,18 +26,18 @@ public class KakomonMemberReloadServlet extends HttpServlet {
 			throws IOException, ServletException {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
+
 		List<Mondai> mondaiList = Mondai.getList(pm);
 		Map<String, Mondai> mondaiMap = Mondai.getMap(pm, mondaiList);
 		List<Kaitou> kaitouList = Kaitou.getList(pm);
-		
-		Map<String, Member> memberMap =  Member.getMap(pm);
-		for(Kaitou k : kaitouList){
+
+		Map<String, Member> memberMap = Member.getMap(pm);
+		for (Kaitou k : kaitouList) {
 			User user = k.getUser();
 			String eMail = user.getEmail();
-			
+
 			// Memberが登録されていなければ追加する
-			if(memberMap.containsKey(eMail) == false){
+			if (memberMap.containsKey(eMail) == false) {
 				Member member = new Member(user);
 				member.makePersistent(pm);
 				memberMap.put(eMail, member);
@@ -47,36 +47,34 @@ public class KakomonMemberReloadServlet extends HttpServlet {
 			String mondaiId = k.getMondaiId();
 			Mondai mondai = mondaiMap.get(mondaiId);
 			String genreId = mondai.getGenre();
-			
+
 			MemberGenre mg;
-			//MemberGenreが登録されていなければ追加
-			if(mgenreList.containsKey(genreId) == false){
-				mg = new MemberGenre(genreId,m);
+			// MemberGenreが登録されていなければ追加
+			if (mgenreList.containsKey(genreId) == false) {
+				mg = new MemberGenre(genreId, m);
 				List<MemberGenre> memberGenreList = m.getMemberGenreList();
 				memberGenreList.add(mg);
 				m.setMemberGenreList(memberGenreList);
 				m.makePersistent(pm);
-			} 
-			else
-			{
+			} else {
 				mg = mgenreList.get(genreId);
 			}
-			
-			if(k.isSeikai() == true){
-				if(mg.getWinMondaiIdSet().contains(mondaiId) == false){
+
+			if (k.isSeikai() == true) {
+				if (mg.getWinMondaiIdSet().contains(mondaiId) == false) {
 					mg.addWinMondaiIdSet(mondaiId);
 					mg.makePersistent(pm);
-					
+
 					m.addCoin(100);
 					m.addExp(100);
 					m.makePersistent(pm);
 					memberMap.put(eMail, m);
 				}
 			} else {
-				if(mg.getLoseMondaiIdSet().contains(mondaiId) == false){
+				if (mg.getLoseMondaiIdSet().contains(mondaiId) == false) {
 					mg.addLoseMondaiIdSet(mondaiId);
 					mg.makePersistent(pm);
-					
+
 					m.addCoin(1);
 					m.addExp(1);
 					m.makePersistent(pm);
@@ -84,19 +82,14 @@ public class KakomonMemberReloadServlet extends HttpServlet {
 				}
 			}
 		}
-		
-		
 
+		req.setAttribute("message", "KaitouごとのMemberを再構築しました");
+		req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/memberAdd.jsp");
 
+		RequestDispatcher rd = req
+				.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
+		rd.forward(req, resp);
 
-		
-			req.setAttribute("message", "KaitouごとのMemberを再構築しました");
-			req.setAttribute("jsp_url", "/WEB-INF/jsp/admin/memberAdd.jsp");
-
-			RequestDispatcher rd = req
-					.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
-			rd.forward(req, resp);
-		
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)

@@ -92,13 +92,5 @@ public class KakomonQuizKotaeServlet extends HttpServlet {
 					.getRequestDispatcher("/WEB-INF/jsp/jsp_base.jsp");
 
 			rd.forward(req, resp);
-/*		} catch (JDOObjectNotFoundException e) {
-			resp.sendRedirect("/");
-		} catch (JDOFatalInternalException e) {
-			resp.sendRedirect("/");
-		} catch (IllegalArgumentException e) {
-			resp.sendRedirect("/");
-		}
-*/
 	}
 }

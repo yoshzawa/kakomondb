@@ -31,13 +31,8 @@ public class Kakomon3ListServlet extends MyHttpServlet {
 
 		Map<String, MondaiImage> mapMondaiImage = MondaiImage.getMap(pm);
 		
-		ArrayList<String[]> kotaeList = new ArrayList<String[]>();
-		for(Sentaku s:Sentaku.values()){
-			String[] data=new String[2];
-			data[0] = s.getNo()+"";
-			data[1] = s.toString();
-			kotaeList.add(data);
-		}
+		ArrayList<String[]> kotaeList = Sentaku.getStringList();
+		
 		
 		ArrayList<String[]> genreList = new ArrayList<String[]>();
 		for(String s:mapGenre.keySet()){
@@ -55,7 +50,6 @@ public class Kakomon3ListServlet extends MyHttpServlet {
 			String[] s = new String[5 + tagLength];
 			s[0] = m.getId();
 			String id = m.getId();
-//			System.out.println(id);
 			s[1] = mapMondaiImage.get(id).getURL();
 			s[2] = m.getComment();
 			s[3] = mapGenre.get(m.getGenre()).getName();
@@ -74,4 +68,6 @@ public class Kakomon3ListServlet extends MyHttpServlet {
 		String jsp_url = "/WEB-INF/jsp/admin/mondai.jsp";
 		forwardJsp(req, resp, jsp_url);
 	}
+
+
 }

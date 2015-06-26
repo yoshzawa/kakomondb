@@ -39,13 +39,17 @@
 		%>
 <form mathod="get" action="/quiz/answer">
 		<div class="btn-group" data-toggle="buttons">
-			<label class="btn btn-primary active"> <input type="radio"
+			<label class="btn btn-primary active"> 
+			<input type="radio"
 				name="answer" value="1" autocomplete="off" checked>ア
-			</label> <label class="btn btn-primary"> <input type="radio"
+			</label> <label class="btn btn-primary"> 
+			<input type="radio"
 				name="answer" value="2" autocomplete="off">イ
-			</label> <label class="btn btn-primary"> <input type="radio"
+			</label> <label class="btn btn-primary"> 
+			<input type="radio"
 				name="answer" value="3" autocomplete="off">ウ
-			</label> <label class="btn btn-primary"> <input type="radio"
+			</label> <label class="btn btn-primary"> 
+			<input type="radio"
 				name="answer" value="4" autocomplete="off">エ
 			</label>
 		</div>
